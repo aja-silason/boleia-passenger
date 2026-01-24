@@ -1,33 +1,59 @@
 import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../shared/route";
 import { Button } from "./components/button/Button";
+import { ButtonInLine } from "./components/button/ButtonInLine";
 import { Header } from "./components/header/Header";
 import { InputInLine } from "./components/input/InputInLine";
 
 export default function HomeScreen() {
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    const [date, setDate] = useState<any>(new Date());
+    const [showCalendar, setShowCalendar] = useState<boolean>(false);
+
+    const onChange = (event: any, selectedDate: any) => {
+        const currentDate = selectedDate || date;
+        setShowCalendar(Platform.OS === "ios");
+        setDate(currentDate);
+    }
     
+    const showMode = () => setShowCalendar(true);
+
     return (
         <View style={styles.mainContent}>
-            <Header title="Bem vindo ao seu painel de motorista" username={"Olá Anania Augusto"}/>
+            <Header title="Bem vindo ao seu painel de Boleia" username={"Olá Anania Augusto"}/>
             
             <Text>Encontra motoristas a caminho do teu destino.</Text>
 
             <View style={styles.moreandcard}>
                 <InputInLine onChange={() => {}} placeholder="De onde vai sair?" title="" icon={<Ionicons name="search-outline" size={20} color={Colors.placeHolder}/>}/>
-                <InputInLine onChange={() => {}} placeholder="Para onde vamos" title="" icon={<Ionicons name="location-outline" size={20} color={Colors.placeHolder}/>} />
+                <InputInLine onChange={() => {}} placeholder="Para onde vamos?" title="" icon={<Ionicons name="location-outline" size={20} color={Colors.placeHolder}/>} />
                 <View style={{flexDirection: "row", gap: 10}}>
-                    <InputInLine onChange={() => {}} placeholder="Hoje" title="" isHalf icon={<Ionicons name="calendar-outline" size={20} color={Colors.placeHolder}/>}/>
-                    <InputInLine onChange={() => {}} placeholder="1" title="" isHalf icon={<Ionicons name="person-outline" size={20} color={Colors.placeHolder}/>}/>
+                    <ButtonInLine onPress={showMode} placeholder="Hoje" title="Hoje" isHalf icon={<Ionicons name="calendar-outline" size={20} color={Colors.placeHolder}/>}/>
+                    <InputInLine onChange={() => {}} placeholder="1" title="" isHalf icon={<Ionicons name="person-outline" size={20} color={Colors.placeHolder}/>} type="telephoneNumber"/>
                 </View>
 
             </View>
 
             <Button isLoading onPress={()=> navigate.navigate("publishtravel")} text="Procurar Boleia" isPrimary />
+
+            {showCalendar && (
+                <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode={'date'}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                    minimumDate={new Date()}
+                />
+            )}
 
         </View>
     )
