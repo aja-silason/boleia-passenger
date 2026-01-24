@@ -3,6 +3,8 @@ import { Platform } from 'react-native';
 export const Colors = {
     text: '#ECEDEE',
     whiteBackground: "#F5F7FA",
+    blueInc: "#E8ECF6",
+    textBlueInc: "#103173",
     placeHolder: "#BEC2CE",
     inactive: "#EAF1F4",
     placeholderText: "#4D4D4D",
@@ -13,6 +15,8 @@ export const Colors = {
     blackText: '#202020',
     blue: "#103173",
     primary: "#F2DF1E",
+    yellowBack: "#FEF5E7",
+    yellowBoldText: "#AE7008",
     orange: "#F59E0B"
 };
 
