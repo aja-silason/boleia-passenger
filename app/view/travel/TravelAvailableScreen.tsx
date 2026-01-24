@@ -23,7 +23,7 @@ export default function TravelAvailableScreen(){
                 keyExtractor={(_, index) => index?.toString()}
                 onEndReachedThreshold={0.5}
                 renderItem={({item, index}) => (
-                    <TouchableOpacity onPress={() => navigate.navigate("traveldetails", {travelDetails: param})} style={styles.card} activeOpacity={.6}>
+                    <TouchableOpacity onPress={() => navigate.navigate("traveldetails", {travelDetails: param, historic: false})} style={styles.card} activeOpacity={.6}>
                         <TravellerCard key={index} />
                     </TouchableOpacity>
                 )}

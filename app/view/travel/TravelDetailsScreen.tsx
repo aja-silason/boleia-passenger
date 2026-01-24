@@ -1,5 +1,7 @@
+import { RootStackParamList } from "@/app/shared/route";
 import { Colors } from "@/constants/theme";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { RouteProp, useRoute } from "@react-navigation/native";
 import { useRef, useState } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import { Modalize } from "react-native-modalize";
@@ -14,9 +16,9 @@ type traveller = {
 
 export default function TravelDetailsScreen(){
 
-    // const route = useRoute<RouteProp<RootStackParamList, "traveldetails">>()
+    const route = useRoute<RouteProp<RootStackParamList, "traveldetails">>()
 
-    // const details = route.params;
+    const details = route.params;
     const travellerModelRef = useRef<Modalize>(null);
     const [travellerInfo, setTravellerInfo] = useState<any>(null);
 
@@ -141,7 +143,7 @@ export default function TravelDetailsScreen(){
             </View>
             
             <View style={styles.modalbuttonaction}>
-                <Button onPress={openTravellerModal} isPrimary isLoading text="Solicitar Reserva" />
+                {!details.historic && <Button onPress={openTravellerModal} isPrimary isLoading text="Solicitar Reserva" />}
             </View>
 
             <Modal

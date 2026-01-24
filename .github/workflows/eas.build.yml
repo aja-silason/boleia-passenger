@@ -1,0 +1,30 @@
+name: EAS BUILD A TEST APP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.19.1
+
+      - name: Install all dependancy
+        run : |
+          npm install -g expo-cli eas-cli
+          npm install
+
+      - name: EAS build Android (production)
+        env: 
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: |
+          eas build --platform android --profile preview --non-interactive

@@ -17,5 +17,5 @@ export type RootStackParamList = {
     publishtravel: undefined;
 
     travelRequest: {travelId: string}
-    traveldetails: {travelDetails: any}
+    traveldetails: {travelDetails: any, historic: boolean}
 }

@@ -39,6 +39,12 @@
         }
       }
     },
-    "owner": "anania_augusto"
+    "owner": "anania_augusto",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "def9a169-8368-4d3d-b352-fcaa2ab828ca"
+      }
+    }
   }
 }

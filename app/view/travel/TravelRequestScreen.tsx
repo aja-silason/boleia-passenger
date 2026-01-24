@@ -41,7 +41,7 @@ export default function TravelRequestScreen(){
             <HeaderBack isOtp={false} title="Informações da Boleia"/>
             
             <View style={{paddingVertical: 10, borderBottomWidth: 1, borderStyle: "dashed", borderColor: Colors.placeholderText}}>
-                <BlueButton onPress={() => navigate.navigate("traveldetails", {travelDetails: travellerInfo})} isBlue isLoading text="Ver detalhe da corrida" />
+                <BlueButton onPress={() => navigate.navigate("traveldetails", {travelDetails: travellerInfo, historic: false})} isBlue isLoading text="Ver detalhe da corrida" />
             </View>
 
             <View style={{ paddingTop: 20}}>
