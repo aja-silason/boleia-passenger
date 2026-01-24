@@ -6,3 +6,8 @@ Colocar a rede no terminal, caso a tenha redes disitantas na máquina
 Rodar a app via usb com expo
     adb reverse tcp:8082 tcp:8081
     npx expo start --localhost
+
+
+
+Expo token
+    3i5Yp3Vvx9VivmsD-kBD-_4d7MsAZLRb0KdbSFDK
