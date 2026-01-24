@@ -26,7 +26,7 @@ export default function SettingsScreen() {
 
     return (
         <View style={styles.mainContent}>
-            <Header title="Anania Augusto" role="Motorista"/>
+            <Header title="Anania Augusto" role="Passageiro"/>
 
             <View style={styles.menu}>
                 {

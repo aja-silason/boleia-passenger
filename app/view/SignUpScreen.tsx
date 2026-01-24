@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { RootStackParamList } from "../shared/route";
 import { Button } from "./components/button/Button";
@@ -10,7 +9,7 @@ import { Input } from "./components/input/Input";
 export default function SignUpScreen() {
   const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const [userinfo, setUserIf] = useState<any>();
+//   const [userinfo, setUserIf] = useState<any>();
  
      return (
          <View style={styles.mainContent}>
@@ -22,11 +21,10 @@ export default function SignUpScreen() {
                     <Input onChange={() => {}} placeholder="Ninguem" title="Último Nome" type="telephoneNumber" isHalf/>
                  </View>
 
-                <Input onChange={() => {}} placeholder="001234567LA890" title="Bilhete de identidade" type="telephoneNumber"/>
                 <Input onChange={() => {}} placeholder="923456789" title="Telefone" type="telephoneNumber"/>
 
                 <View style={{paddingTop: 20}}>
-                    <Button isLoading onPress={()=> navigate.navigate("registervehicle", {phone: "87654321", registerinfo: userinfo})} text="Continuar" isPrimary/>
+                    <Button isLoading onPress={()=> navigate.navigate("otp", {phone: "944996909"})} text="Continuar" isPrimary/>
                 </View>
              </View>
          </View>

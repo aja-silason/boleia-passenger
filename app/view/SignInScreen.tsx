@@ -17,7 +17,7 @@ export default function SignInScreen(){
                 
                 <Input onChange={() => {}} placeholder="(+244) 923 456 789" title="Telefone" type="telephoneNumber"/>
 
-                <Button isLoading onPress={()=> navigate.navigate("otp")} text="Entrar" isPrimary/>
+                <Button isLoading onPress={()=> navigate.navigate("otp", {phone: "944996909"})} text="Entrar" isPrimary/>
             </View>
         </View>
     )

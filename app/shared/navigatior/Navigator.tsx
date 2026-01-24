@@ -3,7 +3,6 @@ import SplashScreen from "@/app/view";
 import { OtpconfirmScreen } from "@/app/view/OtpconfirmScreen";
 import { RecoveryPasswordScreen } from "@/app/view/password/RecoveryPasswordScreen";
 import TypePasswordScreen from "@/app/view/password/TypePasswordScreen";
-import RegisterVehicleScreen from "@/app/view/RegisterVehicleScreen";
 import SignInScreen from "@/app/view/SignInScreen";
 import SignUpScreen from "@/app/view/SignUpScreen";
 import PublishTravelScreen from "@/app/view/travel/PublishTravelScreen";
@@ -22,7 +21,6 @@ export default function Navigator(){
             <Stack.Screen name="welcome" component={WelcomeScreen} options={{headerShown: false, headerTransparent: true}} />
             <Stack.Screen name="signin" component={SignInScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="signup" component={SignUpScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
-            <Stack.Screen name="registervehicle" component={RegisterVehicleScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="recoverpassword" component={RecoveryPasswordScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="typepassword" component={TypePasswordScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="otp" component={OtpconfirmScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
