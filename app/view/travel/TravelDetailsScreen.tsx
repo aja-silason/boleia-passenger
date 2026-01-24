@@ -25,19 +25,41 @@ export default function TravelDetailsScreen(){
             <HeaderBack title="Detalhes da Boleia"/>
             <View>
                 <View style={styles.requesttravel}>
-                    <Text style={styles.title}>Detalhes do Passageiro</Text>
-                    {
+                    <View style={{flexDirection: "row", alignItems: "center", gap: 5}}>
+                        <Ionicons name="speedometer-outline" size={15}/>
+                        <Text style={styles.title}>Motorista</Text>
+                    </View>
+                    <View style={{flexDirection: "row", gap: 10}}>
+                        <View>
+                            <Ionicons name="person-circle-outline" size={40}/>
+                        </View>
+                        <View style={{flexDirection: "column"}}>
+                            <Text style={styles.title}>Maria da Piedade</Text>
+                            <View style={{flexDirection: "row", alignItems: "center", gap: 5}}>
+                                <Text style={{color: Colors.placeholderText}}>4.8</Text>
+                                <Ionicons name="star" color={Colors.orange}/>
+                                <Text style={{color: Colors.placeholderText}}>(120 avaliações)</Text>
+                            </View>
+    
+                        </View>
+
+                    </View>
+                    {/* {
                         travel?.map((item, index) => (
                         <View style={styles.bottomInfo} key={index}>
                             <Text style={styles.detailsInfoTitle}>Passageiro {index + 1}:</Text>
                             <Text style={styles.detailsInfoValue}>{item.name}</Text>
                         </View>
                         ))
-                    }
+                    } */}
+
                 </View>
 
                 <View style={styles.requesttravel}>
-                    <Text style={styles.title}>Detalhes do Pedido</Text>
+                    <View style={{flexDirection: "row", alignItems: "center", gap: 5}}>
+                        <Ionicons name="car-outline" size={20}/>
+                        <Text style={styles.title}>Detalhes da Viatura</Text>
+                    </View>
                     <View style={styles.bottomInfo}>
                         <Text style={styles.detailsInfoTitle}>Lugares Solicitados:</Text>
                         <Text style={styles.detailsInfoValue}>{travel.length}</Text>
@@ -53,7 +75,10 @@ export default function TravelDetailsScreen(){
                 </View> 
 
                 <View style={styles.requesttravel}>
-                    <Text style={styles.title}>Viagem solicitada</Text>
+                    <View style={{flexDirection: "row", alignItems: "center", gap: 5}}>
+                        <Ionicons name="car-outline" size={20}/>
+                        <Text style={styles.title}>Preço e Disponibilidade</Text>
+                    </View>
 
                     <View style={styles.travelduration}>
                         <Text style={styles.datetravel}>03/01/2026</Text>
@@ -123,13 +148,13 @@ const styles = StyleSheet.create({
         fontWeight: "600"
     },
     requesttravel: {
-        borderColor: Colors.placeHolder,
+        borderColor: Colors.whiteBackground,
         borderWidth: 1,
         marginVertical: 10,
         padding: 10,
         borderRadius: 5,
         gap: 5,
-        backgroundColor: Colors.cardBackground
+        backgroundColor: Colors.whiteBackground
     },
     datetravel: {
         fontSize: 11,

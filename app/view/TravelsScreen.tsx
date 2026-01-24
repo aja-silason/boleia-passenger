@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RootStackParamList } from "../shared/route";
-import { TravelCard } from "./components/card/TravelCard";
+import { TravellerCard } from "./components/card/TravellerCard";
 
 export default function TravelsScreen() {
     
@@ -19,7 +19,7 @@ export default function TravelsScreen() {
                 onEndReachedThreshold={0.5}
                 renderItem={({item, index}) => (
                     <TouchableOpacity onPress={() => navigate.navigate("travelRequest", {travelId: item.toString()})} style={styles.card} activeOpacity={.6}>
-                        <TravelCard key={index} />
+                        <TravellerCard key={index} />
                     </TouchableOpacity>
                 )}
 

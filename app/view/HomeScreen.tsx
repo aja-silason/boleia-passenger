@@ -11,8 +11,17 @@ import { ButtonInLine } from "./components/button/ButtonInLine";
 import { Header } from "./components/header/Header";
 import { InputInLine } from "./components/input/InputInLine";
 
+export type QueryTravelRquest = {
+    date: string;
+    where: string;
+    from: string;
+    quantity: number;
+}
+
 export default function HomeScreen() {
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    const [query, setQuery] = useState<QueryTravelRquest>({date: "123", from: "Kilamba", quantity: 1, where: "Maianga"});
 
     const [date, setDate] = useState<any>(new Date());
     const [showCalendar, setShowCalendar] = useState<boolean>(false);
@@ -35,13 +44,13 @@ export default function HomeScreen() {
                 <InputInLine onChange={() => {}} placeholder="De onde vai sair?" title="" icon={<Ionicons name="search-outline" size={20} color={Colors.placeHolder}/>}/>
                 <InputInLine onChange={() => {}} placeholder="Para onde vamos?" title="" icon={<Ionicons name="location-outline" size={20} color={Colors.placeHolder}/>} />
                 <View style={{flexDirection: "row", gap: 10}}>
-                    <ButtonInLine onPress={showMode} placeholder="Hoje" title="Hoje" isHalf icon={<Ionicons name="calendar-outline" size={20} color={Colors.placeHolder}/>}/>
+                    <ButtonInLine onPress={showMode} placeholder="Hoje" title={ date.toLocaleDateString() ?? "Hoje"} isHalf icon={<Ionicons name="calendar-outline" size={20} color={Colors.placeHolder}/>}/>
                     <InputInLine onChange={() => {}} placeholder="1" title="" isHalf icon={<Ionicons name="person-outline" size={20} color={Colors.placeHolder}/>} type="telephoneNumber"/>
                 </View>
 
             </View>
 
-            <Button isLoading onPress={()=> navigate.navigate("publishtravel")} text="Procurar Boleia" isPrimary />
+            <Button isLoading onPress={()=> navigate.navigate("travelavailable", {query: query})} text="Procurar Boleia" isPrimary />
 
             {showCalendar && (
                 <DateTimePicker

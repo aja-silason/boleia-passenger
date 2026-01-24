@@ -9,23 +9,33 @@ export const TravellerCard = () => {
             <View style={[styles.row, styles.travellercard]}>
                 <View style={styles.travellerinfo}>
                     <Ionicons name="person-circle-outline" size={25} color={Colors.placeholderText}/>
-                    <Text style={styles.title}>Maria da Piedade</Text>
+                    <View style={{flexDirection: "column"}}>
+                        <Text style={styles.title}>Maria da Piedade</Text>
+                        <View style={{flexDirection: "row", alignItems: "center", gap: 5}}>
+                            <Text style={{color: Colors.placeholderText}}>4.8</Text>
+                            <Ionicons name="star" color={Colors.orange}/>
+                            <Text style={{color: Colors.placeholderText}}>(120 avaliações)</Text>
+                        </View>
+
+                    </View>
                 </View>
 
-                <Text style={styles.title}>2.500 kz</Text>
+                <Text style={[styles.title, {fontSize: 20}]}>2.500 kz</Text>
             </View>
 
-            <View style={styles.row}>
-                <Text style={styles.title}>Maianga</Text>
-                <Ionicons name="arrow-forward" size={13} color={Colors.placeholderText}/>
-                <Text style={styles.title}>Kilamba</Text>
-            </View>
-
-            <View style={styles.calendar}>
-                <Ionicons name="calendar-outline" color={Colors.placeholderText} size={14}/>
-                <Text style={styles.calendarText}>Sábado, 03/03/2026</Text>
-                <Text style={styles.calendarText}>*</Text>
+            <View style={[styles.calendar, {justifyContent: "space-between"}]}>
+                <View style={{flexDirection: "row", alignItems: "center", gap: 5}}>
+                    <Ionicons name="calendar-outline" color={Colors.placeholderText} size={14}/>
+                    <Text style={styles.calendarText}>Sábado, 03/03/2026</Text>
+                </View>
+                <Text style={styles.calendarText}></Text>
                 <Text style={styles.calendarText}>08:05</Text>
+            </View>
+
+            <View style={[styles.calendar, {justifyContent: "space-between"}]}>
+                <Text style={styles.calendarText}>Toyota Hiace (Branco)</Text>
+                <Text style={styles.calendarText}>|</Text>
+                <Text style={styles.calendarText}>2 Lugares vagos</Text>
             </View>
         </View>
     )
@@ -34,7 +44,8 @@ export const TravellerCard = () => {
 const styles = StyleSheet.create({
     container: {
         borderWidth: 1,
-        borderColor: Colors.placeHolder,
+        borderColor: Colors.whiteBackground,
+        backgroundColor: Colors.whiteBackground,
         borderRadius: 5,
         width: "100%",
         padding: 10,

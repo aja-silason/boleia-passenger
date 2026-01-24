@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 
 export const Colors = {
     text: '#ECEDEE',
+    whiteBackground: "#F5F7FA",
     placeHolder: "#BEC2CE",
     inactive: "#EAF1F4",
     placeholderText: "#4D4D4D",
