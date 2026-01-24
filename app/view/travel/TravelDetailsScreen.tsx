@@ -32,6 +32,14 @@ export default function TravelDetailsScreen(){
         // setTravellerInfo();
     }
 
+    const declineRequest = (id: string) => {
+        travellerModelRef.current?.close();
+    }
+
+    const acceptRequest = (id: string) => {
+        travellerModelRef.current?.close();
+    }
+
     return (
         <View style={styles.mainContent}>
             <HeaderBack title="Detalhes da Boleia"/>
@@ -137,12 +145,12 @@ export default function TravelDetailsScreen(){
             </View>
 
             <Modal
-                height={600}
-                maxHeight={600}
+                height={650}
+                maxHeight={650}
                 ref={travellerModelRef}
                 component={
                     <View style={styles.modal}>
-                        <TravellRequestInfoPendingToApprove travelinfo={{}} accept={() => {}}  decline={() => {}}/>
+                        <TravellRequestInfoPendingToApprove travelinfo={{}} accept={() => acceptRequest("")}  decline={() => declineRequest("")}/>
                     </View>
                 }
             />

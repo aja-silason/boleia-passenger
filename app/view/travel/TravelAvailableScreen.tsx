@@ -9,28 +9,10 @@ export default function TravelAvailableScreen(){
     
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-    // const travellerModelRef = useRef<Modalize>(null);
-    // const acceptModelRef = useRef<Modalize>(null);
-    // const declineModelRef = useRef<Modalize>(null);
-    // const [travellerInfo, setTravellerInfo] = useState<any>(null);
     const route = useRoute<RouteProp<RootStackParamList, "travelavailable">>()
     const param = route.params.query;
 
     const request = [0, 1, 2]
-
-
-    // const openTravellerModal = (info: any) => {
-    //     travellerModelRef.current?.open();
-    //     setTravellerInfo(info);
-    // }
-
-    // const declineRequest = (id: string) => {
-    //     declineModelRef.current?.open();
-    // }
-
-    // const acceptRequest = (id: string) => {
-    //     acceptModelRef.current?.open();
-    // }
 
     return (
         <View style={styles.mainContent}>
@@ -54,41 +36,6 @@ export default function TravelAvailableScreen(){
                 showsVerticalScrollIndicator={false}
                 style={styles.list}
             />
-
-            {/* <Modal
-                height={600}
-                maxHeight={600}
-                ref={travellerModelRef}
-                component={
-                    <View style={styles.modal}>
-                        <TravelRequestInfo travelinfo={travellerInfo} accept={() => acceptRequest(travellerInfo?.toString())}  decline={() => declineRequest(travellerInfo?.toString())}/>
-                    </View>
-                }
-            />
-
-            <Modal
-                height={200}
-                maxHeight={200}
-                ref={acceptModelRef}
-                component={
-                    <View style={styles.behaviorModal}>
-                        <Ionicons name="checkmark-circle" size={50} color={Colors.success} />
-                        <Text style={styles.modalTitle}>Pedido Aceite. Sofia Mendes será notificada.</Text>
-                    </View>
-                }
-            />
-
-            <Modal
-                height={200}
-                maxHeight={200}
-                ref={declineModelRef}
-                component={
-                    <View style={styles.behaviorModal}>
-                        <Ionicons name="remove-circle-outline" size={50} color={Colors.error} />
-                        <Text style={styles.modalTitle}>Pedido Rejeitado. Sofia Mendes será notificada.</Text>
-                    </View>
-                }
-            /> */}
 
         </View>
     )

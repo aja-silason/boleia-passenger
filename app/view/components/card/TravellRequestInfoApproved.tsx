@@ -10,13 +10,13 @@ type props = {
     decline: VoidFunction;
 }
 
-export const TravellRequestInfoPendingToApprove = (props: props) => {
+export const TravellRequestInfoApproved = (props: props) => {
     return (
         <View style={styles.mainContent}>
             <View>
 
                 <View style={{justifyContent: "center", alignItems: "center", marginVertical: 20}}>
-                    <MaterialIcons name="alarm" size={40} color={Colors.yellowBoldText} style={{backgroundColor: Colors.yellowBack, borderRadius: 100, padding: 5}}/>
+                    <MaterialIcons name="check-circle" size={40} color={Colors.success} style={{backgroundColor: Colors.placeHolder, borderRadius: 100, padding: 5}}/>
                     <Text style={styles.title}>Aguardando a Aprovação do Motorista</Text>
                 </View>
 
