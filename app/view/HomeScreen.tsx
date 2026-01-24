@@ -2,47 +2,32 @@ import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../shared/route";
 import { Button } from "./components/button/Button";
-import { RequestTravelCard } from "./components/card/RequestTravleCard";
-import { TravelCard } from "./components/card/TravelCard";
 import { Header } from "./components/header/Header";
+import { InputInLine } from "./components/input/InputInLine";
 
 export default function HomeScreen() {
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
-    const travels = [0,1,2,3]
     
     return (
         <View style={styles.mainContent}>
             <Header title="Bem vindo ao seu painel de motorista" username={"Olá Anania Augusto"}/>
             
+            <Text>Encontra motoristas a caminho do teu destino.</Text>
+
             <View style={styles.moreandcard}>
-                <Button isLoading onPress={()=> navigate.navigate("publishtravel")} text="Publicar nova Boleia" isPrimary icon={<Ionicons name="add-circle-outline" size={20}/>} />
-                <RequestTravelCard traveler={2} onPress={() => navigate.navigate("travelRequest", {travelId: '1232-12321'})} />
+                <InputInLine onChange={() => {}} placeholder="De onde vai sair?" title="" icon={<Ionicons name="search-outline" size={20} color={Colors.placeHolder}/>}/>
+                <InputInLine onChange={() => {}} placeholder="Para onde vamos" title="" icon={<Ionicons name="location-outline" size={20} color={Colors.placeHolder}/>} />
+                <View style={{flexDirection: "row", gap: 10}}>
+                    <InputInLine onChange={() => {}} placeholder="Hoje" title="" isHalf icon={<Ionicons name="calendar-outline" size={20} color={Colors.placeHolder}/>}/>
+                    <InputInLine onChange={() => {}} placeholder="1" title="" isHalf icon={<Ionicons name="person-outline" size={20} color={Colors.placeHolder}/>}/>
+                </View>
+
             </View>
 
-            <Text style={styles.title}>Recentes Boleias</Text>
-
-            <FlatList
-                data={travels}
-                keyExtractor={(_, index) => index?.toString()}
-                onEndReachedThreshold={0.5}
-                renderItem={({item, index}) => (
-                    <TouchableOpacity onPress={() => navigate.navigate("travelRequest", {travelId: item.toString()})} style={styles.card} activeOpacity={.6}>
-                        <TravelCard key={index} />
-                    </TouchableOpacity>
-                )}
-
-                ListEmptyComponent={() => (
-                    <View style={styles.emptylist}>
-                        <Text style={styles.emptytext}>Ainda não há viagens em andamento.</Text>
-                    </View>
-                )}
-                showsVerticalScrollIndicator={false}
-                style={styles.list}
-            />
+            <Button isLoading onPress={()=> navigate.navigate("publishtravel")} text="Procurar Boleia" isPrimary />
 
         </View>
     )
