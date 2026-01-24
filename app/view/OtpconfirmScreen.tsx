@@ -2,12 +2,12 @@ import { Colors } from "@/constants/theme";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { OTPBox } from "../components/box/otpBox";
-import { LinkButton } from "../components/button/LinkButton";
-import { HeaderBack } from "../components/header/HeaderBack";
-import { NumericKeyBoard } from "../components/keyboard/NumericKeyboard";
+import { OTPBox } from "./components/box/otpBox";
+import { LinkButton } from "./components/button/LinkButton";
+import { HeaderBack } from "./components/header/HeaderBack";
+import { NumericKeyBoard } from "./components/keyboard/NumericKeyboard";
 
-export const OTPRecoveryPasswordScreen = () => {
+export const OtpconfirmScreen = () => {
 
     const [otp, setOtp] = useState<string>("");
 

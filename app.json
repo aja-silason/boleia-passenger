@@ -1,19 +1,19 @@
 {
   "expo": {
     "jsEngine": "hermes",
-    "name": "driver.boleia",
-    "slug": "driver-boleia",
+    "name": "boleia",
+    "slug": "boleia",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "driverboleia",
+    "scheme": "boleia",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": false,
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "package": "com.anania_augusto.driverboleia",
+      "package": "com.anania_augusto.boleia",
       "adaptiveIcon": {
         "backgroundColor": "#000"
       },
@@ -36,12 +36,6 @@
         "android": {
           "buildType": "apk"
         }
-      }
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "a73baeb4-36aa-43e7-a13b-bd4488728d9a"
       }
     },
     "owner": "anania_augusto"

@@ -1,6 +1,6 @@
 import { RootStackParamList } from "@/app/shared/route";
 import SplashScreen from "@/app/view";
-import { OTPRecoveryPasswordScreen } from "@/app/view/password/OTPRecoveryPasswordScreen";
+import { OtpconfirmScreen } from "@/app/view/OtpconfirmScreen";
 import { RecoveryPasswordScreen } from "@/app/view/password/RecoveryPasswordScreen";
 import TypePasswordScreen from "@/app/view/password/TypePasswordScreen";
 import RegisterVehicleScreen from "@/app/view/RegisterVehicleScreen";
@@ -25,7 +25,7 @@ export default function Navigator(){
             <Stack.Screen name="registervehicle" component={RegisterVehicleScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="recoverpassword" component={RecoveryPasswordScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="typepassword" component={TypePasswordScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
-            <Stack.Screen name="optrecovery" component={OTPRecoveryPasswordScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
+            <Stack.Screen name="otp" component={OtpconfirmScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             
             <Stack.Screen name="tabs" component={DriverLayout} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="travelRequest" component={TravelRequestScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />

@@ -1,11 +1,11 @@
 export type RootStackParamList = {
     splash: undefined;
-    signin: undefined;
+    signin: {phone: string};
     signup: undefined;
     registervehicle: {phone: string, registerinfo: any};
     welcome: undefined;
     recoverpassword: undefined;
-    optrecovery: {phone: string}
+    otp: undefined
     typepassword: {phone: string}
     
     tabs: undefined

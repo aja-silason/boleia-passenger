@@ -16,7 +16,7 @@ export const OTPBox = (props: props) => {
 
     const handleLoging = () => {
         if(props.code.length === 6) {
-            if(props.code === "123456") return navigate.replace("typepassword", {phone: "944996909"})
+            if(props.code === "123456") return navigate.replace("tabs")
         }
     }
 

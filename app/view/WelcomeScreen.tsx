@@ -26,7 +26,7 @@ export default function WelcomeScreen() {
 
           <View style={style.buttonGroup}>
             <Button text="Criar conta" isLoading={false} isPrimary onPress={() => navigate.navigate("signup")} halfWidth/>
-            <Button text="Entrar" isLoading={false} isPrimary={false} onPress={() => navigate.replace("signin")} halfWidth/>
+            <Button text="Entrar" isLoading={false} isPrimary={false} onPress={() => navigate.replace("signin", {phone: "944996909"})} halfWidth/>
           </View>
 
         </View>

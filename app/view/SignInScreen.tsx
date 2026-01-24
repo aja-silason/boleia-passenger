@@ -3,10 +3,8 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StyleSheet, View } from "react-native";
 import { RootStackParamList } from "../shared/route";
 import { Button } from "./components/button/Button";
-import { LinkButton } from "./components/button/LinkButton";
 import { HeaderBack } from "./components/header/HeaderBack";
 import { Input } from "./components/input/Input";
-import { InputPassword } from "./components/input/InputPassword";
 
 export default function SignInScreen(){
 
@@ -18,13 +16,8 @@ export default function SignInScreen(){
                 <HeaderBack title="Entre na sua conta" description="" goBack={() => navigate.replace("welcome")}/>
                 
                 <Input onChange={() => {}} placeholder="(+244) 923 456 789" title="Telefone" type="telephoneNumber"/>
-                <InputPassword onChange={() => {}} placeholder="******" title="Senha"/>
 
-                <View style={styles.link}>
-                    <LinkButton isLoading onPress={()=> navigate.navigate("recoverpassword")} text="Esqueci a minha senha" isPrimary/>
-                </View>
-
-                <Button isLoading onPress={()=> navigate.replace("tabs")} text="Entrar" isPrimary/>
+                <Button isLoading onPress={()=> navigate.navigate("otp")} text="Entrar" isPrimary/>
             </View>
         </View>
     )
@@ -37,7 +30,7 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
         paddingVertical: 40,
-        gap: 5
+        gap: 20
     },
     link: {
         alignItems: "flex-end",
