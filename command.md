@@ -8,6 +8,5 @@ Rodar a app via usb com expo
     npx expo start --localhost
 
 
-
 Expo token
     3i5Yp3Vvx9VivmsD-kBD-_4d7MsAZLRb0KdbSFDK
