@@ -11,7 +11,7 @@ export default function WelcomeScreen() {
   return (
     <View style={style.mainContainer}>
       <ImageBackground 
-        source={require("@/assets/app_images/passanger.png")} 
+        source={require("@/assets/app_images/passanger.jpg")} 
         style={style.background}
         resizeMode="cover"
       >
