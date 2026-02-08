@@ -1,5 +1,4 @@
 name: EAS BUILD A TEST APP
-
 on:
   push:
     branches:
