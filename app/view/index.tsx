@@ -12,7 +12,7 @@ export default function SplashScreen() {
     
     const redirectFunction = () => {
         return navigate.replace("welcome");
-    }
+    } //
 
     useEffect(() => {
         Animated.timing(progress, {
