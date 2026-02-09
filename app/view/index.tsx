@@ -25,7 +25,7 @@ export default function SplashScreen() {
     }, []);
   return (
         <View style={style.container}>
-            <Image source={require("@/assets/images/splash-icon.png")} style={style.image}/>
+            <Image source={require("@/assets/images/splash_icon.png")} style={style.image}/>
         </View>
     )
 }
