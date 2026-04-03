@@ -1,4 +1,6 @@
 {
+  "name": "main",
+  "displayName": "Boleia",
   "expo": {
     "jsEngine": "hermes",
     "name": "boleia",
