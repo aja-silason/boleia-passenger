@@ -1,30 +1,74 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { useCreateAccount } from "../infra/hooks/useCreateAccount";
 import { RootStackParamList } from "../shared/route";
 import { Button } from "./components/button/Button";
 import { HeaderBack } from "./components/header/HeaderBack";
 import { Input } from "./components/input/Input";
+import { InputPhone } from "./components/input/phoneinput";
+import { LoadingModal } from "./components/modal/LoadingModal";
+
+enum STEP {
+  step_1 = 0,
+  step_2 = 1
+}
 
 export default function SignUpScreen() {
+  const [step, setStep] = useState<STEP>(STEP.step_1);
   const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-//   const [userinfo, setUserIf] = useState<any>();
+  const {ddi, setLocalPhone, setDdi, handleSubmit, handleChange, isLoading} = useCreateAccount();
+
+  const handleGoBack = () => {
+    if (step === STEP.step_1) {
+      navigate.goBack();
+    } else {
+      setStep((prev) => prev - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (step === STEP.step_2) {
+      handleSubmit();
+    } else {
+      setStep((prev) => prev + 1);
+    }
+  };
+
  
      return (
          <View style={styles.mainContent}>
+            <LoadingModal visible={isLoading} />
              <View style={styles.container}>
-                 <HeaderBack title="Crie sua conta" description="Precisamos de algumas informações para começar."/>
-                 
-                 <View style={styles.userinfo}>
-                    <Input onChange={() => {}} placeholder="João" title="Primeiro Nome" type="telephoneNumber" isHalf/>
-                    <Input onChange={() => {}} placeholder="Ninguem" title="Último Nome" type="telephoneNumber" isHalf/>
-                 </View>
+                 <HeaderBack title="Crie sua conta" description="Precisamos de algumas informações para começar." goBack={handleGoBack}/>
 
-                <Input onChange={() => {}} placeholder="923456789" title="Telefone" type="telephoneNumber"/>
+                 {
+                    step === STEP.step_1 && (
+                        <View style={styles.userinfo}>
+                            <Input onChange={(value) => handleChange("firstName", value)} placeholder="João" title="Primeiro Nome" type="telephoneNumber" isHalf/>
+
+                            <Input onChange={(value) => handleChange("lastName", value)} placeholder="Ninguem" title="Último Nome" type="telephoneNumber" isHalf/>
+                        </View>
+                    )
+                 }
+
+                 {
+                    step === STEP.step_2 && (
+                        <InputPhone ddi={ddi} setDdi={setDdi} setLocalPhone={setLocalPhone} />
+                    )
+                 }
+                 
+
 
                 <View style={{paddingTop: 20}}>
-                    <Button isLoading onPress={()=> navigate.navigate("otp", {phone: "944996909"})} text="Continuar" isPrimary/>
+                    <Button 
+                        isLoading={false}
+                        onPress={handleNext}
+                        text={step === STEP.step_2 ? "Finalizar" : "Continuar"}  
+                        isPrimary
+                    />
                 </View>
              </View>
          </View>

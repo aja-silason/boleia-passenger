@@ -26,7 +26,7 @@ export const useValidOTP = () => {
             const res = await OTPNotification.otpNotification.verifyOtp(payload);
 
             setIsLoading(false);
-            if(res?.status === 200 || res?.status === 201 ) return navigate.replace("typepassword", {identificationNumber: phoneNumber});
+            if(res?.status === 200 || res?.status === 201 ) return navigate.replace("tabs");
 
         } catch (error) {
             setIsLoading(false);

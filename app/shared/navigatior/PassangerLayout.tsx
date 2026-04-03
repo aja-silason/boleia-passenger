@@ -5,7 +5,7 @@ import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-export default function DriverLayout(){
+export default function PassangerLayout(){
     
     const Tabs = createBottomTabNavigator();
 

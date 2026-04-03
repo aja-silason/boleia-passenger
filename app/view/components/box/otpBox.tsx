@@ -1,29 +1,28 @@
-import { RootStackParamList } from "@/app/shared/route"
+import { useValidOTP } from "@/app/infra/hooks/useValidOTP"
 import { Colors } from "@/constants/theme"
-import { useNavigation } from "@react-navigation/native"
-import { NativeStackNavigationProp } from "@react-navigation/native-stack"
+import { useEffect } from "react"
 import { StyleSheet, Text, View } from "react-native"
+import { LoadingModal } from "../modal/LoadingModal"
 
 type props = {
-    code: string
+    code: string;
+    phoneNumber: string;
 }
 
 export const OTPBox = (props: props) => {
-    
-    const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    const {isLoading, onSubmit} = useValidOTP();
+
+    useEffect(() => {
+        if(props.code.length === 6){
+            onSubmit(props.code, props.phoneNumber)
+        }
+    }, [props.code]);
 
     const boxes = [0, 1, 2, 3, 4, 5];
 
-    const handleLoging = () => {
-        if(props.code.length === 6) {
-            if(props.code === "123456") return navigate.replace("tabs")
-        }
-    }
-
-    handleLoging();
-
     return (
         <View style={styles.container}>
+            <LoadingModal visible={isLoading} />
             {
                 boxes?.map((index) => {
                     const char = props.code[index] || "";

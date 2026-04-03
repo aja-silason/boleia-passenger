@@ -8,7 +8,7 @@ import TravelAvailableScreen from "@/app/view/travel/TravelAvailableScreen";
 import TravelDetailsScreen from "@/app/view/travel/TravelDetailsScreen";
 import WelcomeScreen from "@/app/view/WelcomeScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import DriverLayout from "./DriverLayout";
+import PassangerLayout from "./PassangerLayout";
 
 export default function Navigator(){
     const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -21,7 +21,7 @@ export default function Navigator(){
             <Stack.Screen name="signup" component={SignUpScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="otp" component={OtpconfirmScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             
-            <Stack.Screen name="tabs" component={DriverLayout} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
+            <Stack.Screen name="tabs" component={PassangerLayout} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="travelavailable" component={TravelAvailableScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             
             <Stack.Screen name="traveldetails" component={TravelDetailsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />

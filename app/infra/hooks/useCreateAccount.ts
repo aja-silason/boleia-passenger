@@ -5,6 +5,7 @@ import { useNavigation } from "expo-router";
 import { useState } from "react";
 import { Alert, Keyboard } from "react-native";
 import { Auth } from "../service/entity/auth.service";
+import { OTPNotification } from "../service/entity/otpnotification.service";
 import { SignUpInput } from "./SignUpInput";
 
 export const useCreateAccount = () => {
@@ -24,7 +25,7 @@ export const useCreateAccount = () => {
         setLocalPhone(formatted);
     };
 
-    const [data, setData] = useState<SignUpInput>({firstName: "", identificationNumber: "", isDriver: true, lastName: "", licenseNumber: "", password: "", phoneNumber: ""});
+    const [data, setData] = useState<SignUpInput>({firstName: "", isDriver: false, lastName: "", phoneNumber: ""});
 
     const handleChange = (name: string, value: string) => {
         setData((prevState) => ({
@@ -47,18 +48,19 @@ export const useCreateAccount = () => {
 
         const payload: SignUpInput = {
             ...data,
-            isDriver: true,
+            isDriver: false,
             phoneNumber: fullNumber
         }
 
         try {
             setIsLoading(true);
             
-            const res = await Auth.auth.signUp(payload);
+            await Auth.auth.signUp(payload);
+            await OTPNotification.otpNotification.requestOTP(localPhone);
 
             setIsLoading(false);
 
-            return navigate.navigate("registervehicle", {phone: fullNumber, registerinfo: data})
+            return navigate.navigate("otp", {phone: fullNumber})
 
         } catch (error) {
             setIsLoading(false);
@@ -68,11 +70,47 @@ export const useCreateAccount = () => {
                 ]);
                 if(error.status === 400) return Alert.alert("Informação", error.response?.data.message);
                 if(error.status === 404) return Alert.alert("Informação", error.response?.data.message);
-                if(error.status === 409) return Alert.alert("Informação", error.response?.data.message);
+                if(error.status === 409) {
+                        Alert.alert("Informação", error.response?.data.message, [
+                            {
+                                text: "Cancelar",
+                                onPress: () => {}
+                            },
+                            {
+                            text: "Iniciar sessão",
+                            onPress: async () => {
+                                const res = await onRetryRequest(fullNumber);
+                                if(res) navigate.navigate("otp", {phone: fullNumber})
+                            }
+                            }
+                        ]);
+                } 
             }
         }
 
     }
+
+
+    const onRetryRequest = async (fullNumber: string) => {
+
+        try {
+            setIsLoading(true)
+                await OTPNotification.otpNotification.requestOTP(fullNumber);
+            setIsLoading(false);
+            return true;
+        } catch (error) {
+            console.log("Mapeamento do erro no request otp", error)
+            setIsLoading(false);
+            Alert.alert("Informação", "Alguma coisa ocorreu mal, estamos resolvendo por você!", [
+                {
+                    text: "Entendido",
+                    onPress: () => setIsLoading(false)
+                }
+            ]);
+            return false;
+        }
+    };
+
 
     return {
         handleChange,

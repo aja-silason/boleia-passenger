@@ -5,7 +5,7 @@ export type RootStackParamList = {
     signin: undefined;
     signup: undefined;
     welcome: undefined;
-    otp: {phone: string}
+    otp: { phone: string }
     
     tabs: undefined
     home: undefined

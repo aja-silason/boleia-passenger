@@ -1,6 +1,6 @@
 import { Colors } from "@/constants/theme";
 import { ReactNode } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { KeyboardTypeOptions, StyleSheet, Text, TextInput, View } from "react-native";
 
 type props = {
     placeholder: string;
@@ -9,7 +9,8 @@ type props = {
     icon?: ReactNode,
     type?: "telephoneNumber" | "creditCardNumber" | "emailAddress" | "postalCode",
     value?: string | any;
-    isHalf?: boolean
+    isHalf?: boolean,
+    keyboardType?: KeyboardTypeOptions
 }
 
 export const Input = (props: props) => {
@@ -20,7 +21,7 @@ export const Input = (props: props) => {
                 <View style={{flexDirection: "row"}}>
                     {props.icon}
                 </View>
-                <TextInput placeholder={props.placeholder} placeholderTextColor={Colors.placeHolder} style={styles.input} textContentType={props.type ?? "none"} onChangeText={props.onChange} value={props.value} defaultValue={props.value}/>
+                <TextInput placeholder={props.placeholder} placeholderTextColor={Colors.placeHolder} style={styles.input} textContentType={props.type ?? "none"} onChangeText={props.onChange} value={props.value} defaultValue={props.value} keyboardType={props.keyboardType}/>
             </View>
         </View>
     )

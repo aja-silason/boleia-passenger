@@ -22,6 +22,7 @@ export const useRequestOTP = () => {
         setLocalPhone(formatted);
     };
 
+
     const onSubmit = async () => {
         Keyboard.dismiss();
         const pureNumber = localPhone.replace(/-/g, "");
@@ -33,12 +34,12 @@ export const useRequestOTP = () => {
         ]);
         
         const fullNumber = `${ddi}${pureNumber}`;
-        
+
         try {
             setIsLoading(true)
             await OTPNotification.otpNotification.requestOTP(fullNumber);
             setIsLoading(false);
-            return navigate.replace("optrecovery", { phone: fullNumber });
+            return navigate.replace("tabs");
         } catch (error) {
             console.log("Mapeamento do erro no request otp", error)
             setIsLoading(false);
@@ -54,9 +55,19 @@ export const useRequestOTP = () => {
 
 
     const onRetryRequest = async () => {
+        const pureNumber = localPhone.replace(/-/g, "");
+        if (pureNumber.length < 9) return Alert.alert("Aviso", "Número incompleto", [
+            {
+                text: "Inserir número",
+                onPress: () => {}
+            }
+        ]);
+        
+        const fullNumber = `${ddi}${pureNumber}`;
+        
         try {
             setIsLoading(true)
-                await OTPNotification.otpNotification.requestOTP(localPhone);
+                await OTPNotification.otpNotification.requestOTP(fullNumber);
             setIsLoading(false);
             return
         } catch (error) {
