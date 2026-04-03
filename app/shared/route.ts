@@ -16,6 +16,9 @@ export type RootStackParamList = {
 
     publishtravel: undefined;
 
+    supportScreen: undefined;
+    notifications: undefined;
+
     travelRequest: {travelId: string}
     traveldetails: {travelDetails: any, historic: boolean}
 }

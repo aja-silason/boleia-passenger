@@ -11,6 +11,7 @@ export const useRequestOTP = () => {
     const [localPhone, setLocalPhone] = useState("");
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+
     const formatPhoneNumber = (text: string) => {
         const cleaned = text.replace(/\D/g, "");
         let formatted = cleaned;

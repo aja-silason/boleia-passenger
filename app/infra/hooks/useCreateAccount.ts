@@ -60,7 +60,7 @@ export const useCreateAccount = () => {
 
             setIsLoading(false);
 
-            return navigate.navigate("otp", {phone: fullNumber})
+            return navigate.replace("otp", {phone: fullNumber})
 
         } catch (error) {
             setIsLoading(false);

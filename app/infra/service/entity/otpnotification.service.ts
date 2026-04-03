@@ -1,5 +1,6 @@
 import { VerifyOTP } from "../../hooks/VerifyOTP"
 import { api } from "../api"
+import { UserOutput } from "./UserOutput"
 
 export namespace OTPNotification {
 
@@ -14,16 +15,7 @@ export namespace OTPNotification {
         } ,
 
         verifyOtp: (payload: VerifyOTP) => {
-
-            const verify = (key: keyof VerifyOTP): string => {
-                const map: Record<keyof VerifyOTP | any, string> = {
-                    phoneNumber: "Número de telefone",
-                    otp: "OTP"
-                }
-                return map[key] || key;
-            }
-
-            return api.post<void>('otp/valid', payload, {skipAuth: true});
+            return api.post<UserOutput>('otp/valid', payload, {skipAuth: true});
         }
 
     }

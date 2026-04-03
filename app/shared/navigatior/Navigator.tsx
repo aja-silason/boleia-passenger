@@ -1,6 +1,8 @@
 import { RootStackParamList } from "@/app/shared/route";
 import SplashScreen from "@/app/view";
 import { OtpconfirmScreen } from "@/app/view/OtpconfirmScreen";
+import NotificationsScreen from "@/app/view/settings/NotificationsScreen";
+import SupportScreen from "@/app/view/settings/SupportScreen";
 import SignInScreen from "@/app/view/SignInScreen";
 import SignUpScreen from "@/app/view/SignUpScreen";
 import PublishTravelScreen from "@/app/view/travel/PublishTravelScreen";
@@ -23,6 +25,8 @@ export default function Navigator(){
             
             <Stack.Screen name="tabs" component={PassangerLayout} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="travelavailable" component={TravelAvailableScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
+            <Stack.Screen name="supportScreen" component={SupportScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
+            <Stack.Screen name="notifications" component={NotificationsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             
             <Stack.Screen name="traveldetails" component={TravelDetailsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="publishtravel" component={PublishTravelScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />

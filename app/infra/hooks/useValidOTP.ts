@@ -1,3 +1,4 @@
+import { useAuthContext } from "@/app/shared/context/auth.context";
 import { RootStackParamList } from "@/app/shared/route";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
@@ -11,6 +12,8 @@ export const useValidOTP = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    const {addUserInfomation} = useAuthContext();
 
 
     const onSubmit = async (code: string, phoneNumber: string) => {
@@ -26,6 +29,7 @@ export const useValidOTP = () => {
             const res = await OTPNotification.otpNotification.verifyOtp(payload);
 
             setIsLoading(false);
+            addUserInfomation(res.data);
             if(res?.status === 200 || res?.status === 201 ) return navigate.replace("tabs");
 
         } catch (error) {

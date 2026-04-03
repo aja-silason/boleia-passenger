@@ -1,6 +1,6 @@
 import React, { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 
-import { LoginOutput } from "@/app/infra/service/entity/UserOutput";
+import { UserOutput } from "@/app/infra/service/entity/UserOutput";
 import { default as Asyncstorage, default as AsyncStorage } from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { Alert } from "react-native";
@@ -8,13 +8,13 @@ import { Alert } from "react-native";
 
 type AuthState = {
 
-    userInformation: LoginOutput | null ;
+    userInformation: UserOutput | null ;
     
     isLoadingAuth: boolean,
     
     setIsLoadingAuth: Dispatch<SetStateAction<boolean>>
 
-    addUserInfomation: (value: LoginOutput) => void;
+    addUserInfomation: (value: UserOutput) => void;
     logOut: VoidFunction;
 
 }
@@ -23,7 +23,7 @@ const AuthContext = createContext<AuthState | undefined>(undefined);
 
 export const AuthProvider: React.FC<{children: ReactNode}> = ({children}) => {
 
-    const [userInformation, setUserInfomation] = useState<LoginOutput | null>(null);
+    const [userInformation, setUserInfomation] = useState<UserOutput | null>(null);
     const router = useRouter();
     
     const [isLoadingAuth, setIsLoadingAuth] = useState<boolean>(true);
@@ -59,7 +59,7 @@ export const AuthProvider: React.FC<{children: ReactNode}> = ({children}) => {
         ]);
     }
 
-    const addUserInfomation = (value: LoginOutput) => {
+    const addUserInfomation = (value: UserOutput) => {
         setUserInfomation(value);
         Asyncstorage.setItem("DR1V3RUS3RB0L314", JSON?.stringify(value));
     }

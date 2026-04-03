@@ -1,15 +1,18 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { AuthProvider } from "./shared/context/auth.context";
 import Navigator from "./shared/navigatior/Navigator";
 
 export default function App() {
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
             <SafeAreaProvider>
-                <NavigationContainer>
-                    <Navigator />
-                </NavigationContainer>
+                <AuthProvider>
+                    <NavigationContainer>
+                        <Navigator />
+                    </NavigationContainer>
+                </AuthProvider>
             </SafeAreaProvider>
         </GestureHandlerRootView>
     )

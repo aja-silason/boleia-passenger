@@ -2,10 +2,7 @@ export interface UserOutput {
     id: string,
     firstName: string,
     lastName: string,
-    phoneNumber: string,
-    identificationNumber: string,
-    licenseNumber: string,
-    status: string
+    phoneNumber: string
 }
 
 export type DriverOuput = {
