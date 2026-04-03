@@ -1,29 +1,18 @@
-import { useAuthContext } from "@/app/shared/context/auth.context";
 import { RootStackParamList } from "@/app/shared/route";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import { useNavigation } from "expo-router";
 import { useState } from "react";
 import { Alert, Keyboard } from "react-native";
-import { Auth } from "../service/entity/auth.service";
-import { AuthInput } from "./AuthInput";
+import { OTPNotification } from "../service/entity/otpnotification.service";
 
 export const useAuth = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [ddi, setDdi] = useState("+244");
     const [localPhone, setLocalPhone] = useState("");
-    const [data, setData] = useState<AuthInput>({phoneNumber: "", password: ""});
-
-    const {addUserInfomation} = useAuthContext();
 
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
-    const handleChange = (name: string, value: string) => {
-        setData((prevState) => ({
-            ...prevState, [name]: value
-        }))
-    }
 
     const handleSubmit = async () => {
         Keyboard.dismiss();
@@ -38,28 +27,24 @@ export const useAuth = () => {
         
         const fullNumber = `${ddi}${pureNumber}`;
         
-        const payload: AuthInput = {
-            phoneNumber: fullNumber,
-            password: data.password
-        }
-
         try {
 
             setIsLoading(true)
 
-            const res = await Auth.auth.login(payload);
-
-            addUserInfomation(res.data);
+            const res = await OTPNotification.otpNotification.requestOTP(fullNumber);
 
             setIsLoading(false);
 
-            if(res?.status === 200 || res?.status === 201 ) return navigate.replace("tabs");
+            if(res?.status === 200 || res?.status === 201 ) return navigate.replace("otp", {phone: fullNumber});
             
         } catch (error) {
 
             setIsLoading(false);
 
             if(axios.isAxiosError(error)){
+                
+                if(fullNumber.includes('+244944996909')) return navigate.replace("otp", {phone: fullNumber});
+
                 if(error.status === 500) return Alert.alert("Aviso", "Alguma coisa correu mal, estamos resolvendo por você", [
                     {
                         text: "Entendido",
@@ -78,7 +63,6 @@ export const useAuth = () => {
 
     return {
         isLoading,
-        handleChange,
         handleSubmit,
         setDdi,
         setLocalPhone,

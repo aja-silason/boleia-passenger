@@ -1,23 +1,27 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StyleSheet, View } from "react-native";
+import { useAuth } from "../infra/hooks/useAuth";
 import { RootStackParamList } from "../shared/route";
 import { Button } from "./components/button/Button";
 import { HeaderBack } from "./components/header/HeaderBack";
-import { Input } from "./components/input/Input";
+import { InputPhone } from "./components/input/phoneinput";
 
 export default function SignInScreen(){
 
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+    const {ddi, setDdi, setLocalPhone, handleSubmit, isLoading} = useAuth();
+
     return (
         <View style={styles.mainContent}>
             <View style={styles.container}>
                 <HeaderBack title="Entre na sua conta" description="" goBack={() => navigate.replace("welcome")}/>
-                
-                <Input onChange={() => {}} placeholder="(+244) 923 456 789" title="Telefone" type="telephoneNumber"/>
 
-                <Button isLoading onPress={()=> navigate.navigate("otp", {phone: "944996909"})} text="Entrar" isPrimary/>
+                <InputPhone ddi={ddi} setDdi={setDdi} setLocalPhone={setLocalPhone} />
+
+
+                <Button isLoading={isLoading} onPress={handleSubmit} text="Entrar" isPrimary/>
             </View>
         </View>
     )

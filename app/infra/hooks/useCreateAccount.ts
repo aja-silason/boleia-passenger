@@ -56,7 +56,7 @@ export const useCreateAccount = () => {
             setIsLoading(true);
             
             await Auth.auth.signUp(payload);
-            await OTPNotification.otpNotification.requestOTP(localPhone);
+            await OTPNotification.otpNotification.requestOTP(fullNumber);
 
             setIsLoading(false);
 
@@ -89,7 +89,6 @@ export const useCreateAccount = () => {
         }
 
     }
-
 
     const onRetryRequest = async (fullNumber: string) => {
 

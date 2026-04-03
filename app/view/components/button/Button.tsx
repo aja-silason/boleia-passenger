@@ -1,6 +1,6 @@
 import { Colors } from "@/constants/theme";
 import { ReactNode } from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 type props = {
     text: string;
@@ -15,7 +15,13 @@ export const Button = (props: props) => {
     return (
         <TouchableOpacity style={[style.container, props.isPrimary ? style.primary : style.secundary, props.halfWidth && style.middleSize]} activeOpacity={.7} onPress={props.onPress}>
             {props.icon}
-            <Text style={[props.isPrimary ? style.textPrimary : style.textSecundary]}>{props.text}</Text>
+            {
+                props.isLoading ? (
+                    <ActivityIndicator color={Colors.blackText}  size={18} />
+                ) : (
+                    <Text style={[props.isPrimary ? style.textPrimary : style.textSecundary]}>{props.text}</Text>
+                )
+            }
         </TouchableOpacity>
     )
 }

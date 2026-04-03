@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Alert, Keyboard } from "react-native";
-import { Driver } from "../../service/entity/driver.service";
+import { User } from "../../service/entity/user.service";
 import { Vehicle } from "../../service/vehicle/vehicle.service";
 import { RegisterVehicleInput } from "./RegisterVehicleInput";
 
@@ -24,7 +24,7 @@ export const useRegisterVehicle = (phoneNumber: string) => {
         try {
             setIsLoading(true)
 
-            const out = await Driver.driver.findDriverByPhoneNumber(phoneNumber);
+            const out = await User.user.findDriverByPhoneNumber(phoneNumber);
 
             const driverId = out?.data?.id;
 
