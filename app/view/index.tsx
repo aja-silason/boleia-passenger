@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import { Animated, Image, StyleSheet, View } from "react-native";
+import { useAuthContext } from "../shared/context/auth.context";
 import { RootStackParamList } from "../shared/route";
 
 export default function SplashScreen() {
@@ -10,8 +11,11 @@ export default function SplashScreen() {
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const [progress] = useState(new Animated.Value(0));
     
+    const {userInformation} = useAuthContext();
+
     const redirectFunction = () => {
-        return navigate.replace("welcome");
+        if(!userInformation) return navigate.replace("welcome");
+        return navigate.replace("tabs");
     }
 
     useEffect(() => {
@@ -22,7 +26,7 @@ export default function SplashScreen() {
         }).start(() => {
             redirectFunction()
         })
-    }, []);
+    }, [userInformation]);
   return (
         <View style={style.container}>
             <Image source={require("@/assets/images/splash_icon.png")} style={style.image}/>

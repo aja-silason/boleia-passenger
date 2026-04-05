@@ -1,4 +1,6 @@
 import { RootStackParamList } from "@/app/shared/route";
+import { Colors } from "@/constants/theme";
+import { Ionicons } from "@expo/vector-icons";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -6,33 +8,35 @@ import { TravellerCard } from "../components/card/TravellerCard";
 import { HeaderBack } from "../components/header/HeaderBack";
 
 export default function TravelAvailableScreen(){
-    
+    const route = useRoute<RouteProp<RootStackParamList, "travelavailable">>()
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-    const route = useRoute<RouteProp<RootStackParamList, "travelavailable">>()
-    const param = route.params.query;
-
-    const request = [0, 1, 2]
+    const travels = route.params.travels;
 
     return (
         <View style={styles.mainContent}>
-            <HeaderBack isOtp={false} title={request?.length + ` Boleia${request.length > 1 ? 's' : ''} para ` + param?.from}/>
+            <HeaderBack isOtp={false} title={travels?.length + ` Boleia${travels.length > 1 ? 's' : ''} para ` + route.params.from}/>
 
             <FlatList
-                data={request}
+                data={travels}
                 keyExtractor={(_, index) => index?.toString()}
                 onEndReachedThreshold={0.5}
                 renderItem={({item, index}) => (
-                    <TouchableOpacity onPress={() => navigate.navigate("traveldetails", {travelDetails: param, historic: false})} style={styles.card} activeOpacity={.6}>
-                        <TravellerCard key={index} />
+                    <TouchableOpacity onPress={() => {}} style={styles.card} activeOpacity={0.9}>
+                        <TravellerCard data={item} key={index} onPress={() => navigate.navigate("traveldetails", {travelDetails: item, historic: false})} />
                     </TouchableOpacity>
                 )}
 
                 ListEmptyComponent={() => (
-                    <View style={{justifyContent: "center", alignItems: "center"}}>
-                        <Text>Sem Pedido Pendetes</Text>
+                    <View style={styles.emptyContainer}>
+                        <Ionicons name="car-outline" size={60} color={Colors.inactive} />
+                        <Text style={styles.emptyTitle}>Nenhuma boleia encontrada</Text>
+                        <Text style={styles.emptySubtitle}>
+                            Tente mudar o horário ou o destino da sua busca.
+                        </Text>
                     </View>
                 )}
+
                 showsVerticalScrollIndicator={false}
                 style={styles.list}
             />
@@ -76,5 +80,24 @@ const styles = StyleSheet.create({
     modalTitle: {
         fontSize: 15,
         fontWeight: "600"
+    },
+    emptyContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 100,
+        paddingHorizontal: 40,
+    },
+    emptyTitle: {
+        fontSize: 18,
+        fontWeight: "700",
+        color: "#333",
+        marginTop: 15,
+    },
+    emptySubtitle: {
+        fontSize: 14,
+        color: Colors.placeholderText,
+        textAlign: "center",
+        marginTop: 8,
     }
 })

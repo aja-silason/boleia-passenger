@@ -1,3 +1,4 @@
+import { TravelOutput } from "@/app/infra/service/travel/TravelOutput";
 import { Colors } from "@/constants/theme";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
@@ -5,7 +6,7 @@ import { BehaviorButton } from "../button/BehaviorButton";
 import { Button } from "../button/Button";
 
 type props = {
-    travelinfo: any,
+    travelinfo: TravelOutput,
     accept: VoidFunction;
     decline: VoidFunction;
 }
@@ -63,7 +64,7 @@ export const TravellRequestInfoPendingToApprove = (props: props) => {
             
             <View style={[styles.modalbuttonaction, {flexDirection: "column"}]}>
                 <BehaviorButton onPress={props.decline} isLoading isSuccess={false} text="Cancelar pedido" />
-                <Button onPress={props.accept} isLoading isPrimary text="Ver detalhes do Pedido" />
+                <Button onPress={props.accept} isLoading={false} isPrimary text="Ver detalhes do Pedido" />
             </View>
         </View>
     )

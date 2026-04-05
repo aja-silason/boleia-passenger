@@ -13,6 +13,10 @@ export interface TravelOutput {
     availablePassangers: PassengerOutput[],
     pendingPassanger: PassengerOutput[],
     createdAt: string,
+    car: {
+        color: string;
+        name: string
+    }
     updatedAt: string
 }
 

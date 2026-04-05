@@ -1,6 +1,7 @@
 import { RootStackParamList } from "@/app/shared/route";
 import SplashScreen from "@/app/view";
 import { OtpconfirmScreen } from "@/app/view/OtpconfirmScreen";
+import ReloadScreen from "@/app/view/ReloadScreen";
 import NotificationsScreen from "@/app/view/settings/NotificationsScreen";
 import SupportScreen from "@/app/view/settings/SupportScreen";
 import SignInScreen from "@/app/view/SignInScreen";
@@ -17,6 +18,7 @@ export default function Navigator(){
 
     return (
         <Stack.Navigator>
+            <Stack.Screen name="reloadScreen" component={ReloadScreen} options={{headerShown: false, headerTransparent: true}} />
             <Stack.Screen name="splash" component={SplashScreen} options={{headerShown: false, headerTransparent: true}} />
             <Stack.Screen name="welcome" component={WelcomeScreen} options={{headerShown: false, headerTransparent: true}} />
             <Stack.Screen name="signin" component={SignInScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />

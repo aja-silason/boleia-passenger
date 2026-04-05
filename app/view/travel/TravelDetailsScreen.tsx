@@ -1,37 +1,43 @@
+import { useGetFindByTravelId } from "@/app/infra/hooks/travel/useGetFindByTravelId";
 import { RootStackParamList } from "@/app/shared/route";
 import { Colors } from "@/constants/theme";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { useRef, useState } from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { RefreshControl, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Modalize } from "react-native-modalize";
 import { Button } from "../components/button/Button";
 import { TravellRequestInfoPendingToApprove } from "../components/card/TravellRequestInfoPendingToApprove";
 import { HeaderBack } from "../components/header/HeaderBack";
 import { Modal } from "../components/modal/Modal";
 
-type traveller = {
-    name: string
-}
 
 export default function TravelDetailsScreen(){
 
     const route = useRoute<RouteProp<RootStackParamList, "traveldetails">>()
 
-    const details = route.params;
+    const details = route.params?.travelDetails;
     const travellerModelRef = useRef<Modalize>(null);
-    const [travellerInfo, setTravellerInfo] = useState<any>(null);
 
+    const {data, handleFetch, isLoading} = useGetFindByTravelId();
 
-    const startTravel = (id: string) => {
-        Alert.alert(`Travel ${id} was started`);
-    }
+    const [refreshing, setRefreshing] = useState(false);
 
-    const travel: traveller[] = [{name: "Anania"}, {name: "Adão"}, {name: "Madalena"}]
+    const onRefresh = useCallback(async () => {
+        setRefreshing(true);
+        
+        await handleFetch(details.id);
+        
+        setRefreshing(false);
+    }, [details.id]);
+
+    useEffect(() => {
+        handleFetch(details.id);
+    }, [])
+
 
     const openTravellerModal = () => {
         travellerModelRef.current?.open();
-        // setTravellerInfo();
     }
 
     const declineRequest = (id: string) => {
@@ -44,115 +50,116 @@ export default function TravelDetailsScreen(){
 
     return (
         <View style={styles.mainContent}>
-            <HeaderBack title="Detalhes da Boleia"/>
-            <View>
-                <View style={styles.requesttravel}>
-                    <View style={{flexDirection: "row", alignItems: "center", gap: 5}}>
-                        <MaterialCommunityIcons name="steering" size={20} color="black" />
-                        <Text style={styles.title}>Motorista</Text>
-                    </View>
-                    <View style={{flexDirection: "row", gap: 10}}>
-                        <View>
-                            <Ionicons name="person-circle-outline" size={40}/>
+            <HeaderBack title="Detalhes da Boleia" />
+            
+            <ScrollView 
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.scrollContainer}
+                refreshControl={
+                    <RefreshControl 
+                        refreshing={refreshing || isLoading}
+                        onRefresh={onRefresh}
+                        colors={[Colors.primary]}
+                        tintColor={Colors.primary}
+                    />
+                }
+            >
+                
+                <View style={styles.card}>
+                    <View style={styles.routeContainer}>
+                        <View style={styles.timeline}>
+                            <View style={styles.dot} />
+                            <View style={styles.line} />
+                            <Ionicons name="location" size={18} color={Colors.primary} />
                         </View>
-                        <View style={{flexDirection: "column"}}>
-                            <Text style={styles.title}>Maria da Piedade</Text>
-                            <View style={{flexDirection: "row", alignItems: "center", gap: 5}}>
-                                <Text style={{color: Colors.placeholderText}}>4.8</Text>
-                                <Ionicons name="star" color={Colors.orange}/>
-                                <Text style={{color: Colors.placeholderText}}>(120 avaliações)</Text>
+                        <View style={styles.routeDetails}>
+                            <View>
+                                <Text style={styles.label}>Origem</Text>
+                                <Text style={styles.routeText}>Kilamba</Text>
                             </View>
-    
+                            <View style={{ marginTop: 20 }}>
+                                <Text style={styles.label}>Destino</Text>
+                                <Text style={styles.routeText}>Maianga</Text>
+                            </View>
                         </View>
-
                     </View>
                 </View>
 
-                <View style={styles.requesttravel}>
-                    <View style={{flexDirection: "row", alignItems: "center", gap: 5}}>
-                        <Ionicons name="car-outline" size={20}/>
-                        <Text style={styles.title}>Detalhes da Viatura</Text>
+                <View style={styles.card}>
+                    <View style={styles.sectionHeader}>
+                        <Ionicons name="person-outline" size={18} color={Colors.primary} />
+                        <Text style={styles.sectionTitle}>Motorista e Veículo</Text>
+                    </View>
+                    
+                    <View style={styles.driverRow}>
+                        <View style={styles.avatar}>
+                            <Ionicons name="person" size={25} color="#fff" />
+                        </View>
+                        <View style={{ flex: 1 }}>
+                            <Text style={styles.driverName}>Maria da Piedade</Text>
+                            <View style={styles.ratingRow}>
+                                <Ionicons name="star" color={Colors.orange} size={14} />
+                                <Text style={styles.ratingText}>4.8 (120 avaliações)</Text>
+                            </View>
+                        </View>
                     </View>
 
-                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                        
-                        <View style={{}}>
-                            <Text>Marca</Text>
-                            <Text style={styles.value}>Suzuki</Text>
-                        </View>
+                    <View style={styles.divider} />
 
+                    <View style={styles.infoGrid}>
                         <View>
-                            <Text>Modelo</Text>
-                            <Text style={styles.value}>Swift</Text>
+                            <Text style={styles.label}>Viatura</Text>
+                            <Text style={styles.value}>Suzuki Swift</Text>
                         </View>
-
                         <View>
-                            <Text>Matricula</Text>
+                            <Text style={styles.label}>Matrícula</Text>
                             <Text style={styles.value}>LD-XL-PT-OO</Text>
                         </View>
-
-                    </View>
-                </View> 
-
-                <View style={styles.requesttravel}>
-                    <View style={{flexDirection: "row", alignItems: "center", gap: 5}}>
-                        <Ionicons name="car-outline" size={20}/>
-                        <Text style={styles.title}>Preço e Disponibilidade</Text>
-                    </View>
-
-                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                        
-                        <View style={{}}>
-                            <Text>Preço</Text>
-                            <Text style={styles.value}>2.500,00 kz</Text>
-                        </View>
-
-                        <View>
-                            <Text>Lugares Vagos</Text>
-                            <Text style={styles.value}>2</Text>
-                        </View>
-
-                        <View>
-                            <Text></Text>
-                            <Text style={styles.value}></Text>
-                        </View>
-
                     </View>
                 </View>
 
-                <View style={styles.requesttravel}>
-                    <View style={{flexDirection: "row", alignItems: "center", gap: 5}}>
-                        <Ionicons name="map-outline" size={20}/>
-                        <Text style={styles.title}>Trajecto</Text>
+                {/* SEÇÃO 3: PREÇO E VAGAS */}
+                <View style={styles.card}>
+                    <View style={styles.sectionHeader}>
+                        <Ionicons name="cash-outline" size={18} color={Colors.primary} />
+                        <Text style={styles.sectionTitle}>Condições</Text>
                     </View>
-
-                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                        
-                        <View style={{}}>
-                            <Text>Origem</Text>
-                            <Text style={styles.value}>Kilamba</Text>
-                        </View>
-
+                    <View style={styles.infoGrid}>
                         <View>
-                            <Text>Destino</Text>
-                            <Text style={styles.value}>Maianga</Text>
+                            <Text style={styles.label}>Preço por lugar</Text>
+                            <Text style={[styles.value, { color: Colors.primary, fontSize: 18 }]}>2.500,00 kz</Text>
                         </View>
-
+                        <View>
+                            <Text style={styles.label}>Vagas disponíveis</Text>
+                            <Text style={styles.value}>2 Lugares</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
-            
-            <View style={styles.modalbuttonaction}>
-                {!details.historic && <Button onPress={openTravellerModal} isPrimary isLoading text="Solicitar Reserva" />}
-            </View>
+
+            </ScrollView>
+
+            {/* BOTÃO FIXO INFERIOR */}
+            {!route.params?.historic && (
+                <View style={styles.footer}>
+                    <Button 
+                        isLoading={false}
+                        onPress={() => travellerModelRef.current?.open()} 
+                        isPrimary 
+                        text="Solicitar Reserva" 
+                    />
+                </View>
+            )}
 
             <Modal
-                height={650}
-                maxHeight={650}
+                height={600}
                 ref={travellerModelRef}
                 component={
-                    <View style={styles.modal}>
-                        <TravellRequestInfoPendingToApprove travelinfo={{}} accept={() => acceptRequest("")}  decline={() => declineRequest("")}/>
+                    <View style={styles.modalPadding}>
+                        <TravellRequestInfoPendingToApprove 
+                            travelinfo={details} 
+                            accept={() => travellerModelRef.current?.close()} 
+                            decline={() => travellerModelRef.current?.close()}
+                        />
                     </View>
                 }
             />
@@ -253,5 +260,126 @@ const styles = StyleSheet.create({
     modalTitle: {
         fontSize: 15,
         fontWeight: "600"
+    },
+    
+    scrollContainer: {
+        // padding: 20,
+        // paddingBottom: 10, // Espaço para o botão fixo
+    },
+    card: {
+        backgroundColor: "#fff",
+        borderRadius: 12,
+        padding: 16,
+        marginBottom: 16,
+        // Sombra leve
+        elevation: 2,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+        borderWidth: 1,
+        borderColor: "#F0F0F0"
+    },
+    sectionHeader: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 8,
+        marginBottom: 12
+    },
+    sectionTitle: {
+        fontSize: 14,
+        fontWeight: "700",
+        color: "#333",
+        textTransform: "uppercase",
+        letterSpacing: 0.5
+    },
+    label: {
+        fontSize: 12,
+        color: Colors.placeholderText,
+        marginBottom: 2
+    },
+    // value: {
+    //     fontSize: 15,
+    //     fontWeight: "600",
+    //     color: "#333"
+    // },
+    // Estilos da Timeline
+    routeContainer: {
+        flexDirection: "row",
+        gap: 15,
+        paddingVertical: 5
+    },
+    timeline: {
+        alignItems: "center",
+        width: 20,
+    },
+    dot: {
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        backgroundColor: Colors.placeholderText,
+        marginTop: 5
+    },
+    line: {
+        width: 2,
+        height: 40,
+        backgroundColor: "#F0F0F0",
+        marginVertical: 4
+    },
+    routeDetails: {
+        flex: 1
+    },
+    routeText: {
+        fontSize: 16,
+        fontWeight: "700",
+        color: "#333"
+    },
+    // Motorista
+    driverRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 12
+    },
+    avatar: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        backgroundColor: Colors.primary,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    driverName: {
+        fontSize: 16,
+        fontWeight: "700"
+    },
+    ratingRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 4
+    },
+    ratingText: {
+        fontSize: 12,
+        color: Colors.placeholderText
+    },
+    divider: {
+        height: 1,
+        backgroundColor: "#F0F0F0",
+        marginVertical: 15
+    },
+    infoGrid: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    footer: {
+        // position: "absolute",
+        bottom: 100,
+        width: "100%",
+        paddingTop: 20,
+        backgroundColor: "#fff",
+        borderTopWidth: 1,
+        borderTopColor: "#F0F0F0"
+    },
+    modalPadding: {
+        paddingHorizontal: 15
     }
 })

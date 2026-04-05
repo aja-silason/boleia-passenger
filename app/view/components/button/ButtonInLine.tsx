@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type props = {
-    placeholder: string;
+    placeholder?: string;
     onPress: VoidFunction;
     title: string,
     icon?: ReactNode,

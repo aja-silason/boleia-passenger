@@ -1,6 +1,7 @@
-import { QueryTravelRquest } from "../view/HomeScreen";
+import { TravelOutput } from "../infra/service/travel/TravelOutput";
 
 export type RootStackParamList = {
+    reloadScreen: undefined;
     splash: undefined;
     signin: undefined;
     signup: undefined;
@@ -12,7 +13,7 @@ export type RootStackParamList = {
     settings: undefined;
     travels: undefined;
 
-    travelavailable: {query: QueryTravelRquest};
+    travelavailable: {travels: TravelOutput[], from: string};
 
     publishtravel: undefined;
 
@@ -20,5 +21,5 @@ export type RootStackParamList = {
     notifications: undefined;
 
     travelRequest: {travelId: string}
-    traveldetails: {travelDetails: any, historic: boolean}
+    traveldetails: {travelDetails: TravelOutput, historic: boolean}
 }

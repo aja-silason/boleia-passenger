@@ -1,15 +1,16 @@
 import { Colors } from "@/constants/theme";
 import { ReactNode } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { KeyboardTypeOptions, StyleSheet, TextInput, View } from "react-native";
 
 type props = {
     placeholder: string;
     onChange: (e: string) => void;
-    title: string,
+    title?: string,
     icon?: ReactNode,
     type?: "telephoneNumber" | "creditCardNumber" | "emailAddress" | "postalCode",
     value?: string | any;
-    isHalf?: boolean
+    isHalf?: boolean;
+    keyBoardType?: KeyboardTypeOptions
 }
 
 export const InputInLine = (props: props) => {
@@ -19,7 +20,7 @@ export const InputInLine = (props: props) => {
                 <View style={{flexDirection: "row"}}>
                     {props.icon}
                 </View>
-                <TextInput placeholder={props.placeholder} placeholderTextColor={Colors.placeHolder} style={styles.input} textContentType={props.type ?? "none"} onChangeText={props.onChange} value={props.value} defaultValue={props.value}/>
+                <TextInput placeholder={props.placeholder} placeholderTextColor={Colors.placeHolder} style={styles.input} textContentType={props.type ?? "none"} onChangeText={props.onChange} value={props.value} defaultValue={props.value} keyboardType={props.keyBoardType}/>
             </View>
         </View>
     )
