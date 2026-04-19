@@ -1,33 +1,42 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, RefreshControl, StyleSheet, Text, View } from "react-native";
+import { useGetAllTravel } from "../infra/hooks/travel/useGetAllTravel";
 import { RootStackParamList } from "../shared/route";
 import { TravellerCard } from "./components/card/TravellerCard";
 
 export default function TravelsScreen() {
     
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-    const travels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    
+    const {data, handleFetch, isLoading} = useGetAllTravel();
 
     return (
         <View style={styles.mainContent}>
             <Text style={styles.title}>Minhas Viagens</Text>
 
             <FlatList
-                data={travels}
+                data={data}
                 keyExtractor={(_, index) => index?.toString()}
                 onEndReachedThreshold={0.5}
-                renderItem={({item, index}) => (
-                    <TouchableOpacity onPress={() => navigate.navigate("traveldetails", {travelDetails: item.toString(), historic: true})} style={styles.card} activeOpacity={.6}>
-                        <TravellerCard key={index} />
-                    </TouchableOpacity>
-                )}
+                renderItem={({item, index}) => (<TravellerCard key={index} data={item} onPress={() => navigate.navigate("traveldetails", {travelDetails: item, historic: true})}/>)}
 
                 ListEmptyComponent={() => (
-                    <Text>Sem viagem</Text>
+                    <View style={styles.emptyContainer}>
+                        <Ionicons 
+                            name={"archive-outline"} 
+                            size={60} 
+                            color="#CCC" 
+                        />
+                        <Text style={styles.emptyText}>Seu histórico de viagens concluídas está vazio</Text>
+                    </View>
                 )}
                 showsVerticalScrollIndicator={false}
                 style={styles.list}
+                onRefresh={handleFetch}
+                refreshing={isLoading}
+                refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleFetch}/>}
             />
 
 
@@ -38,7 +47,7 @@ export default function TravelsScreen() {
 const styles = StyleSheet.create({
     mainContent: {
         paddingHorizontal: 20,
-        paddingVertical: 40,
+        paddingVertical: 60,
         flexWrap: "wrap",
         width: "100%",
         gap: 20,
@@ -58,5 +67,17 @@ const styles = StyleSheet.create({
     card: {
         gap: 10,
         marginVertical: 10
+    },
+    emptyContainer: {
+        marginTop: 80,
+        alignItems: "center",
+        paddingHorizontal: 40,
+    },
+    emptyText: {
+        color: "#ADB5BD",
+        textAlign: "center",
+        fontSize: 16,
+        marginTop: 15,
+        lineHeight: 22
     }
 })

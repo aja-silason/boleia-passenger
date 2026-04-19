@@ -1,4 +1,7 @@
+import { useCancelRequestTravel } from "@/app/infra/hooks/travel/useCancelRequestTravel";
 import { useGetFindByTravelId } from "@/app/infra/hooks/travel/useGetFindByTravelId";
+import { useRequestTravel } from "@/app/infra/hooks/travel/useRequestTravel";
+import { useAuthContext } from "@/app/shared/context/auth.context";
 import { RootStackParamList } from "@/app/shared/route";
 import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
@@ -6,15 +9,19 @@ import { RouteProp, useRoute } from "@react-navigation/native";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { RefreshControl, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Modalize } from "react-native-modalize";
+import { BehaviorButton } from "../components/button/BehaviorButton";
 import { Button } from "../components/button/Button";
 import { TravellRequestInfoPendingToApprove } from "../components/card/TravellRequestInfoPendingToApprove";
 import { HeaderBack } from "../components/header/HeaderBack";
 import { Modal } from "../components/modal/Modal";
 
-
 export default function TravelDetailsScreen(){
 
     const route = useRoute<RouteProp<RootStackParamList, "traveldetails">>()
+
+    const {userInformation} = useAuthContext();
+
+    const passangerId = userInformation ? userInformation?.id : "N-D";
 
     const details = route.params?.travelDetails;
     const travellerModelRef = useRef<Modalize>(null);
@@ -26,27 +33,36 @@ export default function TravelDetailsScreen(){
     const onRefresh = useCallback(async () => {
         setRefreshing(true);
         
-        await handleFetch(details.id);
+        await handleFetch(details?.id);
         
         setRefreshing(false);
-    }, [details.id]);
+    }, [details?.id]);
 
     useEffect(() => {
-        handleFetch(details.id);
-    }, [])
+        handleFetch(details?.id);
+    }, [details?.id])
 
+    const {handleSubmit, isLoading: isLoadingRequestTravel, isError} = useRequestTravel(details?.id, passangerId);
+    const {handleSubmit: cancelRequest, isLoading: isLoadingCancelRequestTravel} = useCancelRequestTravel(details?.id, passangerId);
 
-    const openTravellerModal = () => {
-        travellerModelRef.current?.open();
+    const handleRequest = async () => {
+        await handleSubmit();
+        if(!isLoadingRequestTravel && !isError)
+            travellerModelRef.current?.open()
+        onRefresh();
     }
 
-    const declineRequest = (id: string) => {
-        travellerModelRef.current?.close();
+    const handleCancelRequest = async () => {
+        await cancelRequest();
+        onRefresh();
     }
 
-    const acceptRequest = (id: string) => {
-        travellerModelRef.current?.close();
-    }
+    console.log(JSON.stringify(data, null, 2))
+
+    const aimAlreadyInTravel = data?.pendingPassanger?.filter(i => i?.id?.includes(passangerId))?.length === 1 ? true : false ;
+
+
+    console.log(JSON.stringify(aimAlreadyInTravel, null, 2))
 
     return (
         <View style={styles.mainContent}>
@@ -64,7 +80,6 @@ export default function TravelDetailsScreen(){
                     />
                 }
             >
-                
                 <View style={styles.card}>
                     <View style={styles.routeContainer}>
                         <View style={styles.timeline}>
@@ -75,11 +90,11 @@ export default function TravelDetailsScreen(){
                         <View style={styles.routeDetails}>
                             <View>
                                 <Text style={styles.label}>Origem</Text>
-                                <Text style={styles.routeText}>Kilamba</Text>
+                                <Text style={styles.routeText}>{data?.origin || '-'}</Text>
                             </View>
                             <View style={{ marginTop: 20 }}>
                                 <Text style={styles.label}>Destino</Text>
-                                <Text style={styles.routeText}>Maianga</Text>
+                                <Text style={styles.routeText}>{data?.destiny || '-'}</Text>
                             </View>
                         </View>
                     </View>
@@ -96,7 +111,7 @@ export default function TravelDetailsScreen(){
                             <Ionicons name="person" size={25} color="#fff" />
                         </View>
                         <View style={{ flex: 1 }}>
-                            <Text style={styles.driverName}>Maria da Piedade</Text>
+                            <Text style={styles.driverName}>{`${data?.driver?.firstName +' '+ data?.driver?.lastName}` || '-'}</Text>
                             <View style={styles.ratingRow}>
                                 <Ionicons name="star" color={Colors.orange} size={14} />
                                 <Text style={styles.ratingText}>4.8 (120 avaliações)</Text>
@@ -109,16 +124,15 @@ export default function TravelDetailsScreen(){
                     <View style={styles.infoGrid}>
                         <View>
                             <Text style={styles.label}>Viatura</Text>
-                            <Text style={styles.value}>Suzuki Swift</Text>
+                            <Text style={styles.value}>{data?.car?.brand || '-'}</Text>
                         </View>
                         <View>
                             <Text style={styles.label}>Matrícula</Text>
-                            <Text style={styles.value}>LD-XL-PT-OO</Text>
+                            <Text style={styles.value}>{data?.car?.plate || '-'}</Text>
                         </View>
                     </View>
                 </View>
 
-                {/* SEÇÃO 3: PREÇO E VAGAS */}
                 <View style={styles.card}>
                     <View style={styles.sectionHeader}>
                         <Ionicons name="cash-outline" size={18} color={Colors.primary} />
@@ -127,36 +141,60 @@ export default function TravelDetailsScreen(){
                     <View style={styles.infoGrid}>
                         <View>
                             <Text style={styles.label}>Preço por lugar</Text>
-                            <Text style={[styles.value, { color: Colors.primary, fontSize: 18 }]}>2.500,00 kz</Text>
+                            <Text style={[styles.value, { color: Colors.primary, fontSize: 18 }]}>{data?.price?.toLocaleString('pt-AO', {minimumFractionDigits: 2})} KZ</Text>
                         </View>
                         <View>
                             <Text style={styles.label}>Vagas disponíveis</Text>
-                            <Text style={styles.value}>2 Lugares</Text>
+                            <Text style={styles.value}>{data?.availableSeats} Lugares</Text>
                         </View>
                     </View>
                 </View>
 
             </ScrollView>
 
-            {/* BOTÃO FIXO INFERIOR */}
             {!route.params?.historic && (
                 <View style={styles.footer}>
-                    <Button 
-                        isLoading={false}
-                        onPress={() => travellerModelRef.current?.open()} 
-                        isPrimary 
-                        text="Solicitar Reserva" 
-                    />
+                    {
+                        !aimAlreadyInTravel ? (
+                            <Button 
+                                isLoading={isLoadingRequestTravel}
+                                onPress={handleRequest} 
+                                isPrimary
+                                text="Solicitar Reserva"
+                            />
+
+                        ) : (
+                            <BehaviorButton isLoading isSuccess={isLoadingCancelRequestTravel} onPress={handleCancelRequest} text="Cancelar Solicitação" />
+                        )   
+                    }
                 </View>
             )}
 
+            {route.params?.historic && (
+                <View style={styles.footer}>
+                    {
+                        !aimAlreadyInTravel && (
+                            <Button 
+                                // icon={<Ionicons name="map" color={Colors.background} />}
+                                isLoading={false}
+                                onPress={() => {}} 
+                                isPrimary={false}
+                                text="Ver mapa"
+                            />
+
+                        )   
+                    }
+                </View>
+            )}
+
+
             <Modal
-                height={600}
+                height={500}
                 ref={travellerModelRef}
                 component={
                     <View style={styles.modalPadding}>
                         <TravellRequestInfoPendingToApprove 
-                            travelinfo={details} 
+                            travelinfo={data} 
                             accept={() => travellerModelRef.current?.close()} 
                             decline={() => travellerModelRef.current?.close()}
                         />
@@ -170,7 +208,7 @@ export default function TravelDetailsScreen(){
 const styles = StyleSheet.create({
     mainContent: {
         padding: 20,
-        paddingVertical: 40,
+        paddingVertical: 60,
         backgroundColor: "#fff",
         flex: 1
     },

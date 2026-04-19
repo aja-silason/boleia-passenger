@@ -48,7 +48,7 @@ export default function TravelAvailableScreen(){
 const styles = StyleSheet.create({
     mainContent: {
         paddingHorizontal: 20,
-        paddingVertical: 40,
+        paddingVertical: 60,
         flexWrap: "wrap",
         width: "100%",
         backgroundColor: "#fff",

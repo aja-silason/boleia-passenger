@@ -2,11 +2,9 @@ import { TravelOutput } from "@/app/infra/service/travel/TravelOutput";
 import { Colors } from "@/constants/theme";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
-import { BehaviorButton } from "../button/BehaviorButton";
-import { Button } from "../button/Button";
 
 type props = {
-    travelinfo: TravelOutput,
+    travelinfo: TravelOutput | undefined,
     accept: VoidFunction;
     decline: VoidFunction;
 }
@@ -26,32 +24,23 @@ export const TravellRequestInfoPendingToApprove = (props: props) => {
                     <Text style={styles.title}>Resumo da sua Reserva</Text>
 
                     <View style={styles.travelduration}>
-                        <Text style={styles.datetravel}>03/01/2026</Text>
-                        <Text style={styles.datetravel}>04/01/2026</Text>
-                    </View>
-
-                    <View style={styles.travelduration}>
-                        <Text style={styles.time}>22h:53</Text>
-                        <Ionicons name="car-sharp" size={20} color={Colors.placeHolder} />
-                        <Text style={styles.time}>00h:03</Text>
+                        {/* <Text style={styles.datetravel}>03/01/2026</Text> */}
+                        {/* <Text style={styles.datetravel}>04/01/2026</Text> */}
                     </View>
 
                     <View style={styles.bottomInfo}>
-                        <Text style={styles.bottonTravelText}>Talatona</Text>
-                        <Text style={styles.bottomContentTime}>1h:10</Text>
-                        <Text style={styles.bottonTravelText}>Maianga</Text>
+                        <Text style={styles.bottonTravelText}>{props?.travelinfo?.origin || '-'}</Text>
+                        <Ionicons name="car-sharp" size={20} color={Colors.placeHolder} />
+                        {/* <Text style={styles.bottomContentTime}>1h:10</Text> */}
+                        <Text style={styles.bottonTravelText}>{props?.travelinfo?.destiny || '-'}</Text>
                     </View>
 
                     <View style={{borderBottomWidth: 1, marginVertical: 10, borderColor: Colors.placeHolder}}></View>
 
                     <View style={{flexDirection: "column"}}>
                         <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                            <Text style={{color: Colors.placeholderText}}>Lugares: </Text>
-                            <Text style={{fontWeight: 600}}>2</Text>
-                        </View>
-                        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                            <Text style={{color: Colors.placeholderText}}>Preço Total: </Text>
-                            <Text style={{fontWeight: 600}}>2.500,00kz</Text>
+                            <Text style={{color: Colors.placeholderText}}>Preço por pessoa: </Text>
+                            <Text style={{fontWeight: 600}}>{props?.travelinfo?.price?.toLocaleString('pt-AO', { minimumFractionDigits: 2 }) || '-'} KZ</Text>
                         </View>
                     </View>
                 </View>
@@ -60,11 +49,6 @@ export const TravellRequestInfoPendingToApprove = (props: props) => {
                    <Text style={{fontWeight: 600, color: Colors.textBlueInc}}>O que acontece agora?</Text>
                    <Text style={{color: Colors.textBlueInc}}>A sua solicitação foi enviada ao motorista, dentro em breve receberá notificação sobre o estado da mesma.</Text>
                 </View> 
-            </View>
-            
-            <View style={[styles.modalbuttonaction, {flexDirection: "column"}]}>
-                <BehaviorButton onPress={props.decline} isLoading isSuccess={false} text="Cancelar pedido" />
-                <Button onPress={props.accept} isLoading={false} isPrimary text="Ver detalhes do Pedido" />
             </View>
         </View>
     )

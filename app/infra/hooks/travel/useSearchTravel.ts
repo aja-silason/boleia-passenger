@@ -7,15 +7,8 @@ import { Alert, Keyboard } from "react-native";
 import { Travel } from "../../service/travel/travel.service";
 import { SearchTravels } from "./SearchTravels";
 
-export type QueryTravelRquest = {
-    date: string;
-    where: string;
-    from: string;
-    quantity: number;
-}
-
 export const useSearchTravel = () => {
-    const [data, setData] = useState({destiny: "", seats: 0});
+    const [data, setData] = useState({location: "", seats: 0});
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     
@@ -29,24 +22,23 @@ export const useSearchTravel = () => {
         Keyboard.dismiss();
         
         try {
-            setIsLoading(true)
-            
+            setIsLoading(true)            
             const payload: SearchTravels = {
-                location: data.destiny,
+                location: data.location,
                 seats: +data.seats
             }
              
             const res = await Travel.travel.searchTravel(payload);
 
-            console.log(JSON.stringify(res.data, null, 2));
+            console.log(JSON.stringify("Quntas bolieas" +  res.data.length));
 
-            navigate.navigate("travelavailable", { travels: res.data, from: data.destiny });
+            navigate.navigate("travelavailable", { travels: res.data, from: data.location });
 
             setIsLoading(false)
-            
         } catch (error) {
             setIsLoading(false)
             if(axios.isAxiosError(error)){
+                console.log(JSON.stringify({logs: error.response?.data}, null, 2))
                 if(error.status === 500) return Alert.alert("Aviso", "Alguma coisa correu mal, estamos resolvendo por você", [
                     {text: "Entendido", onPress: () => {}}
                 ]);

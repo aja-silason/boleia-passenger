@@ -21,5 +21,5 @@ export type RootStackParamList = {
     notifications: undefined;
 
     travelRequest: {travelId: string}
-    traveldetails: {travelDetails: TravelOutput, historic: boolean}
+    traveldetails: {travelDetails: TravelOutput | undefined, historic: boolean}
 }

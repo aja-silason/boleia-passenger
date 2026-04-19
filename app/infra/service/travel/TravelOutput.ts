@@ -15,7 +15,8 @@ export interface TravelOutput {
     createdAt: string,
     car: {
         color: string;
-        name: string
+        brand: string;
+        plate: string
     }
     updatedAt: string
 }

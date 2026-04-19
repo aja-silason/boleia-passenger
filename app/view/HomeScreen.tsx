@@ -1,12 +1,17 @@
 import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "expo-router";
 import { useState } from "react";
-import { Platform, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Platform, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useGetAllTravel } from "../infra/hooks/travel/useGetAllTravel";
 import { useSearchTravel } from "../infra/hooks/travel/useSearchTravel";
 import { useAuthContext } from "../shared/context/auth.context";
+import { RootStackParamList } from "../shared/route";
 import { Button } from "./components/button/Button";
 import { ButtonInLine } from "./components/button/ButtonInLine";
+import { ActiveTravelCard } from "./components/card/ActiveTravelCard";
 import { Header } from "./components/header/Header";
 import { InputInLine } from "./components/input/InputInLine";
 
@@ -15,6 +20,9 @@ export default function HomeScreen() {
     const {userInformation} = useAuthContext();
 
     const { handleChange, isLoading, handleSubmit} = useSearchTravel()
+    const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    const {data, handleFetch, isLoading: isLoadingFetchData} = useGetAllTravel();
 
     const [date, setDate] = useState(new Date());
     const [showCalendar, setShowCalendar] = useState(false);
@@ -26,11 +34,20 @@ export default function HomeScreen() {
         handleChange("startTime", currentDate?.toISOString())
     };
 
+    const activeTravel = data
+        ?.filter(travel => travel.status === "STARTED") // Filtra apenas as que iniciaram
+        .slice(-1)[0];
+
+    console.log("Activa boleia", activeTravel)
+
     return (
         <SafeAreaView style={styles.safeArea}>
             <ScrollView 
                 contentContainerStyle={styles.scrollContent}
                 showsVerticalScrollIndicator={false}
+                refreshControl={
+                    <RefreshControl refreshing={isLoadingFetchData} onRefresh={handleFetch}/>
+                }
             >
                 <Header title="Encontre sua próxima" username={`Olá, ${userInformation?.firstName+' '+userInformation?.lastName}`} />
                 
@@ -41,12 +58,12 @@ export default function HomeScreen() {
                 </View>
 
                 <View style={styles.searchCard}>
-                    <InputInLine 
+                    {/* <InputInLine 
                         onChange={(value) => handleChange("origin", value)} 
                         placeholder="De onde vai sair?" 
                         icon={<Ionicons name="radio-button-on" size={20} color="green"/>}
                     />
-                    <View style={styles.divider} />
+                    <View style={styles.divider} /> */}
 
                     <InputInLine 
                         onChange={(value) => handleChange("location", value)} 
@@ -83,6 +100,21 @@ export default function HomeScreen() {
                     </View>
                 </View>
 
+                {
+                    activeTravel && (
+                        <View style={{ marginVertical: 30 }}>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>
+                                Sua Viagem Atual
+                            </Text> 
+
+                            <ActiveTravelCard 
+                                data={activeTravel} 
+                                onPress={() => navigate.navigate("traveldetails", {travelDetails: activeTravel, historic: true})}
+                            />
+                        </View>
+                    )
+                }
+
                 {showCalendar && (
                     <DateTimePicker
                         value={date}
@@ -102,7 +134,7 @@ const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
         backgroundColor: "#fff",
-        paddingVertical: 40
+        paddingVertical: 60
     },
     scrollContent: {
         paddingHorizontal: 20,

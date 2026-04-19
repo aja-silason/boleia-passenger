@@ -19,7 +19,7 @@ export const TravellerCard = ({ data, onPress }: TravellerCardProps) => {
 
     return (
         <TouchableOpacity 
-            activeOpacity={0.8} 
+            activeOpacity={0.9} 
             onPress={onPress} 
             style={styles.container}
         >
@@ -42,12 +42,12 @@ export const TravellerCard = ({ data, onPress }: TravellerCardProps) => {
 
             <View style={styles.divider} />
 
-            {/* <View style={styles.detailsRow}>
+            <View style={styles.detailsRow}>
                 <View style={styles.infoBlock}>
                     <Ionicons name="map-outline" size={16} color={Colors.placeholderText} />
                     <Text style={styles.infoText}>{data?.origin} &rarr; {data?.destiny}</Text>
                 </View>
-            </View> */}
+            </View>
 
             <View style={styles.detailsRow}>
                 <View style={styles.infoBlock}>
@@ -63,7 +63,7 @@ export const TravellerCard = ({ data, onPress }: TravellerCardProps) => {
             <View style={styles.footer}>
                 <View style={styles.vehicleTag}>
                     <Ionicons name="car-outline" size={14} color={Colors.placeholderText} />
-                    <Text style={styles.footerText}>{data?.car?.name || '-'} • {data?.car?.color || '-'}</Text>
+                    <Text style={styles.footerText}>{data?.car?.brand || '-'} • {data?.car?.color || '-'}</Text>
                 </View>
                 
                 <View style={[styles.seatsTag, { backgroundColor: Colors.inactive }]}>

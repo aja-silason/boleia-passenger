@@ -3,11 +3,12 @@ import axios from "axios";
 import { useState } from "react";
 import { Alert, Keyboard } from "react-native";
 import { Travel } from "../../service/travel/travel.service";
-import { RequestTravelInput } from "./RequestTravelInput";
+import { TravelRequest } from "../../service/travel/TravelRequest";
 
-export const useAcceptRequestTravel = (travelId: string, passangerId: string) => {
+export const useRequestTravel = (travelId: string, passangerId: string) => {
     
     const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const {userInformation} = useAuthContext();
 
@@ -20,18 +21,16 @@ export const useAcceptRequestTravel = (travelId: string, passangerId: string) =>
 
             setIsLoading(true)
             
-            const payload: RequestTravelInput = {
+            const payload: TravelRequest = {
                 passangerId: passangerId,
                 travelId: travelId
             }
-
-            console.log(JSON.stringify(payload, null, 2))
 
             if(driverId === "N-D") return;
 
             console.log(JSON.stringify(payload, null, 2))
             
-            await Travel.travel.accept(payload);
+            await Travel.travel.requestTravel(payload);
 
             setIsLoading(false)
 
@@ -39,22 +38,29 @@ export const useAcceptRequestTravel = (travelId: string, passangerId: string) =>
             
         } catch (error) {
             setIsLoading(false)
+            setIsError(true);
             if(axios.isAxiosError(error)){
-                if(error.status === 500) return Alert.alert("Aviso", "Alguma coisa correu mal, estamos resolvendo por você", [
+                console.log(JSON.stringify({logs: error.response?.data}, null, 2))
+                if(error.status === 500) return Alert.alert("Aviso", `Alguma coisa correu mal, estamos resolvendo por você`, [
                     {text: "Entendido", onPress: () => {}}
                 ]);
                 if(error.status === 400) return Alert.alert("Informação", error.response?.data.message);
                 if(error.status === 404) return Alert.alert("Informação", error.response?.data.message);   
+                if(error.status === 409) return Alert.alert("Informação", error.response?.data.message);   
             }
 
             return false;
+        } finally {
+            setIsError(false)
         }
 
     }
 
     return {
         handleSubmit,
-        isLoading
+        isLoading,
+        isError,
+        setIsError
     }
 
 }

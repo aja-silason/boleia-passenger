@@ -12,7 +12,7 @@ export const useGetAllTravel = () => {
 
     const {userInformation} = useAuthContext();
 
-    const driverId = userInformation != null ? userInformation?.id : "N-D";
+    const passangerId = userInformation != null ? userInformation?.id : "N-D";
 
     const handleFetch = useCallback(async () => {
 
@@ -21,25 +21,24 @@ export const useGetAllTravel = () => {
             setIsLoading(true);
             setIsError(false);
 
-            if(driverId === "N-D") return;
+            if(passangerId === "N-D") return;
 
-            const res = await Travel.travel.findAllTravel(driverId);
+            const res = await Travel.travel.findAllTravel(passangerId);
 
             setData(res.data);
 
         } catch (error) {
             setIsError(true);
-            console.error("Erro ao buscar viagens:", error);
-
             if (axios.isAxiosError(error)) {
                 const message = error.response?.data?.message || "Não foi possível carregar as viagens.";
-                Alert.alert("Aviso", message);
+                if(error.status === 500) return Alert.alert("Aviso", "Alguma coisa correu mal, estamos resolvendo por você");
+                if(error.status !== 500) return Alert.alert("Aviso", message);
             }
         } finally {
             setIsLoading(false);
         }
 
-    }, [driverId]);
+    }, [passangerId]);
 
     return {
         data,
