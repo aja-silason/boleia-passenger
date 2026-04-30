@@ -13,9 +13,9 @@ import WelcomeScreen from "@/app/view/WelcomeScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import PassangerLayout from "./PassangerLayout";
 
-export default function Navigator(){
-    const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
+export default function Navigator(){
     return (
         <Stack.Navigator>
             <Stack.Screen name="reloadScreen" component={ReloadScreen} options={{headerShown: false, headerTransparent: true}} />
