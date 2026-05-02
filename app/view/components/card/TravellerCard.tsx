@@ -80,12 +80,6 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         padding: 16,
         marginBottom: 12,
-        // Sombra suave para destacar o card
-        elevation: 3,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
         borderWidth: 1,
         borderColor: '#F0F0F0'
     },
@@ -107,7 +101,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderWidth: 1,
-        borderColor: Colors.primary + '20' // 20% de opacidade
+        borderColor: Colors.primary + '20'
     },
     driverName: {
         fontSize: 16,

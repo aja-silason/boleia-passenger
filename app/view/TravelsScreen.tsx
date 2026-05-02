@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { FlatList, RefreshControl, StyleSheet, Text, View } from "react-native";
+import { useEffect } from "react";
+import { BackHandler, FlatList, RefreshControl, StyleSheet, Text, View } from "react-native";
 import { useGetAllTravel } from "../infra/hooks/travel/useGetAllTravel";
 import { RootStackParamList } from "../shared/route";
 import { TravellerCard } from "./components/card/TravellerCard";
@@ -9,6 +10,23 @@ import { TravellerCard } from "./components/card/TravellerCard";
 export default function TravelsScreen() {
     
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    useEffect(() => {
+            const backAction = () => {
+                if(navigate.canGoBack()) {
+                    navigate.goBack();
+                    return true;
+                }
+                return false;
+            };
+    
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction
+            );
+    
+            return () => backHandler.remove();
+        }, [navigate]);
     
     const {data, handleFetch, isLoading} = useGetAllTravel();
 

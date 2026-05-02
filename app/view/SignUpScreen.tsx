@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { useEffect, useState } from "react";
+import { BackHandler, StyleSheet, View } from "react-native";
 import { useCreateAccount } from "../infra/hooks/useCreateAccount";
 import { RootStackParamList } from "../shared/route";
 import { Button } from "./components/button/Button";
@@ -18,6 +18,23 @@ enum STEP {
 export default function SignUpScreen() {
   const [step, setStep] = useState<STEP>(STEP.step_1);
   const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+useEffect(() => {
+        const backAction = () => {
+            if(navigate.canGoBack()) {
+                navigate.goBack();
+                return true;
+            }
+            return false;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            'hardwareBackPress',
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, [navigate]);
 
   const {ddi, setLocalPhone, setDdi, handleSubmit, handleChange, isLoading} = useCreateAccount();
 

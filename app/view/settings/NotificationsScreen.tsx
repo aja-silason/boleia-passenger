@@ -1,9 +1,32 @@
+import { RootStackParamList } from "@/app/shared/route";
 import { Colors } from "@/constants/theme";
-import { useState } from "react";
-import { StyleSheet, Switch, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useEffect, useState } from "react";
+import { BackHandler, StyleSheet, Switch, Text, View } from "react-native";
 import { HeaderBack } from "../components/header/HeaderBack";
 
 export default function NotificationsScreen() {
+
+    const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    useEffect(() => {
+            const backAction = () => {
+                if(navigate.canGoBack()) {
+                    navigate.goBack();
+                    return true;
+                }
+                return false;
+            };
+    
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction
+            );
+    
+            return () => backHandler.remove();
+        }, [navigate]);
+
     const [settings, setSettings] = useState({
         newRequests: true,
         tripUpdates: true,
@@ -54,7 +77,7 @@ const styles = StyleSheet.create({
         flex: 1, 
         backgroundColor: Colors.whiteBackground,
         paddingHorizontal: 20,
-        paddingVertical: 60
+        paddingTop: 20
     },
     list: {
         padding: 20,

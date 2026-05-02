@@ -24,7 +24,7 @@ export default function WelcomeScreen() {
         <View style={style.container}>
           
           <View style={style.textGroup}>
-            <Text style={style.title}>Viajar juntos éé mais leve.</Text>
+            <Text style={style.title}>Viajar juntos é mais leve.</Text>
             <Text style={style.subtitle}>
               Conectamos motoristas e passageiros que vão para o mesmo destino rápido, seguro e económico.
             </Text>

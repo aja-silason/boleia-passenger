@@ -1,5 +1,6 @@
 import { RootStackParamList } from "@/app/shared/route";
 import SplashScreen from "@/app/view";
+import Map from "@/app/view/Map";
 import { OtpconfirmScreen } from "@/app/view/OtpconfirmScreen";
 import ReloadScreen from "@/app/view/ReloadScreen";
 import NotificationsScreen from "@/app/view/settings/NotificationsScreen";
@@ -17,7 +18,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Navigator(){
     return (
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="reloadScreen">
             <Stack.Screen name="reloadScreen" component={ReloadScreen} options={{headerShown: false, headerTransparent: true}} />
             <Stack.Screen name="splash" component={SplashScreen} options={{headerShown: false, headerTransparent: true}} />
             <Stack.Screen name="welcome" component={WelcomeScreen} options={{headerShown: false, headerTransparent: true}} />
@@ -32,6 +33,8 @@ export default function Navigator(){
             
             <Stack.Screen name="traveldetails" component={TravelDetailsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="publishtravel" component={PublishTravelScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
+            
+            <Stack.Screen name="map" component={Map} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
 
         </Stack.Navigator>
     )

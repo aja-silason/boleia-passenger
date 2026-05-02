@@ -3,8 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "expo-router";
-import { useState } from "react";
-import { Platform, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { BackHandler, Platform, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useGetAllTravel } from "../infra/hooks/travel/useGetAllTravel";
 import { useSearchTravel } from "../infra/hooks/travel/useSearchTravel";
 import { useAuthContext } from "../shared/context/auth.context";
@@ -17,10 +17,28 @@ import { InputInLine } from "./components/input/InputInLine";
 
 
 export default function HomeScreen() {
+        const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    useEffect(() => {
+            const backAction = () => {
+                if(navigate.canGoBack()) {
+                    navigate.goBack();
+                    return true;
+                }
+                return false;
+            };
+    
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction
+            );
+    
+            return () => backHandler.remove();
+        }, [navigate]);
+
     const {userInformation} = useAuthContext();
 
     const { handleChange, isLoading, handleSubmit} = useSearchTravel()
-    const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     const {data, handleFetch, isLoading: isLoadingFetchData} = useGetAllTravel();
 

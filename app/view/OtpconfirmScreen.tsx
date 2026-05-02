@@ -1,8 +1,9 @@
 import { Colors } from "@/constants/theme";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { RouteProp, useRoute } from "@react-navigation/native";
-import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useEffect, useState } from "react";
+import { BackHandler, StyleSheet, Text, View } from "react-native";
 import { useRequestOTP } from "../infra/hooks/useRequestOTP";
 import { RootStackParamList } from "../shared/route";
 import { OTPBox } from "./components/box/otpBox";
@@ -12,6 +13,25 @@ import { NumericKeyBoard } from "./components/keyboard/NumericKeyboard";
 import { LoadingModal } from "./components/modal/LoadingModal";
 
 export const OtpconfirmScreen = () => {
+
+        const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+        useEffect(() => {
+            const backAction = () => {
+                if(navigate.canGoBack()) {
+                    navigate.goBack();
+                    return true;
+                }
+                return false;
+            };
+    
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction
+            );
+    
+            return () => backHandler.remove();
+        }, [navigate]);
 
     const [otp, setOtp] = useState<string>("");
 

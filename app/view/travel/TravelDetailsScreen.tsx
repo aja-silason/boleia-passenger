@@ -5,9 +5,10 @@ import { useAuthContext } from "@/app/shared/context/auth.context";
 import { RootStackParamList } from "@/app/shared/route";
 import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
-import { RouteProp, useRoute } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { RefreshControl, ScrollView, StyleSheet, Text, View } from "react-native";
+import { BackHandler, RefreshControl, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Modalize } from "react-native-modalize";
 import { BehaviorButton } from "../components/button/BehaviorButton";
 import { Button } from "../components/button/Button";
@@ -16,6 +17,25 @@ import { HeaderBack } from "../components/header/HeaderBack";
 import { Modal } from "../components/modal/Modal";
 
 export default function TravelDetailsScreen(){
+
+    const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    useEffect(() => {
+            const backAction = () => {
+                if(navigate.canGoBack()) {
+                    navigate.goBack();
+                    return true;
+                }
+                return false;
+            };
+    
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction
+            );
+    
+            return () => backHandler.remove();
+        }, [navigate]);
 
     const route = useRoute<RouteProp<RootStackParamList, "traveldetails">>()
 
@@ -33,17 +53,17 @@ export default function TravelDetailsScreen(){
     const onRefresh = useCallback(async () => {
         setRefreshing(true);
         
-        await handleFetch(details?.id);
+        await handleFetch(details?.id as string);
         
         setRefreshing(false);
     }, [details?.id]);
 
     useEffect(() => {
-        handleFetch(details?.id);
+        handleFetch(details?.id as string);
     }, [details?.id])
 
-    const {handleSubmit, isLoading: isLoadingRequestTravel, isError} = useRequestTravel(details?.id, passangerId);
-    const {handleSubmit: cancelRequest, isLoading: isLoadingCancelRequestTravel} = useCancelRequestTravel(details?.id, passangerId);
+    const {handleSubmit, isLoading: isLoadingRequestTravel, isError} = useRequestTravel(details?.id as string, passangerId);
+    const {handleSubmit: cancelRequest, isLoading: isLoadingCancelRequestTravel} = useCancelRequestTravel(details?.id as string, passangerId);
 
     const handleRequest = async () => {
         await handleSubmit();
@@ -111,7 +131,7 @@ export default function TravelDetailsScreen(){
                             <Ionicons name="person" size={25} color="#fff" />
                         </View>
                         <View style={{ flex: 1 }}>
-                            <Text style={styles.driverName}>{`${data?.driver?.firstName +' '+ data?.driver?.lastName}` || '-'}</Text>
+                            <Text style={styles.driverName}>{data?.driver?.fullName || '-'}</Text>
                             <View style={styles.ratingRow}>
                                 <Ionicons name="star" color={Colors.orange} size={14} />
                                 <Text style={styles.ratingText}>4.8 (120 avaliações)</Text>
@@ -177,7 +197,7 @@ export default function TravelDetailsScreen(){
                             <Button 
                                 // icon={<Ionicons name="map" color={Colors.background} />}
                                 isLoading={false}
-                                onPress={() => {}} 
+                                onPress={() => navigate.navigate("map")} 
                                 isPrimary={false}
                                 text="Ver mapa"
                             />
@@ -301,20 +321,12 @@ const styles = StyleSheet.create({
     },
     
     scrollContainer: {
-        // padding: 20,
-        // paddingBottom: 10, // Espaço para o botão fixo
     },
     card: {
         backgroundColor: "#fff",
         borderRadius: 12,
         padding: 16,
         marginBottom: 16,
-        // Sombra leve
-        elevation: 2,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
         borderWidth: 1,
         borderColor: "#F0F0F0"
     },
@@ -336,12 +348,6 @@ const styles = StyleSheet.create({
         color: Colors.placeholderText,
         marginBottom: 2
     },
-    // value: {
-    //     fontSize: 15,
-    //     fontWeight: "600",
-    //     color: "#333"
-    // },
-    // Estilos da Timeline
     routeContainer: {
         flexDirection: "row",
         gap: 15,

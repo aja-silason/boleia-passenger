@@ -3,13 +3,31 @@ import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useEffect } from "react";
+import { Alert, BackHandler, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useAuthContext } from "../shared/context/auth.context";
 import { RootStackParamList } from "../shared/route";
 import { MenuButton } from "./components/button/MenuButton";
 
 export default function SettingsScreen() {
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    useEffect(() => {
+            const backAction = () => {
+                if(navigate.canGoBack()) {
+                    navigate.goBack();
+                    return true;
+                }
+                return false;
+            };
+    
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction
+            );
+    
+            return () => backHandler.remove();
+        }, [navigate]);
 
     const {userInformation} = useAuthContext();
 

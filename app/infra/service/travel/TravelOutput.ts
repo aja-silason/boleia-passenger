@@ -17,6 +17,9 @@ export interface TravelOutput {
         color: string;
         brand: string;
         plate: string
+    },
+    driver: {
+        fullName: string
     }
     updatedAt: string
 }

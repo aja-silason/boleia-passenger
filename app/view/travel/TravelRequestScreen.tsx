@@ -3,8 +3,8 @@ import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useRef, useState } from "react";
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { BackHandler, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Modalize } from "react-native-modalize";
 import { BlueButton } from "../components/button/BlueButton";
 import { TravellerCard } from "../components/card/TravellerCard";
@@ -13,8 +13,24 @@ import { HeaderBack } from "../components/header/HeaderBack";
 import { Modal } from "../components/modal/Modal";
 
 export default function TravelRequestScreen(){
-    
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    useEffect(() => {
+            const backAction = () => {
+                if(navigate.canGoBack()) {
+                    navigate.goBack();
+                    return true;
+                }
+                return false;
+            };
+    
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction
+            );
+    
+            return () => backHandler.remove();
+        }, [navigate]);
 
     const travellerModelRef = useRef<Modalize>(null);
     const acceptModelRef = useRef<Modalize>(null);

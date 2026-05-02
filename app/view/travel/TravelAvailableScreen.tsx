@@ -3,13 +3,31 @@ import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useEffect } from "react";
+import { BackHandler, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { TravellerCard } from "../components/card/TravellerCard";
 import { HeaderBack } from "../components/header/HeaderBack";
 
 export default function TravelAvailableScreen(){
-    const route = useRoute<RouteProp<RootStackParamList, "travelavailable">>()
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    
+    useEffect(() => {
+            const backAction = () => {
+                if(navigate.canGoBack()) {
+                    navigate.goBack();
+                    return true;
+                }
+                return false;
+            };
+    
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction
+            );
+    
+            return () => backHandler.remove();
+        }, [navigate]);
+    const route = useRoute<RouteProp<RootStackParamList, "travelavailable">>()
 
     const travels = route.params.travels;
 

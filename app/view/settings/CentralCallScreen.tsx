@@ -1,13 +1,14 @@
-import { useAuthContext } from "@/app/shared/context/auth.context";
+import { useGetSystemInformation } from "@/app/infra/hooks/setting/useGetSystemInformation";
 import { RootStackParamList } from "@/app/shared/route";
 import { Colors } from "@/constants/theme";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect } from "react";
-import { BackHandler, StyleSheet, Text, View } from "react-native";
+import { BackHandler, ScrollView, StyleSheet, Text, View } from "react-native";
+import { RefreshControl } from "react-native-gesture-handler";
 import { HeaderBack } from "../components/header/HeaderBack";
 
-export default function AccountDataScreen() {
+export default function CentrallCallScreen(){
 
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -28,67 +29,36 @@ export default function AccountDataScreen() {
             return () => backHandler.remove();
         }, [navigate]);
 
-    const {userInformation} = useAuthContext();
-
-    const convertStatus = (status: string) => {
-        if(status === "APPROVED") return 'Aprovado'
-        if(status === "SUSPENDED") return 'Suspenso'
-        if(status === "PENDING") return 'Pendente'
-    }
-
-    return (
-        <View style={{ flex: 1, backgroundColor: Colors.whiteBackground }}>
+    const {data, handleFetch, isLoading} = useGetSystemInformation();
+    
+        return (
+            <View style={{ flex: 1, backgroundColor: Colors.whiteBackground }}>
                 <View style={styles.container}>
-                    <HeaderBack />
+                <HeaderBack />
                     <View style={styles.header}>
-                        <Text style={styles.title}>Dados da Conta</Text>
+                        <Text style={styles.title}>Central de Apoio</Text>
                     </View>
 
-                    <View style={styles.infoBox}>
-                        <Text style={styles.infoTitle}>Usuário</Text>
-                        <Text style={styles.infoValue}>{userInformation?.firstName +' '+ userInformation?.lastName}</Text>
-                    </View>
-
-                    <View style={styles.infoBox}>
-                        <Text style={styles.infoTitle}>Telefone</Text>
-                        <Text style={styles.infoValue}>{userInformation?.phoneNumber}</Text>
-                    </View>
-
-                    <View style={styles.infoBox}>
-                        <Text style={styles.infoTitle}>NIF / Identificação</Text>
-                        <Text style={styles.infoValue}>{userInformation?.identificationNumber}</Text>
-                    </View>
-
-                    <View style={styles.infoBox}>
-                        <Text style={styles.infoTitle}>Número da Licença</Text>
-                        <Text style={styles.infoValue}>{userInformation?.licenseNumber}</Text>
-                    </View>
-
-                    <View style={styles.infoBox}>
-                        <Text style={styles.infoTitle}>Estado do Usuário</Text>
-                        <Text style={styles.infoValue}>{convertStatus(userInformation?.status as string)}</Text>
-                    </View>
-
-                    <View style={styles.infoBox}>
-                        <Text style={styles.infoTitle}>Ultimo acesso</Text>
-                        <Text style={styles.infoValue}>{userInformation?.userWillBeSignedUntil}</Text>
-                    </View>
+                    <ScrollView 
+                        style={styles.infoBox}
+                        refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleFetch} />}
+                    >
+                        <Text style={styles.infoTitle}>Número de Telefone da Central</Text>
+                        <Text style={styles.infoValue}>{data?.centralPhoneNumber}</Text>
+                    </ScrollView>
     
                 </View>
             </View>
-    );
+        );
 }
 
 const styles = StyleSheet.create({
-    mainContent: { flex: 1, backgroundColor: "#fff" },
-    form: { gap: 15, marginTop: 20 },
-    footer: { marginTop: 'auto', paddingTop: 20 },
     infoBox: { backgroundColor: "#F8F9FA", padding: 15, borderRadius: 10, borderWidth: 1, borderColor: "#EEE", marginBottom: 10 },
     infoTitle: { fontSize: 12, color: Colors.placeholderText, marginBottom: 5 },
     infoValue: { fontSize: 15, fontWeight: "600", color: "#333" },
     container: {
         padding: 20,
-        paddingTop: 30
+        paddingTop: 30,
     },
     header: {
         marginBottom: 30,

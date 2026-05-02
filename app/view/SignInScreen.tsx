@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { StyleSheet, View } from "react-native";
+import { useEffect } from "react";
+import { BackHandler, StyleSheet, View } from "react-native";
 import { useAuth } from "../infra/hooks/useAuth";
 import { RootStackParamList } from "../shared/route";
 import { Button } from "./components/button/Button";
@@ -10,6 +11,23 @@ import { InputPhone } from "./components/input/phoneinput";
 export default function SignInScreen(){
 
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    useEffect(() => {
+            const backAction = () => {
+                if(navigate.canGoBack()) {
+                    navigate.goBack();
+                    return true;
+                }
+                return false;
+            };
+    
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction
+            );
+    
+            return () => backHandler.remove();
+        }, [navigate]);
 
     const {ddi, setDdi, setLocalPhone, handleSubmit, isLoading} = useAuth();
 

@@ -57,12 +57,7 @@ const styles = StyleSheet.create({
         padding: 16,
         marginBottom: 20,
         borderWidth: 1,
-        borderColor: "#f0f0f0",
-        // elevation: 4,
-        // shadowColor: Colors.primary,
-        // shadowOffset: { width: 0, height: 4 },
-        // shadowOpacity: 0.1,
-        // shadowRadius: 6,
+        borderColor: "#f0f0f0"
     },
     badge: {
         flexDirection: 'row',
@@ -78,13 +73,13 @@ const styles = StyleSheet.create({
         width: 8,
         height: 8,
         borderRadius: 4,
-        backgroundColor: '#4CAF50', // Verde pulsante seria ideal
+        backgroundColor: '#4CAF50',
         marginRight: 6,
     },
     badgeText: {
         fontSize: 10,
         fontWeight: '800',
-        color: '#1976D2',
+        color: Colors.blackText,
     },
     content: {
         flexDirection: 'row',
@@ -103,7 +98,7 @@ const styles = StyleSheet.create({
     line: {
         width: 1,
         height: 15,
-        backgroundColor: '#90CAF9',
+        backgroundColor: Colors.placeholderText,
         marginVertical: 2,
     },
     textColumn: {
@@ -131,11 +126,11 @@ const styles = StyleSheet.create({
     tapPrompt: {
         marginTop: 12,
         fontSize: 11,
-        color: '#1976D2',
+        color: Colors.placeholderText,
         textAlign: 'center',
         fontStyle: 'italic',
         borderTopWidth: 1,
-        borderTopColor: '#BBDEFB',
+        borderTopColor: Colors.inactive,
         paddingTop: 8,
     }
 });
