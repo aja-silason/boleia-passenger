@@ -22,5 +22,10 @@ export type RootStackParamList = {
 
     travelRequest: {travelId: string}
     traveldetails: {travelDetails: TravelOutput | undefined, historic: boolean}
-    map: undefined
+    map: undefined;
+    accountData: undefined;
+    chatAndSupport: undefined
+    central: undefined
+    useTerms: undefined
+    privacyPolitics: undefined
 }

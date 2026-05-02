@@ -34,7 +34,6 @@ export default function SupportScreen() {
             
             <View style={{ padding: 20, gap: 10 }}>
                 <MenuButton icon="chatbubbles-outline" text="Chat com Suporte" onPress={() => navigate.navigate("chatAndSupport")}/>
-                {/* <MenuButton icon="mail-outline" text="Enviar E-mail" onPress={() => {}} /> */}
                 <MenuButton icon="call-outline" text="Ligar para Central" onPress={() => navigate.navigate("central")} />
                 <MenuButton icon="document-text-outline" text="Termos de Uso" onPress={() => navigate.navigate("useTerms")} />
                 <MenuButton icon="document-text-outline" text="Política de Privacidade" onPress={() => navigate.navigate("privacyPolitics")} />

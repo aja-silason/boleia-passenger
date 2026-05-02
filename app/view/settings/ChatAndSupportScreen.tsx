@@ -18,7 +18,7 @@ import {
 import { Button } from "../components/button/Button";
 import { HeaderBack } from "../components/header/HeaderBack";
 
-export default function SupportScreen() {
+export default function ChatAndSupportScreen() {
 
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 

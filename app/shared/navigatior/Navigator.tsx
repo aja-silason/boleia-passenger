@@ -3,11 +3,15 @@ import SplashScreen from "@/app/view";
 import Map from "@/app/view/Map";
 import { OtpconfirmScreen } from "@/app/view/OtpconfirmScreen";
 import ReloadScreen from "@/app/view/ReloadScreen";
+import AccountDataScreen from "@/app/view/settings/AccountDataScreen";
+import CentrallCallScreen from "@/app/view/settings/CentralCallScreen";
+import ChatAndSupportScreen from "@/app/view/settings/ChatAndSupportScreen";
 import NotificationsScreen from "@/app/view/settings/NotificationsScreen";
+import PrivacyPoliticsScreen from "@/app/view/settings/PrivacyPoliticsScreen";
 import SupportScreen from "@/app/view/settings/SupportScreen";
+import UseTermsScreen from "@/app/view/settings/UseTermsScreen";
 import SignInScreen from "@/app/view/SignInScreen";
 import SignUpScreen from "@/app/view/SignUpScreen";
-import PublishTravelScreen from "@/app/view/travel/PublishTravelScreen";
 import TravelAvailableScreen from "@/app/view/travel/TravelAvailableScreen";
 import TravelDetailsScreen from "@/app/view/travel/TravelDetailsScreen";
 import WelcomeScreen from "@/app/view/WelcomeScreen";
@@ -29,12 +33,17 @@ export default function Navigator(){
             <Stack.Screen name="tabs" component={PassangerLayout} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="travelavailable" component={TravelAvailableScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="supportScreen" component={SupportScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
+            <Stack.Screen name="chatAndSupport" component={ChatAndSupportScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             <Stack.Screen name="notifications" component={NotificationsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
             
             <Stack.Screen name="traveldetails" component={TravelDetailsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
-            <Stack.Screen name="publishtravel" component={PublishTravelScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
+            {/* <Stack.Screen name="publishtravel" component={PublishTravelScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} /> */}
             
             <Stack.Screen name="map" component={Map} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
+            <Stack.Screen name="accountData" component={AccountDataScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
+            <Stack.Screen name="central" component={CentrallCallScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
+            <Stack.Screen name="useTerms" component={UseTermsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
+            <Stack.Screen name="privacyPolitics" component={PrivacyPoliticsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "dark"}} />
 
         </Stack.Navigator>
     )

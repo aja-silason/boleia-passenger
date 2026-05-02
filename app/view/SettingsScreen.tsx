@@ -66,7 +66,7 @@ export default function SettingsScreen() {
                     <MenuButton 
                         icon="person-outline" 
                         text="Dados da Conta" 
-                        onPress={() => Alert.alert("Conta")} 
+                        onPress={() => navigate.navigate("accountData")} 
                     />
                     <View style={styles.divider} />
                     <MenuButton 

@@ -30,12 +30,6 @@ export default function AccountDataScreen() {
 
     const {userInformation} = useAuthContext();
 
-    const convertStatus = (status: string) => {
-        if(status === "APPROVED") return 'Aprovado'
-        if(status === "SUSPENDED") return 'Suspenso'
-        if(status === "PENDING") return 'Pendente'
-    }
-
     return (
         <View style={{ flex: 1, backgroundColor: Colors.whiteBackground }}>
                 <View style={styles.container}>
@@ -52,26 +46,6 @@ export default function AccountDataScreen() {
                     <View style={styles.infoBox}>
                         <Text style={styles.infoTitle}>Telefone</Text>
                         <Text style={styles.infoValue}>{userInformation?.phoneNumber}</Text>
-                    </View>
-
-                    <View style={styles.infoBox}>
-                        <Text style={styles.infoTitle}>NIF / Identificação</Text>
-                        <Text style={styles.infoValue}>{userInformation?.identificationNumber}</Text>
-                    </View>
-
-                    <View style={styles.infoBox}>
-                        <Text style={styles.infoTitle}>Número da Licença</Text>
-                        <Text style={styles.infoValue}>{userInformation?.licenseNumber}</Text>
-                    </View>
-
-                    <View style={styles.infoBox}>
-                        <Text style={styles.infoTitle}>Estado do Usuário</Text>
-                        <Text style={styles.infoValue}>{convertStatus(userInformation?.status as string)}</Text>
-                    </View>
-
-                    <View style={styles.infoBox}>
-                        <Text style={styles.infoTitle}>Ultimo acesso</Text>
-                        <Text style={styles.infoValue}>{userInformation?.userWillBeSignedUntil}</Text>
                     </View>
     
                 </View>
