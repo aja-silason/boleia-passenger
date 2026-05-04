@@ -83,7 +83,7 @@ export default function SettingsScreen() {
                     <MenuButton 
                         icon="lock-closed-outline" 
                         text="Privacidade e Segurança" 
-                        onPress={() => Alert.alert("Segurança")} 
+                        onPress={() => navigate.navigate("security")} 
                     />
                     <View style={styles.divider} />
                     <MenuButton 

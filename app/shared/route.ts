@@ -28,4 +28,5 @@ export type RootStackParamList = {
     central: undefined
     useTerms: undefined
     privacyPolitics: undefined
+    security: undefined
 }

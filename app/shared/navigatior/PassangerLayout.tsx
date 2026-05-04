@@ -10,15 +10,23 @@ const Tabs = createBottomTabNavigator();
 export default function PassangerLayout(){    
 
     return (
-        <Tabs.Navigator>
+        <Tabs.Navigator
+            screenOptions={{
+                tabBarActiveTintColor: Colors.background,
+                tabBarInactiveTintColor: Colors.placeHolder,
+                tabBarStyle: {
+                    elevation: 0,
+                    borderTopWidth: 0
+                },
+            }}
+        >
             <Tabs.Screen 
                 name="index"
                 component={HomeScreen} 
                 options={{
                     headerShown: false,
                     title: "Home",
-                    tabBarActiveTintColor: Colors.background,
-                    tabBarInactiveTintColor: Colors.placeHolder,
+                    freezeOnBlur: true,
                     tabBarIcon: ({color, focused, size}) => (
                         <Ionicons name="home-outline" color={focused ? Colors.background : color} size={size}/>
                     )
@@ -31,8 +39,7 @@ export default function PassangerLayout(){
                 options={{
                     headerShown: false,
                     title: "Viagens",
-                    tabBarActiveTintColor: Colors.background,
-                    tabBarInactiveTintColor: Colors.placeHolder,
+                    freezeOnBlur: true,
                     tabBarIcon: ({color, focused, size}) => (
                         <Ionicons name="map-outline" color={focused ? Colors.background : color} size={size}/>
                     )
@@ -45,8 +52,7 @@ export default function PassangerLayout(){
                 options={{
                     headerShown: false,
                     title: "Configurações",
-                    tabBarActiveTintColor: Colors.background,
-                    tabBarInactiveTintColor: Colors.placeHolder,
+                    freezeOnBlur: true,
                     tabBarIcon: ({color, focused, size}) => (
                         <Ionicons name="settings-outline" color={focused ? Colors.background : color} size={size}/>
                     )

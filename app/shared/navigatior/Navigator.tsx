@@ -8,6 +8,7 @@ import CentrallCallScreen from "@/app/view/settings/CentralCallScreen";
 import ChatAndSupportScreen from "@/app/view/settings/ChatAndSupportScreen";
 import NotificationsScreen from "@/app/view/settings/NotificationsScreen";
 import PrivacyPoliticsScreen from "@/app/view/settings/PrivacyPoliticsScreen";
+import SecurityScreen from "@/app/view/settings/SecurityScreen";
 import SupportScreen from "@/app/view/settings/SupportScreen";
 import UseTermsScreen from "@/app/view/settings/UseTermsScreen";
 import SignInScreen from "@/app/view/SignInScreen";
@@ -44,6 +45,7 @@ export default function Navigator(){
             <Stack.Screen name="central" component={CentrallCallScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
             <Stack.Screen name="useTerms" component={UseTermsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
             <Stack.Screen name="privacyPolitics" component={PrivacyPoliticsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
+            <Stack.Screen name="security" component={SecurityScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
 
         </Stack.Navigator>
     )
