@@ -57,9 +57,9 @@ export const useRequestOTP = () => {
 
     const onRetryRequest = async () => {
         const pureNumber = localPhone.replace(/-/g, "");
-        if (pureNumber.length < 9) return Alert.alert("Aviso", "Número incompleto", [
+        if (pureNumber.length < 9) return Alert.alert("Aviso", "Não foi possível pegar o número", [
             {
-                text: "Inserir número",
+                text: "Tentar novamente",
                 onPress: () => {}
             }
         ]);
