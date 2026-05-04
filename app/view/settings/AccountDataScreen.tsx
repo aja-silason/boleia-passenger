@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     infoValue: { fontSize: 15, fontWeight: "600", color: "#333" },
     container: {
         padding: 20,
-        paddingTop: 30
+        paddingTop: 60
     },
     header: {
         marginBottom: 30,

@@ -14,7 +14,7 @@ export namespace Settings {
             return api.get<SystemInformationOutput>('settings/system-information', {skipAuth: true});
         },
         getPrivacyPolitcs: () => {
-            return api.get<PoliticsOutput[]>('settings/politcs', {skipAuth: true});
+            return api.get<PoliticsOutput[]>('settings/politics', {skipAuth: true});
         },
         getTerms: () => {
             return api.get<TermsOutput[]>('settings/terms', {skipAuth: true});

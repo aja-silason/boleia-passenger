@@ -33,21 +33,20 @@ export default function CentrallCallScreen(){
     
         return (
             <View style={{ flex: 1, backgroundColor: Colors.whiteBackground }}>
-                <View style={styles.container}>
-                <HeaderBack />
+                <ScrollView 
+                    style={styles.container}
+                    refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleFetch} />}
+                >
+                    <HeaderBack />
                     <View style={styles.header}>
                         <Text style={styles.title}>Central de Apoio</Text>
                     </View>
 
-                    <ScrollView 
-                        style={styles.infoBox}
-                        refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleFetch} />}
-                    >
+                    <View style={styles.infoBox}>
                         <Text style={styles.infoTitle}>Número de Telefone da Central</Text>
                         <Text style={styles.infoValue}>{data?.centralPhoneNumber}</Text>
-                    </ScrollView>
-    
-                </View>
+                    </View>
+                </ScrollView>
             </View>
         );
 }
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
     infoValue: { fontSize: 15, fontWeight: "600", color: "#333" },
     container: {
         padding: 20,
-        paddingTop: 30,
+        paddingTop: 60,
     },
     header: {
         marginBottom: 30,
