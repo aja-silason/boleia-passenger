@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { HeaderBack } from "./components/header/HeaderBack";
 
+
 export default function Map() {
     return (
         <View style={styles.container}>

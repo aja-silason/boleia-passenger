@@ -197,7 +197,8 @@ export default function TravelDetailsScreen(){
                             <Button 
                                 // icon={<Ionicons name="map" color={Colors.background} />}
                                 isLoading={false}
-                                onPress={() => navigate.navigate("map")} 
+                                // onPress={() => navigate.navigate("map")} 
+                                onPress={() => {}} 
                                 isPrimary={false}
                                 text="Ver mapa"
                             />

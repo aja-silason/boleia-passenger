@@ -1,9 +1,9 @@
 {
   "name": "main",
-  "displayName": "Boleia",
   "expo": {
+    "displayName": "Boleia",
     "jsEngine": "hermes",
-    "name": "boleia",
+    "name": "Boleia",
     "slug": "boleia",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -34,7 +34,10 @@
     },
     "plugins": [
       "expo-router",
-      "@react-native-community/datetimepicker"
+      "@react-native-community/datetimepicker",
+      "expo-font",
+      "expo-maps",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": false,
