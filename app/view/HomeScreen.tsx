@@ -56,8 +56,6 @@ export default function HomeScreen() {
         ?.filter(travel => travel.status === "STARTED") // Filtra apenas as que iniciaram
         .slice(-1)[0];
 
-    console.log("Activa boleia", activeTravel)
-
     return (
         <SafeAreaView style={styles.safeArea}>
             <ScrollView 
