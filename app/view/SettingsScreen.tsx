@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.whiteBackground,
         paddingHorizontal: 20,
+        paddingVertical: 40
     },
     profileSection: {
         flexDirection: "row",

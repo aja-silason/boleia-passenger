@@ -78,7 +78,7 @@ export default function UseTermsScreen() {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        paddingTop: 30,
+        paddingTop: 60,
     },
     header: {
         marginBottom: 30,
