@@ -50,6 +50,9 @@
         }
       }
     },
+    "updates": {
+      "url": "https://u.expo.dev/def9a169-8368-4d3d-b352-fcaa2ab828ca"
+    },
     "owner": "anania_augusto",
     "extra": {
       "router": {},
