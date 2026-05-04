@@ -11,6 +11,7 @@ export const Colors = {
     cardBackground: "#F9FBFC",
     success: "#0A6443",
     error: "#9C1B1B",
+    dangerColor: "#bb3a3a",
     background: '#121212',
     blackText: '#202020',
     blue: "#103173",
