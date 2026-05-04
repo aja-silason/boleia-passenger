@@ -1,6 +1,7 @@
 import { Colors } from "@/constants/theme";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import * as Update from "expo-updates";
 import { useEffect } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { useAuthContext } from "../shared/context/auth.context";
@@ -12,7 +13,26 @@ export default function ReloadScreen(){
 
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>(); 
 
+    const onCheckIfHasUpdate = async () => {
+        try {
+            
+            if(__DEV__) return;
+
+            const update = await Update.checkForUpdateAsync();
+
+            if(update.isAvailable) {
+                await Update.fetchUpdateAsync();
+                await Update.reloadAsync();
+            }
+
+        } catch (error) {
+            console.log("Erro ao buscar actualizações");
+        }
+    }
+
     useEffect(() => {
+
+        onCheckIfHasUpdate();
 
         const timer = setTimeout(() => {
             if (!userInformation) {
