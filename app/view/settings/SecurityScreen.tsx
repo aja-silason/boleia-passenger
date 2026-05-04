@@ -1,5 +1,4 @@
 import { useDeactiveUser } from "@/app/infra/hooks/setting/useDeactiveUser";
-import { useReplacePassword } from "@/app/infra/hooks/useReplacePassword";
 import { RootStackParamList } from "@/app/shared/route";
 import { Colors } from "@/constants/theme";
 import { useNavigation } from "@react-navigation/native";
@@ -8,7 +7,6 @@ import { useEffect } from "react";
 import { BackHandler, KeyboardAvoidingView, Platform, StyleSheet, Text, View } from "react-native";
 import { Button } from "../components/button/Button";
 import { HeaderBack } from "../components/header/HeaderBack";
-import { Input } from "../components/input/Input";
 
 export default function SecurityScreen () {
 
@@ -33,8 +31,6 @@ export default function SecurityScreen () {
 
     const {handleSubmit, isLoading} = useDeactiveUser();
 
-    const {handleChange, handleSubmit: submitChange, isLoading: loadingChangePassword} = useReplacePassword();
-
     return (
             <KeyboardAvoidingView
                 style={{ flex: 1, backgroundColor: Colors.whiteBackground }}
@@ -45,12 +41,12 @@ export default function SecurityScreen () {
                 <View style={styles.header}>
                     <Text style={styles.title}>Segurança</Text>
                 </View>
-
+{/* 
                 <View style={{gap: 10}}>
                     <Input onChange={(value: string) => handleChange("oldPassword", value)} placeholder="" title="Senha Antiga"/>
                     <Input onChange={(value: string) => handleChange("confirmedPassword", value)} placeholder="" title="Nova senha"/>
                     <Button text="Apagar a minha conta" isLoading={loadingChangePassword} isPrimary={true} onPress={submitChange} style={{color: "red"}}/>
-                </View>
+                </View> */}
 
                 <View style={{borderTopWidth: 1, borderColor: Colors.placeHolder, marginVertical: 10}}></View>
 
@@ -69,7 +65,7 @@ export default function SecurityScreen () {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        paddingTop: 30,
+        paddingTop: 60,
     },
     header: {
         marginBottom: 30,

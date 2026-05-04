@@ -50,7 +50,7 @@ export default function UseTermsScreen() {
                     <FlatList
                         style={{height: "75%"}}
                         data={data}
-                        keyExtractor={(item) => item?.order.toString()}
+                        keyExtractor={(item) => item?.id}
                         renderItem={({ item }) => (
                             <View>
                                 <Text style={styles.innerTitle}>{item?.title}</Text>

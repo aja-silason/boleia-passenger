@@ -1,5 +1,5 @@
 export interface TermsOutput {
     title: string;
     description: string;
-    order: number
+    id: string
 }

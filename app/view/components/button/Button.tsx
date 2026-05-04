@@ -1,58 +1,119 @@
 import { Colors } from "@/constants/theme";
 import { ReactNode } from "react";
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+    ActivityIndicator,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from "react-native";
 
-type props = {
+type Props = {
     text: string;
-    isPrimary: boolean;
-    isLoading: boolean;
+    isPrimary?: boolean;
+    isLoading?: boolean;
+    disabled?: boolean;
     onPress: () => void;
     halfWidth?: boolean;
-    icon?: ReactNode
+    icon?: ReactNode;
+    style?: any;
 }
 
-export const Button = (props: props) => {
+export const Button = ({ 
+    text, 
+    isPrimary = true, 
+    isLoading = false, 
+    disabled = false, 
+    onPress, 
+    halfWidth, 
+    icon,
+    style: customStyle 
+}: Props) => {
+    
+    const isDisabled = disabled || isLoading;
+
     return (
-        <TouchableOpacity style={[style.container, props.isPrimary ? style.primary : style.secundary, props.halfWidth && style.middleSize]} activeOpacity={.7} onPress={props.onPress}>
-            {props.icon}
-            {
-                props.isLoading ? (
-                    <ActivityIndicator color={Colors.blackText}  size={18} />
+        <TouchableOpacity 
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            style={[
+                styles.container, 
+                isPrimary ? styles.primary : styles.secondary, 
+                halfWidth && styles.middleSize,
+                isDisabled && styles.disabled,
+                customStyle
+            ]} 
+            activeOpacity={0.8} 
+            onPress={() => {
+                if (!isDisabled) {
+                    onPress();
+                }
+            }}
+            disabled={isDisabled}
+        >
+            <View style={styles.content}>
+                {isLoading ? (
+                    <ActivityIndicator 
+                        color={isPrimary ? "#FFF" : Colors.primary} 
+                        size="small"
+                    />
                 ) : (
-                    <Text style={[props.isPrimary ? style.textPrimary : style.textSecundary]}>{props.text}</Text>
-                )
-            }
+                    <>
+                        {icon && <View style={styles.iconContainer}>{icon}</View>}
+                        <Text style={[
+                            styles.baseText,
+                            isPrimary ? styles.textPrimary : styles.textSecondary
+                        ]}>
+                            {text}
+                        </Text>
+                    </>
+                )}
+            </View>
         </TouchableOpacity>
-    )
-}
+    );
+};
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         width: "100%",
-        padding: 14,
+        borderRadius: 12,
+        minHeight: 54,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 8,
-        borderColor: Colors.text,
+        overflow: 'hidden', 
+    },
+    content: {
         flexDirection: "row",
-        gap: 5
+        alignItems: "center",
+        justifyContent: "center",
+        width: '100%',
+        paddingHorizontal: 15,
     },
     middleSize: {
-        flex: 1
+        flex: 1,
     },
     primary: {
         backgroundColor: Colors.primary
     },
-    secundary: {
-        borderWidth: 1
+    secondary: {
+        backgroundColor: 'transparent',
+        borderWidth: 1.5,
+        borderColor: Colors.inactive,
+    },
+    disabled: {
+        opacity: 0.8,
+        borderColor: 'transparent'
+    },
+    baseText: {
+        fontWeight: "700",
+        fontSize: 14,
     },
     textPrimary: {
-        fontWeight: "600",
-        fontSize: 13
+        color: Colors.blackText,
     },
-    textSecundary: {
-        fontWeight: "500",
-        fontSize: 13,
-        color: Colors.text
+    textSecondary: {
+        color: Colors.inactive,
+    },
+    iconContainer: {
+        marginRight: 8,
     }
 });
