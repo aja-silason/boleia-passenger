@@ -118,8 +118,6 @@ export default function HomeScreen() {
                     </View>
                 </View>
 
-                <Text>Boleia qui</Text>
-
                 {
                     activeTravel && (
                         <View style={{ marginVertical: 30 }}>
