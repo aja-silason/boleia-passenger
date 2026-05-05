@@ -10,6 +10,11 @@ import { TravellerCard } from "./components/card/TravellerCard";
 export default function TravelsScreen() {
     
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    const {data, handleFetch, isLoading} = useGetAllTravel();
+
+    useEffect(() => {
+        handleFetch()
+    }, [navigate])
 
     useEffect(() => {
             const backAction = () => {
@@ -28,7 +33,6 @@ export default function TravelsScreen() {
             return () => backHandler.remove();
         }, [navigate]);
     
-    const {data, handleFetch, isLoading} = useGetAllTravel();
 
     const finishedTravel = useMemo(() => {
         return data?.filter(travel => travel.status === "COMPLETED");
