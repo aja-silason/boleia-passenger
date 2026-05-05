@@ -1,6 +1,6 @@
 import { TravelOutput } from "@/app/infra/service/travel/TravelOutput";
 import { Colors } from "@/constants/theme";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -29,7 +29,7 @@ export const TravellerCard = ({ data, onPress }: TravellerCardProps) => {
                         <Ionicons name="person" size={24} color={Colors.primary} />
                     </View>
                     <View>
-                        <Text style={styles.driverName}>{data?.driver?.fullName}</Text>
+                        <Text style={styles.driverName}>{data?.driver?.fullName || '-'}</Text>
                         <View style={styles.ratingRow}>
                             <Ionicons name="star" size={14} color={Colors.orange} />
                             <Text style={styles.ratingText}>4.8</Text>
@@ -41,7 +41,7 @@ export const TravellerCard = ({ data, onPress }: TravellerCardProps) => {
             <View style={styles.divider} />
             <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                 <View style={styles.infoBlock}>
-                    <Ionicons name="money" size={16} color={Colors.placeholderText} />
+                    <FontAwesome name="money" size={16} color={Colors.placeholderText} />
                     <Text style={styles.infoText}>Preço: </Text>
                 </View>
                 <Text style={styles.price}>{data?.price?.toLocaleString('pt-AO', { minimumFractionDigits: 2 })} Kz</Text>
