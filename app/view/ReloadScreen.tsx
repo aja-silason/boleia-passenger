@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import * as Update from "expo-updates";
 import { useEffect } from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Alert, StyleSheet, View } from "react-native";
 import { useAuthContext } from "../shared/context/auth.context";
 import { RootStackParamList } from "../shared/route";
 
@@ -16,11 +16,12 @@ export default function ReloadScreen(){
     const onCheckIfHasUpdate = async () => {
         try {
             
-            if(__DEV__) return;
+            // if(__DEV__) return;
 
             const update = await Update.checkForUpdateAsync();
 
             if(update.isAvailable) {
+                Alert.alert("Boleia", "Actualização disponivel, feche a aplicação e volte abrir", [{text: "OK", onPress: () => {}}]);
                 await Update.fetchUpdateAsync();
                 await Update.reloadAsync();
             }
