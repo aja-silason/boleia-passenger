@@ -43,7 +43,7 @@ export default function NotificationsScreen() {
             <View style={styles.list}>
                 <NotificationItem 
                     title="Minhas Solicitações" //Mudar para -> Minhas Solicitações 
-                    desc="Avisar quando um passageiro pedir boleia." // Mudar para -> Avisar quando o motorista aceitar minha boleia
+                    desc="Avisar quando um motorista aceitar minha solicitação de Boleia." // Mudar para -> Avisar quando o motorista aceitar minha boleia
                     value={settings.newRequests} 
                     onToggle={() => toggle('newRequests')} 
                 />
