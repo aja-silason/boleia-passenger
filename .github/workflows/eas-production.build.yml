@@ -3,7 +3,7 @@ name: EAS BUILD A TEST APP
 on:
   push:
     branches:
-      - development
+      - production
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
           npm install -g expo-cli eas-cli
           npm install
 
-      - name: EAS build Android (Staging Preview)
+      - name: EAS build Android (production)
         env: 
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: |

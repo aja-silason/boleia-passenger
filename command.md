@@ -10,3 +10,11 @@ Rodar a app via usb com expo
 
 Expo token
     3i5Yp3Vvx9VivmsD-kBD-_4d7MsAZLRb0KdbSFDK
+
+Verificar esse link
+    [text](.github/workflows/eas-development.build.yml)
+
+
+Vincular uma branch para o canal
+
+    npx eas channel:edit staging --branch preview
