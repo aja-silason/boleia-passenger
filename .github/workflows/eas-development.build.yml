@@ -27,6 +27,6 @@ jobs:
         env: 
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: |
-          npx eas update --branch development --message "Upstream new updates"
+          npx eas update --branch preview --message "Upstream new updates"
 
         
