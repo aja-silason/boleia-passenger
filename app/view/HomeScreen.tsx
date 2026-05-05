@@ -17,7 +17,13 @@ import { InputInLine } from "./components/input/InputInLine";
 
 
 export default function HomeScreen() {
-        const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    const {data, handleFetch, isLoading: isLoadingFetchData} = useGetAllTravel();
+
+    useEffect(() => {
+        handleFetch()
+    }, [])
+
 
     useEffect(() => {
             const backAction = () => {
@@ -40,7 +46,6 @@ export default function HomeScreen() {
 
     const { handleChange, isLoading, handleSubmit} = useSearchTravel()
 
-    const {data, handleFetch, isLoading: isLoadingFetchData} = useGetAllTravel();
 
     const [date, setDate] = useState(new Date());
     const [showCalendar, setShowCalendar] = useState(false);
