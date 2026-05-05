@@ -29,13 +29,20 @@ export const TravellerCard = ({ data, onPress }: TravellerCardProps) => {
                         <Ionicons name="person" size={24} color={Colors.primary} />
                     </View>
                     <View>
-                        <Text style={styles.driverName}>{data?.origin} &rarr; {data?.destiny}</Text>
+                        <Text style={styles.driverName}>{data?.driver?.fullName}</Text>
                         <View style={styles.ratingRow}>
                             <Ionicons name="star" size={14} color={Colors.orange} />
                             <Text style={styles.ratingText}>4.8</Text>
                             <Text style={styles.reviewsText}>(120 avaliações)</Text>
                         </View>
                     </View>
+                </View>
+            </View>
+            <View style={styles.divider} />
+            <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                <View style={styles.infoBlock}>
+                    <Ionicons name="money" size={16} color={Colors.placeholderText} />
+                    <Text style={styles.infoText}>Preço: </Text>
                 </View>
                 <Text style={styles.price}>{data?.price?.toLocaleString('pt-AO', { minimumFractionDigits: 2 })} Kz</Text>
             </View>
@@ -87,6 +94,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        flexWrap: "wrap"
     },
     driverInfo: {
         flexDirection: "row",
@@ -107,6 +115,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "700",
         color: "#333",
+        flexWrap: "wrap"
     },
     ratingRow: {
         flexDirection: "row",
@@ -149,7 +158,7 @@ const styles = StyleSheet.create({
     infoText: {
         fontSize: 14,
         color: "#555",
-        fontWeight: "500",
+        fontWeight: "500"
     },
     footer: {
         flexDirection: "row",

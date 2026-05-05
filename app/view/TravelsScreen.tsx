@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { BackHandler, FlatList, RefreshControl, StyleSheet, Text, View } from "react-native";
 import { useGetAllTravel } from "../infra/hooks/travel/useGetAllTravel";
 import { RootStackParamList } from "../shared/route";
@@ -30,12 +30,16 @@ export default function TravelsScreen() {
     
     const {data, handleFetch, isLoading} = useGetAllTravel();
 
+    const finishedTravel = useMemo(() => {
+        return data?.filter(travel => travel.status === "COMPLETED");
+    }, [data])
+
     return (
         <View style={styles.mainContent}>
             <Text style={styles.title}>Minhas Viagens</Text>
 
             <FlatList
-                data={data}
+                data={finishedTravel}
                 keyExtractor={(_, index) => index?.toString()}
                 onEndReachedThreshold={0.5}
                 renderItem={({item, index}) => (<TravellerCard key={index} data={item} onPress={() => navigate.navigate("traveldetails", {travelDetails: item, historic: true})}/>)}

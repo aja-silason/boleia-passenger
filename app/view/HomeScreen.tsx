@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { BackHandler, Platform, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useGetAllTravel } from "../infra/hooks/travel/useGetAllTravel";
 import { useSearchTravel } from "../infra/hooks/travel/useSearchTravel";
@@ -52,9 +52,11 @@ export default function HomeScreen() {
         handleChange("startTime", currentDate?.toISOString())
     };
 
-    const activeTravel = data
-        ?.filter(travel => travel.status === "STARTED") // Filtra apenas as que iniciaram
+    const activeTravel = useMemo(() => {
+        return data
+        ?.filter(travel => travel.status === "OPEN" || travel.status === "STARTED")
         .slice(-1)[0];
+    }, [data])
 
     return (
         <SafeAreaView style={styles.safeArea}>
@@ -115,6 +117,8 @@ export default function HomeScreen() {
                         />
                     </View>
                 </View>
+
+                <Text>Boleia qui</Text>
 
                 {
                     activeTravel && (
