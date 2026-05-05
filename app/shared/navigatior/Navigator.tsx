@@ -23,29 +23,34 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Navigator(){
     return (
-        <Stack.Navigator initialRouteName="reloadScreen">
-            <Stack.Screen name="reloadScreen" component={ReloadScreen} options={{headerShown: false, headerTransparent: true}} />
-            <Stack.Screen name="splash" component={SplashScreen} options={{headerShown: false, headerTransparent: true}} />
-            <Stack.Screen name="welcome" component={WelcomeScreen} options={{headerShown: false, headerTransparent: true}} />
-            <Stack.Screen name="signin" component={SignInScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            <Stack.Screen name="signup" component={SignUpScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            <Stack.Screen name="otp" component={OtpconfirmScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
+        <Stack.Navigator initialRouteName="splash"
+        screenOptions={{
+            headerShown: false,
+            statusBarStyle: "inverted"
+        }}
+        >
+            <Stack.Screen name="reloadScreen" component={ReloadScreen} />
+            <Stack.Screen name="splash" component={SplashScreen} />
+            <Stack.Screen name="welcome" component={WelcomeScreen} />
+            <Stack.Screen name="signin" component={SignInScreen} />
+            <Stack.Screen name="signup" component={SignUpScreen} />
+            <Stack.Screen name="otp" component={OtpconfirmScreen} />
             
-            <Stack.Screen name="tabs" component={PassangerLayout} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            <Stack.Screen name="travelavailable" component={TravelAvailableScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            <Stack.Screen name="supportScreen" component={SupportScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            <Stack.Screen name="chatAndSupport" component={ChatAndSupportScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            <Stack.Screen name="notifications" component={NotificationsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
+            <Stack.Screen name="tabs" component={PassangerLayout} />
+            <Stack.Screen name="travelavailable" component={TravelAvailableScreen} />
+            <Stack.Screen name="supportScreen" component={SupportScreen} />
+            <Stack.Screen name="chatAndSupport" component={ChatAndSupportScreen} />
+            <Stack.Screen name="notifications" component={NotificationsScreen} />
             
-            <Stack.Screen name="traveldetails" component={TravelDetailsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            {/* <Stack.Screen name="publishtravel" component={PublishTravelScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} /> */}
+            <Stack.Screen name="traveldetails" component={TravelDetailsScreen} />
+            {/* <Stack.Screen name="publishtravel" component={PublishTravelScreen} /> */}
             
-            <Stack.Screen name="map" component={Map} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            <Stack.Screen name="accountData" component={AccountDataScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            <Stack.Screen name="central" component={CentrallCallScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            <Stack.Screen name="useTerms" component={UseTermsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            <Stack.Screen name="privacyPolitics" component={PrivacyPoliticsScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
-            <Stack.Screen name="security" component={SecurityScreen} options={{headerShown: false, headerTransparent: false, statusBarStyle: "auto"}} />
+            <Stack.Screen name="map" component={Map} />
+            <Stack.Screen name="accountData" component={AccountDataScreen} />
+            <Stack.Screen name="central" component={CentrallCallScreen} />
+            <Stack.Screen name="useTerms" component={UseTermsScreen} />
+            <Stack.Screen name="privacyPolitics" component={PrivacyPoliticsScreen} />
+            <Stack.Screen name="security" component={SecurityScreen} />
 
         </Stack.Navigator>
     )

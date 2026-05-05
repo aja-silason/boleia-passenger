@@ -13,38 +13,28 @@ export default function ReloadScreen(){
 
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>(); 
 
-    const onCheckIfHasUpdate = async () => {
-        try {
-            
-            // if(__DEV__) return;
-
-            const update = await Update.checkForUpdateAsync();
-
-            if(update.isAvailable) {
-                Alert.alert("Boleia", "Actualização disponivel, feche a aplicação e volte abrir", [{text: "OK", onPress: () => {}}]);
-                await Update.fetchUpdateAsync();
-                await Update.reloadAsync();
-            }
-
-        } catch (error) {
-            console.log("Erro ao buscar actualizações");
-        }
-    }
-
     useEffect(() => {
 
-        onCheckIfHasUpdate();
+        const onCheckIfHasUpdate = async () => {
+            try {
+                const update = await Update.checkForUpdateAsync();
+                if(update.isAvailable) {
+                    Alert.alert("Sistema", "Actualização disponivel, feche a aplicação e volte abrir", [{text: "OK", onPress: () => {}}]);
+                    await Update.fetchUpdateAsync();
+                    await Update.reloadAsync();
+                }
+            } catch (error) {
+                console.log("Erro ao buscar actualizações");
+            }
 
-        const timer = setTimeout(() => {
             if (!userInformation) {
                 navigate.replace("welcome");
             } else {
                 navigate.replace("tabs");
             }
-        }, 2000);
+        }
 
-        return () => clearTimeout(timer);
-
+        onCheckIfHasUpdate();
 
     }, [userInformation, navigate])
 
