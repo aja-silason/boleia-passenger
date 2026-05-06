@@ -10,6 +10,11 @@
     "icon": "./assets/images/icon.png",
     "scheme": "boleia",
     "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash_icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
     "runtimeVersion": {
       "policy": "appVersion"
     },
