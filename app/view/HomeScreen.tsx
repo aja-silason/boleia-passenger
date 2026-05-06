@@ -71,6 +71,7 @@ export default function HomeScreen() {
                 refreshControl={
                     <RefreshControl refreshing={isLoadingFetchData} onRefresh={handleFetch}/>
                 }
+                keyboardShouldPersistTaps="handled"
             >
                 <Header title="Encontre sua próxima" username={`Olá, ${userInformation?.firstName+' '+userInformation?.lastName}`} />
                 

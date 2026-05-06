@@ -35,6 +35,7 @@ export default function CentrallCallScreen(){
             <View style={{ flex: 1, backgroundColor: Colors.whiteBackground }}>
                 <ScrollView 
                     style={styles.container}
+                    keyboardShouldPersistTaps="handled"
                     refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleFetch} />}
                 >
                     <HeaderBack />

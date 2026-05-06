@@ -1,10 +1,10 @@
 import { Colors } from "@/constants/theme";
-import { ReactNode } from "react";
+import { ReactNode, useCallback, useRef } from "react";
 import {
     ActivityIndicator,
+    Pressable,
     StyleSheet,
     Text,
-    TouchableOpacity,
     View
 } from "react-native";
 
@@ -17,6 +17,7 @@ type Props = {
     halfWidth?: boolean;
     icon?: ReactNode;
     style?: any;
+    debounceMS?: number
 }
 
 export const Button = ({ 
@@ -27,27 +28,34 @@ export const Button = ({
     onPress, 
     halfWidth, 
     icon,
-    style: customStyle 
+    style: customStyle,
+    debounceMS = 300
 }: Props) => {
     
     const isDisabled = disabled || isLoading;
 
+    const lastPress = useRef(0);
+
+    const handlePress = useCallback(() => {
+        const now = Date.now();
+        if (now - lastPress.current <debounceMS) return;
+        lastPress.current = now;
+        onPress();
+    }, [onPress, debounceMS]);
+
+
     return (
-        <TouchableOpacity 
+        <Pressable
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            style={[
-                styles.container, 
-                isPrimary ? styles.primary : styles.secondary, 
+            style={({ pressed }) => [
+                styles.container,
+                isPrimary ? styles.primary : styles.secondary,
                 halfWidth && styles.middleSize,
                 isDisabled && styles.disabled,
+                pressed && !isDisabled && styles.pressed,
                 customStyle
-            ]} 
-            activeOpacity={0.8} 
-            onPress={() => {
-                if (!isDisabled) {
-                    onPress();
-                }
-            }}
+            ]}
+            onPress={handlePress}
             disabled={isDisabled}
         >
             <View style={styles.content}>
@@ -68,7 +76,7 @@ export const Button = ({
                     </>
                 )}
             </View>
-        </TouchableOpacity>
+        </Pressable>
     );
 };
 
@@ -78,8 +86,10 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         minHeight: 54,
         justifyContent: "center",
-        alignItems: "center",
-        overflow: 'hidden', 
+        alignItems: "center"
+    },
+    pressed: {
+        opacity: 0.8
     },
     content: {
         flexDirection: "row",
@@ -87,6 +97,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         width: '100%',
         paddingHorizontal: 15,
+        overflow: 'hidden'
     },
     middleSize: {
         flex: 1,

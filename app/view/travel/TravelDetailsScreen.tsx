@@ -99,6 +99,7 @@ export default function TravelDetailsScreen(){
                         tintColor={Colors.primary}
                     />
                 }
+                keyboardShouldPersistTaps="handled"
             >
                 <View style={styles.card}>
                     <View style={styles.routeContainer}>

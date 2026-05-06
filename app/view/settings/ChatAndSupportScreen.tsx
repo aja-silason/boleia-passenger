@@ -46,7 +46,7 @@ export default function ChatAndSupportScreen() {
             style={{ flex: 1, backgroundColor: Colors.whiteBackground }}
             behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-            <ScrollView contentContainerStyle={styles.container}>
+            <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
             <HeaderBack />
                 <View style={styles.header}>
                     <Text style={styles.title}>Como podemos ajudar?</Text>

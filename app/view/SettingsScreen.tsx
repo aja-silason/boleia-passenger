@@ -46,7 +46,7 @@ export default function SettingsScreen() {
     };
 
     return (
-        <ScrollView style={styles.mainContent} showsVerticalScrollIndicator={false}>
+        <ScrollView style={styles.mainContent} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
             <View style={styles.profileSection}>
                 <View style={styles.avatarContainer}>
                     <Ionicons name="person" size={40} color={Colors.primary} />
