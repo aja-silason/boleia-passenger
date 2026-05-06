@@ -58,7 +58,7 @@ export const Button = ({
             onPress={handlePress}
             disabled={isDisabled}
         >
-            <View style={styles.content}>
+            <View style={styles.content} pointerEvents="none">
                 {isLoading ? (
                     <ActivityIndicator 
                         color={isPrimary ? "#FFF" : Colors.primary} 
