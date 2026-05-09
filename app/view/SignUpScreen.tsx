@@ -53,7 +53,6 @@ useEffect(() => {
       setStep((prev) => prev + 1);
     }
   };
-
  
      return (
          <View style={styles.mainContent}>
