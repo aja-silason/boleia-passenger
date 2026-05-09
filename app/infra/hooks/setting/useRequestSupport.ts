@@ -8,7 +8,7 @@ import { Settings } from "../../service/settings/setting.service";
 export const useRequestSupport = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [data, setData] = useState<RequestSupportInput>({userId: "", description: ""});
+    const [data, setData] = useState<RequestSupportInput>({userId: "", message: ""});
 
     const {userInformation} = useAuthContext();
 
@@ -28,14 +28,16 @@ export const useRequestSupport = () => {
         try {
 
             setIsLoading(true);
-                        
-            const res = await Settings.settings.requestSupport(payload);
+            console.log("Enviando", JSON.stringify(payload, null, 2))
+
+            await Settings.settings.requestSupport(payload);
 
             setIsLoading(false);
             
         } catch (error) {
             setIsLoading(false);
             if(axios.isAxiosError(error)){
+                console.log(JSON.stringify(error, null, 2))
                 if(error.status === 500) return Alert.alert("Aviso", "Alguma coisa correu mal, estamos resolvendo por você", [
                     {text: "Entendido", onPress: () => {}}
                 ]);
@@ -45,7 +47,7 @@ export const useRequestSupport = () => {
             }
             
         } finally {
-            setData({description: "", userId: userInformation?.id as string});
+            setData({message: "", userId: userInformation?.id as string});
         }
 
     }

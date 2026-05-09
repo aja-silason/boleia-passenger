@@ -63,8 +63,8 @@ export default function ChatAndSupportScreen() {
                         multiline
                         numberOfLines={5}
                         textAlignVertical="top"
-                        value={data.description}
-                        onChangeText={(value) => handleChange("description", value)}
+                        value={data.message}
+                        onChangeText={(value) => handleChange("message", value)}
                     />
                 </View>
 
@@ -104,13 +104,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#F0F0F0",
         padding: 15,
-        minHeight: 200,
-        marginBottom: 25
+        minHeight: 100,
+        marginBottom: 25,
+        height: 150
     },
     textArea: {
         fontSize: 16,
-        color: "#1A1A1A",
-        height: "40%",
+        color: "#1A1A1A"
     },
     submitButton: {
         backgroundColor: Colors.primary,
