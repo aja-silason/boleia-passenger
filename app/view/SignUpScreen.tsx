@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import { BackHandler, StyleSheet, View } from "react-native";
+import { Alert, BackHandler, StyleSheet, View } from "react-native";
 import { useCreateAccount } from "../infra/hooks/useCreateAccount";
 import { RootStackParamList } from "../shared/route";
 import { Button } from "./components/button/Button";
@@ -48,7 +48,8 @@ useEffect(() => {
 
   const handleNext = () => {
     if (step === STEP.step_2) {
-      handleSubmit();
+    //   handleSubmit();
+    Alert.alert("Cliquei", "Sim clicou")
     } else {
       setStep((prev) => prev + 1);
     }
