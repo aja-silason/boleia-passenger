@@ -20,6 +20,8 @@ export default function HomeScreen() {
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const {data, handleFetch, isLoading: isLoadingFetchData} = useGetAllTravel();
 
+    console.log("API URL: ", process.env.EXPO_PUBLIC_API_URL)
+
     useEffect(() => {
         handleFetch()
     }, [])

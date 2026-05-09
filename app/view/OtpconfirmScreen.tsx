@@ -55,7 +55,7 @@ export const OtpconfirmScreen = () => {
 
     const onRetryRequest = () => {
         setLocalPhone(route?.params.phone);
-        onSubmitRetry();
+        onSubmitRetry(route?.params.phone);
     }
 
 

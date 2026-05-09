@@ -27,6 +27,7 @@ export const useRequestOTP = () => {
     const onSubmit = async () => {
         Keyboard.dismiss();
         const pureNumber = localPhone.replace(/-/g, "");
+        console.log("Número puro: ", pureNumber)
         if (pureNumber.length < 9) return Alert.alert("Aviso", "Número incompleto", [
             {
                 text: "Inserir número",
@@ -42,7 +43,6 @@ export const useRequestOTP = () => {
             setIsLoading(false);
             return navigate.replace("tabs");
         } catch (error) {
-            console.log("Mapeamento do erro no request otp", error)
             setIsLoading(false);
             Alert.alert("Informação", "Alguma coisa ocorreu mal, estamos resolvendo por você!", [
                 {
@@ -55,16 +55,19 @@ export const useRequestOTP = () => {
     };
 
 
-    const onRetryRequest = async () => {
-        const pureNumber = localPhone.replace(/-/g, "");
-        if (pureNumber.length < 9) return Alert.alert("Aviso", "Não foi possível pegar o número", [
+    const onRetryRequest = async (number: string) => {
+        const aNumber = number.replace(/-/g, "");
+        console.log("Número puro: ", aNumber)
+        if (number.length < 9) return Alert.alert("Aviso", "Não foi possível pegar o número", [
             {
                 text: "Tentar novamente",
                 onPress: () => {}
             }
         ]);
         
-        const fullNumber = `${ddi}${pureNumber}`;
+        const fullNumber = `${aNumber}`;
+
+        console.log("Número completo para retry: ", fullNumber)
         
         try {
             setIsLoading(true)
@@ -72,7 +75,6 @@ export const useRequestOTP = () => {
             setIsLoading(false);
             return
         } catch (error) {
-            console.log("Mapeamento do erro no request otp", error)
             setIsLoading(false);
             Alert.alert("Informação", "Alguma coisa ocorreu mal, estamos resolvendo por você!", [
                 {
