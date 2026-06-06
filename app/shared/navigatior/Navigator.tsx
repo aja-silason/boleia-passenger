@@ -2,6 +2,7 @@ import { RootStackParamList } from "@/app/shared/route";
 import SplashScreen from "@/app/view";
 import Map from "@/app/view/Map";
 import { OtpconfirmScreen } from "@/app/view/OtpconfirmScreen";
+import { OtpCreatePasswordScreen } from "@/app/view/OtpCreatePasswordScreen";
 import ReloadScreen from "@/app/view/ReloadScreen";
 import AccountDataScreen from "@/app/view/settings/AccountDataScreen";
 import CentrallCallScreen from "@/app/view/settings/CentralCallScreen";
@@ -35,6 +36,7 @@ export default function Navigator(){
             <Stack.Screen name="signin" component={SignInScreen} />
             <Stack.Screen name="signup" component={SignUpScreen} />
             <Stack.Screen name="otp" component={OtpconfirmScreen} />
+            <Stack.Screen name="createPassword" component={OtpCreatePasswordScreen} />
             
             <Stack.Screen name="tabs" component={PassangerLayout} />
             <Stack.Screen name="travelavailable" component={TravelAvailableScreen} />

@@ -5,7 +5,6 @@ import { useNavigation } from "expo-router";
 import { useState } from "react";
 import { Alert, Keyboard } from "react-native";
 import { Auth } from "../service/entity/auth.service";
-import { OTPNotification } from "../service/entity/otpnotification.service";
 import { SignUpInput } from "./SignUpInput";
 
 export const useCreateAccount = () => {
@@ -56,11 +55,10 @@ export const useCreateAccount = () => {
             setIsLoading(true);
             
             await Auth.auth.signUp(payload);
-            await OTPNotification.otpNotification.requestOTP(fullNumber);
 
             setIsLoading(false);
 
-            return navigate.replace("otp", {phone: fullNumber})
+            return navigate.replace("createPassword", {phone: fullNumber})
 
         } catch (error) {
             setIsLoading(false);
@@ -78,10 +76,7 @@ export const useCreateAccount = () => {
                             },
                             {
                             text: "Iniciar sessão",
-                            onPress: async () => {
-                                const res = await onRetryRequest(fullNumber);
-                                if(res) navigate.navigate("otp", {phone: fullNumber})
-                            }
+                            onPress: async () => navigate.replace("signin")
                             }
                         ]);
                 } 
@@ -89,27 +84,6 @@ export const useCreateAccount = () => {
         }
 
     }
-
-    const onRetryRequest = async (fullNumber: string) => {
-
-        try {
-            setIsLoading(true)
-                await OTPNotification.otpNotification.requestOTP(fullNumber);
-            setIsLoading(false);
-            return true;
-        } catch (error) {
-            console.log("Mapeamento do erro no request otp", error)
-            setIsLoading(false);
-            Alert.alert("Informação", "Alguma coisa ocorreu mal, estamos resolvendo por você!", [
-                {
-                    text: "Entendido",
-                    onPress: () => setIsLoading(false)
-                }
-            ]);
-            return false;
-        }
-    };
-
 
     return {
         handleChange,
