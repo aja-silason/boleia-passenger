@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import { BackHandler, StyleSheet, View } from "react-native";
 import { RootStackParamList } from "../shared/route";
-import { OTPBox } from "./components/box/otpBox";
+import { OtpCreatePasswordBox } from "./components/box/otpCreatePasswordBox";
 import { HeaderBack } from "./components/header/HeaderBack";
 import { NumericKeyBoard } from "./components/keyboard/NumericKeyboard";
 
@@ -53,7 +53,7 @@ export const OtpCreatePasswordScreen = () => {
             <View style={style.container}>
                 <HeaderBack title="Criar senha" description="Digite a senha que deverá ser usado junto a:" isOtp number={route?.params?.phone}/>
                 
-                <OTPBox code={otp} phoneNumber={route?.params.phone}/>
+                <OtpCreatePasswordBox code={otp} phoneNumber={route?.params.phone}/>
 
                 <View style={style.countionContent}>
                 </View>
