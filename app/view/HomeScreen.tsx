@@ -84,12 +84,12 @@ export default function HomeScreen() {
                 </View>
 
                 <View style={styles.searchCard}>
-                    {/* <InputInLine 
+                    <InputInLine 
                         onChange={(value) => handleChange("origin", value)} 
                         placeholder="De onde vai sair?" 
                         icon={<Ionicons name="radio-button-on" size={20} color="green"/>}
                     />
-                    <View style={styles.divider} /> */}
+                    <View style={styles.divider} />
 
                     <InputInLine 
                         onChange={(value) => handleChange("location", value)} 
