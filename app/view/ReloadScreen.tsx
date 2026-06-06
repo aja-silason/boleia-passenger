@@ -31,7 +31,7 @@ export default function ReloadScreen(){
             if (!userInformation) {
                 navigate.replace("welcome");
             } else {
-                navigate.replace("tabs");
+                userInformation.type.includes("PASSANGER") ? navigate.replace("tabs") : navigate.replace("tabsDriver");
             }
         }
 

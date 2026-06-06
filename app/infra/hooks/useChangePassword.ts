@@ -47,7 +47,7 @@ export const useChangePassword = () => {
         try {
             setIsLoading(true);
 
-            await Auth.auth.changePassword(payload);
+            await Auth.auth.addPassword(payload);
             
             setIsSuccess(true);
             setIsLoading(false);

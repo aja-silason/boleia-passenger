@@ -1,8 +1,11 @@
 export interface UserOutput {
-    id: string,
-    firstName: string,
-    lastName: string,
-    phoneNumber: string
+  id: string;
+  firstName: string,
+  lastName: string,
+  phoneNumber: string,
+  status: string,
+  userWillBeSignedUntil: string,
+  type: string
 }
 
 export type DriverOuput = {
@@ -30,4 +33,5 @@ export interface LoginOutput {
   phoneNumber: string,
   status: string,
   userWillBeSignedUntil: string,
+  type: string
 }

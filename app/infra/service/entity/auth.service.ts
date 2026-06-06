@@ -8,7 +8,7 @@ export namespace  Auth {
     export const auth = {
 
         login: (input: AuthInput) => {
-            return api.post<LoginOutput>('user/passsanger-signin', input, {skipAuth: true})
+            return api.post<LoginOutput>('user/signin', input, {skipAuth: true})
         },
 
         addPassword: (input: AuthInput) => {

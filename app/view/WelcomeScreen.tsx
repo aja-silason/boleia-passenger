@@ -8,12 +8,6 @@ export default function WelcomeScreen() {
 
   const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>(); 
 
-  // const {userInformation} = useAuthContext();
-
-  // useEffect(() => {
-  //   if(userInformation) navigate.replace("tabs");
-  // }, [userInformation])
-
   return (
     <View style={style.mainContainer}>
       <ImageBackground 
@@ -31,7 +25,7 @@ export default function WelcomeScreen() {
           </View>
 
           <View style={style.buttonGroup}>
-            <Button text="Criar conta" isLoading={false} isPrimary onPress={() => navigate.navigate("signup")} halfWidth/>
+            <Button text="Criar conta" isLoading={false} isPrimary onPress={() => navigate.navigate("typeOfUser")} halfWidth/>
             <Button text="Entrar" isLoading={false} isPrimary={false} onPress={() => navigate.replace("signin")} halfWidth/>
           </View>
 

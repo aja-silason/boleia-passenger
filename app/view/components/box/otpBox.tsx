@@ -1,4 +1,4 @@
-import { usePassangerSingin } from "@/app/infra/hooks/usePassangerSingin"
+import { useSignIn } from "@/app/infra/hooks/useSignIn"
 import { Colors } from "@/constants/theme"
 import { useEffect } from "react"
 import { StyleSheet, Text, View } from "react-native"
@@ -10,7 +10,7 @@ type props = {
 }
 
 export const OTPBox = (props: props) => {
-    const {isLoading, onSubmit} = usePassangerSingin();
+    const {isLoading, onSubmit} = useSignIn();
 
     useEffect(() => {
         if(props.code.length === 6){

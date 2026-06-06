@@ -7,31 +7,24 @@ import { Alert } from "react-native";
 
 
 type AuthState = {
-
     userInformation: UserOutput | null ;
-    
     isLoadingAuth: boolean,
-    
     setIsLoadingAuth: Dispatch<SetStateAction<boolean>>
-
     addUserInfomation: (value: UserOutput) => void;
     logOut: VoidFunction;
-
 }
 
 const AuthContext = createContext<AuthState | undefined>(undefined);
 
 export const AuthProvider: React.FC<{children: ReactNode}> = ({children}) => {
-
     const [userInformation, setUserInfomation] = useState<UserOutput | null>(null);
-    const router = useRouter();
-    
     const [isLoadingAuth, setIsLoadingAuth] = useState<boolean>(true);
+    const router = useRouter();
 
     useEffect(() => { 
         const loadStorageData = async () => {
             try {
-                const userRaw = await AsyncStorage.getItem("DR1V3RUS3RB0L314");
+                const userRaw = await AsyncStorage.getItem("B01314US3RB0L314");
                 if (userRaw) {
                     setUserInfomation(JSON.parse(userRaw));
                 }
@@ -61,18 +54,16 @@ export const AuthProvider: React.FC<{children: ReactNode}> = ({children}) => {
 
     const addUserInfomation = (value: UserOutput) => {
         setUserInfomation(value);
-        Asyncstorage.setItem("DR1V3RUS3RB0L314", JSON?.stringify(value));
+        Asyncstorage.setItem("B01314US3RB0L314", JSON?.stringify(value));
     }
     return (
         <AuthContext.Provider value={{addUserInfomation, userInformation, isLoadingAuth, logOut, setIsLoadingAuth}}>
             {children}
         </AuthContext.Provider>
     )
-
 }
 
 export const useAuthContext = () => {
-
     const context = useContext(AuthContext);
 
     if(!context){
