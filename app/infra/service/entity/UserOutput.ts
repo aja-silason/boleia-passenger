@@ -28,8 +28,6 @@ export interface LoginOutput {
   firstName: string,
   lastName: string,
   phoneNumber: string,
-  identificationNumber: string,
-  licenseNumber: string,
   status: string,
   userWillBeSignedUntil: string,
 }

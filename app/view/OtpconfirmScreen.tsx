@@ -1,16 +1,12 @@
 import { Colors } from "@/constants/theme";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import { BackHandler, StyleSheet, Text, View } from "react-native";
-import { useRequestOTP } from "../infra/hooks/useRequestOTP";
+import { BackHandler, StyleSheet, View } from "react-native";
 import { RootStackParamList } from "../shared/route";
 import { OTPBox } from "./components/box/otpBox";
-import { LinkButton } from "./components/button/LinkButton";
 import { HeaderBack } from "./components/header/HeaderBack";
 import { NumericKeyBoard } from "./components/keyboard/NumericKeyboard";
-import { LoadingModal } from "./components/modal/LoadingModal";
 
 export const OtpconfirmScreen = () => {
 
@@ -37,7 +33,6 @@ export const OtpconfirmScreen = () => {
 
     const route = useRoute<RouteProp<RootStackParamList, "otp">>();
 
-    const {isLoading, setLocalPhone, onRetryRequest: onSubmitRetry} = useRequestOTP();   
 
     const handleNumberPress = (num: string) => {
         if(otp.length < 6) {
@@ -53,24 +48,14 @@ export const OtpconfirmScreen = () => {
         setOtp("");
     }
 
-    const onRetryRequest = () => {
-        setLocalPhone(route?.params.phone);
-        onSubmitRetry(route?.params.phone);
-    }
-
-
     return (
         <View style={style.mainContainer}>
-            <LoadingModal visible={isLoading} />
             <View style={style.container}>
-                <HeaderBack title="Confirmar o seu número" description="Enviamos o OTP por sms para o número " isOtp number={route?.params?.phone}/>
+                <HeaderBack title="Segurança" description="Digite a sua senha para:" isOtp number={route?.params?.phone}/>
                 
                 <OTPBox code={otp} phoneNumber={route?.params.phone}/>
 
                 <View style={style.countionContent}>
-                    <Ionicons name="information-circle-outline" color={Colors.placeHolder}/>
-                    <Text style={style.caution}>Não recebeu o código?</Text>
-                    <LinkButton isLoading onPress={onRetryRequest} text="Reenviar" isPrimary/>
                 </View>
                 
                 <NumericKeyBoard onClear={handleClear} onDelete={handleDelete} onPressNumber={handleNumberPress}/>

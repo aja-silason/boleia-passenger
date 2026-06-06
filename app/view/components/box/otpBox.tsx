@@ -1,4 +1,4 @@
-import { useValidOTP } from "@/app/infra/hooks/useValidOTP"
+import { usePassangerSingin } from "@/app/infra/hooks/usePassangerSingin"
 import { Colors } from "@/constants/theme"
 import { useEffect } from "react"
 import { StyleSheet, Text, View } from "react-native"
@@ -10,7 +10,7 @@ type props = {
 }
 
 export const OTPBox = (props: props) => {
-    const {isLoading, onSubmit} = useValidOTP();
+    const {isLoading, onSubmit} = usePassangerSingin();
 
     useEffect(() => {
         if(props.code.length === 6){
@@ -23,6 +23,7 @@ export const OTPBox = (props: props) => {
     return (
         <View style={styles.container}>
             <LoadingModal visible={isLoading} />
+            
             {
                 boxes?.map((index) => {
                     const char = props.code[index] || "";

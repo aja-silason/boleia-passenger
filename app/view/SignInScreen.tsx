@@ -1,14 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useEffect } from "react";
-import { BackHandler, StyleSheet, View } from "react-native";
-import { useAuth } from "../infra/hooks/useAuth";
+import { useEffect, useState } from "react";
+import { Alert, BackHandler, Keyboard, StyleSheet, View } from "react-native";
 import { RootStackParamList } from "../shared/route";
 import { Button } from "./components/button/Button";
 import { HeaderBack } from "./components/header/HeaderBack";
 import { InputPhone } from "./components/input/phoneinput";
 
 export default function SignInScreen(){
+    const [ddi, setDdi] = useState("+244");
+    const [localPhone, setLocalPhone] = useState("");
 
     const navigate = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -29,7 +30,20 @@ export default function SignInScreen(){
             return () => backHandler.remove();
         }, [navigate]);
 
-    const {ddi, setDdi, setLocalPhone, handleSubmit, isLoading} = useAuth();
+    const handleSubmit = () => {
+        Keyboard.dismiss();
+        const pureNumber = localPhone.replace(/-/g, "");
+            if (pureNumber.length < 9) return Alert.alert("Aviso", "Número incompleto", [
+                {
+                    text: "Inserir número",
+                    onPress: () => {}
+                }
+        ]);
+        
+        const fullNumber = `${ddi}${pureNumber}`;
+
+        navigate.navigate("otp", {phone: fullNumber});
+    };
 
     return (
         <View style={styles.mainContent}>
@@ -39,7 +53,7 @@ export default function SignInScreen(){
                 <InputPhone ddi={ddi} setDdi={setDdi} setLocalPhone={setLocalPhone} />
 
 
-                <Button isLoading={isLoading} onPress={handleSubmit} text="Entrar" isPrimary/>
+                <Button isLoading={false} onPress={handleSubmit} text="Entrar" isPrimary/>
             </View>
         </View>
     )
