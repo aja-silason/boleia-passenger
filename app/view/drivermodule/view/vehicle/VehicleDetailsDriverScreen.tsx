@@ -31,6 +31,8 @@ export default function VehicleDetailsDriverScreen() {
     
     const { data } = route.params as { data: VehicleOutput };
 
+    const isActive = data.status?.includes("AVAILABLE");
+
     const vehicle = {
         brand: data?.brand,
         model: data?.model,
@@ -38,7 +40,7 @@ export default function VehicleDetailsDriverScreen() {
         color: data?.color,
         year: data?.year,
         category: "N/D",
-        isActive: data?.isActive
+        isActive: isActive
     };
 
     const handleDelete = () => {

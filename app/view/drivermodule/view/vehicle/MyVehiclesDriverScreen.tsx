@@ -47,7 +47,7 @@ export default function MyVehiclesDriverScreen() {
                 keyExtractor={(item, index) => item.id?.toString() || index.toString()}
                 renderItem={({ item }) => (
                     <TouchableOpacity 
-                        onPress={() => navigate.navigate("vehicleDetails" as any, { data: item })} 
+                        onPress={() => navigate.navigate("vehicleDetailsDriver" , { data: item })} 
                         style={styles.card} 
                         activeOpacity={0.8}
                     >

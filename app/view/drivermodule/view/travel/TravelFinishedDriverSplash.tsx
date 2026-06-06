@@ -37,7 +37,7 @@ export function TravelFinishedDriverSplash() {
                 <BlueButton
                     isLoading={false}
                     text="Voltar ao Início" 
-                    onPress={() => navigate.navigate("tabs")}
+                    onPress={() => navigate.navigate("tabsDriver")}
                     isBlue 
                 />
             </View>

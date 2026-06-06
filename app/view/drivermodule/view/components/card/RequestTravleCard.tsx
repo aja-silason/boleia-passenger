@@ -1,3 +1,4 @@
+
 import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 14,
         fontWeight: "700",
-        color: Colors.contrastOrange,
+        color: Colors.blueInc,
         textTransform: 'uppercase',
         letterSpacing: 0.5,
     },

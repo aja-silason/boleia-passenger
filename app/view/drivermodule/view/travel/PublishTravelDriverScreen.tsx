@@ -145,7 +145,7 @@ export default function PublishTravelDriverScreen() {
                         <Text style={styles.modalTitleText}>Viagem Publicada!</Text>
                         <Text style={styles.modalDescription}>Sua boleia já está visível para os passageiros.</Text>
                         <Button 
-                            onPress={() => navigate.navigate("tabs")} 
+                            onPress={() => navigate.navigate("tabsDriver")} 
                             text="Voltar ao Início" 
                             isPrimary
                         />

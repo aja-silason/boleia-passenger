@@ -1,4 +1,5 @@
 import { VehicleOutput } from "@/app/infra/service/vehicle/VehicleOutput";
+import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons"; // Certifique-se de ter o expo-icons instalado
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -9,8 +10,11 @@ interface VehicleCardProps {
 }
 
 export const VehicleCard = ({data}: VehicleCardProps) => {
+
+    const isActive = data.status.includes("AVAILABLE");
+
     return (
-        <View style={[styles.container, data.isActive && styles.activeContainer]}>
+        <View style={[styles.container, isActive && styles.activeContainer]}>
             <View style={styles.contentHeader}>
                 <View style={styles.vehicleInfo}>
                     <Text style={styles.modelText}>
@@ -22,7 +26,7 @@ export const VehicleCard = ({data}: VehicleCardProps) => {
                     </View>
                 </View>
 
-                {data.isActive ? (
+                {isActive ? (
                     <View style={styles.statusBadgeActive}>
                         <Ionicons name="checkmark-circle" size={18} color="#fff" />
                         <Text style={styles.statusTextActive}>Ativo</Text>
@@ -56,8 +60,8 @@ const styles = StyleSheet.create({
         borderColor: "#f0f0f0",
     },
     activeContainer: {
-        borderColor: "#a6d1ff", // Borda levemente azulada para o ativo
-        borderWidth: 2,
+        borderColor: Colors.blueInc,
+        borderWidth: 1,
     },
     contentHeader: {
         flexDirection: "row",
