@@ -1,8 +1,8 @@
 import { useAuthContext } from "@/app/shared/context/auth.context";
+import { Travel } from "@/app/view/drivermodule/infra/service/travel/travel.service";
 import axios from "axios";
 import { useState } from "react";
 import { Alert, Keyboard } from "react-native";
-import { Travel } from "../../service/travel/travel.service";
 import { RequestTravelInput } from "./RequestTravelInput";
 
 export const useRefusetRequestTravel = (travelId: string, passangerId: string) => {
@@ -25,11 +25,8 @@ export const useRefusetRequestTravel = (travelId: string, passangerId: string) =
                 travelId: travelId
             }
 
-            console.log(JSON.stringify(payload, null, 2))
-
             if(driverId === "N-D") return;
 
-            console.log(JSON.stringify(payload, null, 2))
             
             await Travel.travel.refuse(payload);
 

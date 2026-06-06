@@ -1,9 +1,9 @@
 import { RootStackParamList } from "@/app/shared/route";
+import { Auth } from "@/app/view/drivermodule/infra/service/entity/auth.service";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import axios from "axios";
 import { useState } from "react";
 import { Alert, Keyboard } from "react-native";
-import { Auth } from "../service/entity/auth.service";
 import { AtributePasswordInput } from "./AtributePasswordInput";
 
 type Props = {
@@ -26,9 +26,6 @@ export const useAtributePassword = () => {
             ...prevState, [name] : value
         }))
     }
-
-        console.log(route?.params?.phoneNumber)
-
 
     const handleSubmit = async () => {
         Keyboard.dismiss();

@@ -1,12 +1,13 @@
+import { useAuthContext } from "@/app/shared/context/auth.context";
 import axios from "axios";
 import { useState } from "react";
 import { Alert, Keyboard } from "react-native";
-import { Driver } from "../../service/entity/driver.service";
 import { Vehicle } from "../../service/vehicle/vehicle.service";
 import { RegisterVehicleInput } from "./RegisterVehicleInput";
 
-export const useRegisterVehicle = (phoneNumber: string) => {
+export const useRegisterVehicle = () => {
 
+    const {userInformation} = useAuthContext();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [data, setData] = useState<RegisterVehicleInput>({idDriver: "", plate: "", model: "", color: "", brand: "", seats: "", serieYear: ""})
     
@@ -16,17 +17,13 @@ export const useRegisterVehicle = (phoneNumber: string) => {
         }))
     }
 
-    console.log(phoneNumber)
-
     const handleSubmit = async () => {
         Keyboard.dismiss();
         
         try {
             setIsLoading(true)
 
-            const out = await Driver.driver.findDriverByPhoneNumber(phoneNumber);
-
-            const driverId = out?.data?.id;
+            const driverId = userInformation?.id as string;
 
             const payload: RegisterVehicleInput = {
                 ...data,

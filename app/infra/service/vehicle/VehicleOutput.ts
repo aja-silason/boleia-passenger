@@ -8,5 +8,6 @@ export type VehicleOutput = {
   seats: string;
   serieYear: string;
   isActive: boolean;
-  year: string
+  year: string,
+  status: string
 }

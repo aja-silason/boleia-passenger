@@ -27,9 +27,6 @@ export const useAtributePassword = () => {
         }))
     }
 
-        console.log(route?.params?.phoneNumber)
-
-
     const handleSubmit = async () => {
         Keyboard.dismiss();
 

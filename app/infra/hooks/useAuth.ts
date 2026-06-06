@@ -45,9 +45,6 @@ export const useAuth = () => {
                 
                 if(fullNumber.includes('+244944996909')) return navigate.replace("otp", {phone: fullNumber});
 
-                console.log(JSON.stringify(error.response, null, 2))
-                console.log(JSON.stringify(error, null, 2))
-
                 if(error.status === 500) return Alert.alert("Aviso", "Alguma coisa correu mal, estamos resolvendo por você", [
                     {
                         text: "Entendido",

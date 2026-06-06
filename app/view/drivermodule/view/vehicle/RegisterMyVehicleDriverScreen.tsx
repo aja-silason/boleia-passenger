@@ -1,4 +1,3 @@
-import { useRegisterVehicle } from "@/app/infra/hooks/vehicle/useRegisterVehicle";
 import { useAuthContext } from "@/app/shared/context/auth.context";
 import { RootStackParamList } from "@/app/shared/route";
 import { Colors } from "@/constants/theme";
@@ -8,6 +7,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useRef } from "react";
 import { BackHandler, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, View } from "react-native";
 import { Modalize } from "react-native-modalize";
+import { useRegisterVehicle } from "../../infra/hooks/vehicle/useRegisterVehicle";
 import { Button } from "../components/button/Button";
 import { HeaderBack } from "../components/header/HeaderBack";
 import { Input } from "../components/input/Input";
@@ -37,7 +37,7 @@ export default function RegisterMyVehicleDriverScreen() {
         return () => backHandler.remove();
     }, [navigate]);
 
-  const {isLoading, handleChange, handleSubmit} = useRegisterVehicle(userInformation != null ? userInformation.phoneNumber : 'ND');
+  const {isLoading, handleChange, handleSubmit} = useRegisterVehicle();
 
   const successRef = useRef<Modalize>(null);
 
@@ -66,7 +66,7 @@ export default function RegisterMyVehicleDriverScreen() {
                  </View>
 
                  <View style={styles.carinfo}>
-                    <Input onChange={(value) => handleChange("seriesYear", value)} placeholder="2022" title="Ano" isHalf/>
+                    <Input onChange={(value) => handleChange("serieYear", value)} placeholder="2022" title="Ano" isHalf/>
                     <Input onChange={(value) => handleChange("color", value)} placeholder="Preto" title="Cor" isHalf/>
                  </View>
 

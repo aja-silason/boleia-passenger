@@ -17,8 +17,6 @@ export const InputPassword = ({onChange, placeholder, title, icon, value}: props
 
     const toogleContent = () => setShow(!show);
 
-    console.log("Password information", show);
-
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>

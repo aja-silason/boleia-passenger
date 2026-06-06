@@ -30,15 +30,12 @@ export const useSearchTravel = () => {
              
             const res = await Travel.travel.searchTravel(payload);
 
-            console.log(JSON.stringify("Quntas bolieas" +  res.data.length));
-
             navigate.navigate("travelavailable", { travels: res.data, from: data.location });
 
             setIsLoading(false)
         } catch (error) {
             setIsLoading(false)
             if(axios.isAxiosError(error)){
-                console.log(JSON.stringify({logs: error.response?.data}, null, 2))
                 if(error.status === 500) return Alert.alert("Aviso", "Alguma coisa correu mal, estamos resolvendo por você", [
                     {text: "Entendido", onPress: () => {}}
                 ]);

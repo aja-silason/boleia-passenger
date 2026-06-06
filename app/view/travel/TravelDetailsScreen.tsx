@@ -77,12 +77,7 @@ export default function TravelDetailsScreen(){
         onRefresh();
     }
 
-    console.log(JSON.stringify(data, null, 2))
-
     const aimAlreadyInTravel = data?.pendingPassanger?.filter(i => i?.id?.includes(passangerId))?.length === 1 ? true : false ;
-
-
-    console.log(JSON.stringify(aimAlreadyInTravel, null, 2))
 
     return (
         <View style={styles.mainContent}>

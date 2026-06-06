@@ -27,9 +27,6 @@ export const useChangePassword = () => {
         }))
     }
 
-        console.log(route?.params?.phoneNumber)
-
-
     const handleSubmit = async () => {
         Keyboard.dismiss();
 

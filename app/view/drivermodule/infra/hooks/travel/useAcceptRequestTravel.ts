@@ -25,11 +25,7 @@ export const useAcceptRequestTravel = (travelId: string, passangerId: string) =>
                 travelId: travelId
             }
 
-            console.log(JSON.stringify(payload, null, 2))
-
             if(driverId === "N-D") return;
-
-            console.log(JSON.stringify(payload, null, 2))
             
             await Travel.travel.accept(payload);
 

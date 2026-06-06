@@ -24,8 +24,6 @@ export default function ReloadScreen(){
                     await Update.reloadAsync();
                 }
             } catch (error) {
-                console.log("EAS =>", JSON.stringify(error, null, 2))
-                console.log("Erro ao buscar actualizações");
             }
 
             if (!userInformation) {

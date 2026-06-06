@@ -84,10 +84,10 @@ export default function Navigator(){
                 <Stack.Screen name="tabsDriver" component={DriverLayout} />
                 <Stack.Screen name="signupDriver" component={SignUpDriverScreen} />
                 <Stack.Screen name="typepassword" component={TypePasswordDriverScreen} />
-                <Stack.Screen name="travelRequest" component={TravelRequestDriverScreen} />
+                <Stack.Screen name="travelRequestDriver" component={TravelRequestDriverScreen} />
                 <Stack.Screen name="traveldetailsDriver" component={TravelDetailsDriverScreen} />
                 <Stack.Screen name="travelFinishSplah" component={TravelFinishedDriverSplash} />
-                <Stack.Screen name="publishtravel" component={PublishTravelDriverScreen} />
+                <Stack.Screen name="publishtravelDriver" component={PublishTravelDriverScreen} />
                 <Stack.Screen name="myVehicles" component={MyVehiclesDriverScreen} />
                 <Stack.Screen name="registerMyVehicle" component={RegisterMyVehicleDriverScreen} />
                 <Stack.Screen name="vehicleDetailsDriver" component={VehicleDetailsDriverScreen} />

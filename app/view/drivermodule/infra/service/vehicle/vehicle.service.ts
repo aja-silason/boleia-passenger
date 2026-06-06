@@ -6,6 +6,7 @@ import { VehicleOutput } from "./VehicleOutput";
 export namespace Vehicle {
     export const vehicle = {
         registerVehicle:  (input: RegisterVehicleInput) => {
+            console.log(JSON.stringify(input, null, 2))
             return api.post<void>('vehicle', input, {skipAuth: true});
         },
 

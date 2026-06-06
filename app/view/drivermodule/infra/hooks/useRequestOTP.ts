@@ -40,7 +40,6 @@ export const useRequestOTP = () => {
             setIsLoading(false);
             return navigate.replace("optrecovery", { phone: fullNumber });
         } catch (error) {
-            console.log("Mapeamento do erro no request otp", error)
             setIsLoading(false);
             Alert.alert("Informação", "Alguma coisa ocorreu mal, estamos resolvendo por você!", [
                 {
@@ -60,7 +59,6 @@ export const useRequestOTP = () => {
             setIsLoading(false);
             return
         } catch (error) {
-            console.log("Mapeamento do erro no request otp", error)
             setIsLoading(false);
             Alert.alert("Informação", "Alguma coisa ocorreu mal, estamos resolvendo por você!", [
                 {

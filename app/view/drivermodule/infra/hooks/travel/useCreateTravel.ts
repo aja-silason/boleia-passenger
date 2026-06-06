@@ -62,12 +62,8 @@ export const useCreateTravel = () => {
                 driverId: driverId
             }
 
-            console.log(JSON.stringify(payload, null, 2))
-
             if(driverId === "N-D") return;
 
-            console.log(JSON.stringify(payload, null, 2))
-            
             await Travel.travel.register(payload);
 
             setIsSuccess(true);

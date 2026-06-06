@@ -33,8 +33,6 @@ export default function MyVehiclesDriverScreen() {
     }, [navigate]);
 
 
-    console.log(JSON.stringify(data, null, 2));
-
     return (
         <View style={styles.mainContent}>
             <View style={styles.header}>

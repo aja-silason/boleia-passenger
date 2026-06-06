@@ -28,7 +28,6 @@ export const useRequestSupport = () => {
         try {
 
             setIsLoading(true);
-            console.log("Enviando", JSON.stringify(payload, null, 2))
 
             await Settings.settings.requestSupport(payload);
 
@@ -37,7 +36,6 @@ export const useRequestSupport = () => {
         } catch (error) {
             setIsLoading(false);
             if(axios.isAxiosError(error)){
-                console.log(JSON.stringify(error, null, 2))
                 if(error.status === 500) return Alert.alert("Aviso", "Alguma coisa correu mal, estamos resolvendo por você", [
                     {text: "Entendido", onPress: () => {}}
                 ]);

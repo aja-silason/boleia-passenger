@@ -31,7 +31,6 @@ export const useGetAllTravel = () => {
             setIsError(true);
             if (axios.isAxiosError(error)) {
                 const message = error.response?.data?.message || "Não foi possível carregar as viagens.";
-                console.log("Erro aqui", JSON.stringify({info: error.response?.data, other: error.response?.status}, null, 2))
                 if(error.status === 500) return Alert.alert("Aviso", "Alguma coisa correu mal, estamos resolvendo por você");
             }
         } finally {

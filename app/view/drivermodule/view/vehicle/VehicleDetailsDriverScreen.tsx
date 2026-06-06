@@ -47,7 +47,7 @@ export default function VehicleDetailsDriverScreen() {
             "Tem certeza que deseja remover este veículo da sua lista?",
             [
                 { text: "Cancelar", style: "cancel" },
-                { text: "Excluir", style: "destructive", onPress: () => console.log("Deletar", data?.id) }
+                { text: "Excluir", style: "destructive", onPress: () => Alert.alert("Aviso", "Solicite deleção da conta ao nosso suporte") }
             ]
         );
     };

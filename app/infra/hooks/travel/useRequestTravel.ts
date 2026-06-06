@@ -27,8 +27,6 @@ export const useRequestTravel = (travelId: string, passangerId: string) => {
             }
 
             if(driverId === "N-D") return;
-
-            console.log(JSON.stringify(payload, null, 2))
             
             await Travel.travel.requestTravel(payload);
 
@@ -40,7 +38,6 @@ export const useRequestTravel = (travelId: string, passangerId: string) => {
             setIsLoading(false)
             setIsError(true);
             if(axios.isAxiosError(error)){
-                console.log(JSON.stringify({logs: error.response?.data}, null, 2))
                 if(error.status === 500) return Alert.alert("Aviso", `Alguma coisa correu mal, estamos resolvendo por você`, [
                     {text: "Entendido", onPress: () => {}}
                 ]);

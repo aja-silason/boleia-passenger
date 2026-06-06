@@ -27,7 +27,6 @@ export const useRequestOTP = () => {
     const onSubmit = async () => {
         Keyboard.dismiss();
         const pureNumber = localPhone.replace(/-/g, "");
-        console.log("Número puro: ", pureNumber)
         if (pureNumber.length < 9) return Alert.alert("Aviso", "Número incompleto", [
             {
                 text: "Inserir número",
@@ -57,7 +56,6 @@ export const useRequestOTP = () => {
 
     const onRetryRequest = async (number: string) => {
         const aNumber = number.replace(/-/g, "");
-        console.log("Número puro: ", aNumber)
         if (number.length < 9) return Alert.alert("Aviso", "Não foi possível pegar o número", [
             {
                 text: "Tentar novamente",
@@ -66,9 +64,7 @@ export const useRequestOTP = () => {
         ]);
         
         const fullNumber = `${aNumber}`;
-
-        console.log("Número completo para retry: ", fullNumber)
-        
+         
         try {
             setIsLoading(true)
                 await OTPNotification.otpNotification.requestOTP(fullNumber);

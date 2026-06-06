@@ -55,7 +55,7 @@ export default function HomeDriverScreen() {
             <View style={styles.actionSection}>
                 <Button 
                     isLoading={false} 
-                    onPress={() => navigate.navigate("publishtravel")} 
+                    onPress={() => navigate.navigate("publishtravelDriver")} 
                     text="Publicar nova Boleia" 
                     isPrimary 
                     icon={<Ionicons name="add-circle-outline" size={22} />} 

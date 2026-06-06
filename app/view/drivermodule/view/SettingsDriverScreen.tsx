@@ -71,7 +71,7 @@ export default function SettingsDriverScreen() {
                     <MenuButton 
                         icon="person-outline" 
                         text="Dados da Conta" 
-                        onPress={() => navigate.navigate("accountData")} 
+                        onPress={() => navigate.navigate("accountDataDriver")} 
                     />
                     <View style={styles.divider} />
                     <MenuButton 
@@ -88,13 +88,13 @@ export default function SettingsDriverScreen() {
                     <MenuButton 
                         icon="lock-closed-outline" 
                         text="Privacidade e Segurança" 
-                        onPress={() => navigate.navigate("security")} 
+                        onPress={() => navigate.navigate("securityDriver")} 
                     />
                     <View style={styles.divider} />
                     <MenuButton 
                         icon="help-circle-outline" 
                         text="Ajuda e Suporte" 
-                        onPress={() => navigate.navigate("supportScreen")} 
+                        onPress={() => navigate.navigate("supportScreenDriver")} 
                     />
                 </View>
             </View>
