@@ -1,7 +1,7 @@
+import { Travel } from "@/app/view/drivermodule/infra/service/travel/travel.service";
 import axios from "axios";
 import { useState } from "react";
 import { Alert } from "react-native";
-import { Travel } from "../../service/travel/travel.service";
 
 export const useStartTravel = (travelId: string) => {    
     const [isLoading, setIsLoading] = useState(false);
