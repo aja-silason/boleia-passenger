@@ -10,6 +10,7 @@ import SecurityDriverScreen from "@/app/view/drivermodule/view/settings/Security
 import SupportDriverScreen from "@/app/view/drivermodule/view/settings/SupportDriverScreen";
 import UseTermsDriverScreen from "@/app/view/drivermodule/view/settings/UseTermsDriverScreen";
 import SignUpDriverScreen from "@/app/view/drivermodule/view/SignUpDriverScreen";
+import SubmissionDocumentDriverScreen from "@/app/view/drivermodule/view/SubmissionDocumentDriverScreen";
 import PublishTravelDriverScreen from "@/app/view/drivermodule/view/travel/PublishTravelDriverScreen";
 import TravelDetailsDriverScreen from "@/app/view/drivermodule/view/travel/TravelDetailsDriverScreen";
 import { TravelFinishedDriverSplash } from "@/app/view/drivermodule/view/travel/TravelFinishedDriverSplash";
@@ -100,6 +101,7 @@ export default function Navigator(){
                 <Stack.Screen name="privacyPoliticsDriver" component={PrivacyPoliticsDriverScreen} />
                 <Stack.Screen name="securityDriver" component={SecurityDriverScreen} />
                 <Stack.Screen name="centralDriver" component={CentrallCallDriverScreen} />
+                <Stack.Screen name="documentSubmissionDriver" component={SubmissionDocumentDriverScreen} />
             </Stack.Group>
 
 

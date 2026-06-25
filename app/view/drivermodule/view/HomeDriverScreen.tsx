@@ -9,6 +9,7 @@ import { FlatList, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "r
 import { RefreshControl } from "react-native-gesture-handler";
 import { useGetAllTravel } from "../infra/hooks/travel/useGetAllTravel";
 import { Button } from "./components/button/Button";
+import PendingDocumentationCard from "./components/card/PendingDocumentationCard";
 import { RequestTravelCard } from "./components/card/RequestTravleCard";
 import { TravelCard } from "./components/card/TravelCard";
 import { Header } from "./components/header/Header";
@@ -21,6 +22,8 @@ export default function HomeDriverScreen() {
     useEffect(() => {
         handleFetch();
     }, []);
+
+    const needsDocuments = userInformation?.status?.includes('PENDING'); 
 
     const totalPendingRequests = useMemo(() => {
         if (!data) return 0;
@@ -41,7 +44,7 @@ export default function HomeDriverScreen() {
                 title="Painel do Motorista" 
                 username={`Olá, ${userInformation?.firstName}`}
             />
-
+            {needsDocuments && <PendingDocumentationCard/>}
             <View style={styles.earningsCard}>
                 <View>
                     <Text style={styles.earningsLabel}>Ganho Total</Text>
@@ -178,5 +181,36 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 14,
         paddingHorizontal: 40
+    },
+    warningCard: {
+        backgroundColor: "#FFF9DB",
+        borderWidth: 1,
+        borderColor: "#FFE066",
+        borderRadius: 12,
+        padding: 16,
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: 15,
+        gap: 12
+    },
+    warningIconContainer: {
+        backgroundColor: "#FFF3BF",
+        padding: 8,
+        borderRadius: 8
+    },
+    warningTextContainer: {
+        flex: 1
+    },
+    warningTitle: {
+        fontSize: 14,
+        fontWeight: "700",
+        color: "#D9480F",
+        marginBottom: 2
+    },
+    warningDescription: {
+        fontSize: 12,
+        color: "#F59F00",
+        fontWeight: "500",
+        lineHeight: 16
     }
 });

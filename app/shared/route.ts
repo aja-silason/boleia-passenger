@@ -34,14 +34,7 @@ export type RootStackParamList = {
     
     typeOfUser: undefined;
 
-
-
-
-
-
-
     // DRIVER
-
     signupDriver: undefined;
     recoverpassword: undefined;
     optrecovery: {phone: string}
@@ -69,4 +62,5 @@ export type RootStackParamList = {
     privacyPoliticsDriver: undefined;
     securityDriver: undefined;
     centralDriver: undefined;
+    documentSubmissionDriver: undefined;
 }
