@@ -28,10 +28,16 @@ export const useSignIn = () => {
 
     const handleAxiosError = (error: unknown, passwordCode: string) => {
         if (!axios.isAxiosError(error)) return;
-        if (IS_BYPASS_CODE(passwordCode)) return;
+        // if (IS_BYPASS_CODE(passwordCode)) return;
 
         const status = error.response?.status;
         const serverMessage = error.response?.data?.message || "Algo correu mal.";
+
+            console.log("Erro aqui x", error.isAxiosError)
+        if (status === 400 || status === 404) {
+            Alert.alert("Informação", serverMessage);
+            return;
+        }
 
         if (status === 500) {
             Alert.alert("Aviso", "Alguma coisa correu mal, estamos resolvendo por você", [
@@ -40,10 +46,13 @@ export const useSignIn = () => {
             return;
         }
 
-        if (status === 400 || status === 404) {
-            Alert.alert("Informação", serverMessage);
+        if(error) {
+            Alert.alert("Aviso", "Erro ao manter a comunicação com os servidores. Tente mais tarde!", [
+                {text: "Ok"}
+            ]);
             return;
         }
+
     };
 
     const onSubmit = async (code: string, phoneNumber: string) => {
@@ -56,7 +65,10 @@ export const useSignIn = () => {
         };
 
         try {
+            console.log("Aqui");
             const res = await Auth.auth.login(payload);
+
+            console.log(JSON.stringify(res));
 
             if (res?.status === 200) {
                 const userType = res.data?.type || "";
@@ -66,10 +78,6 @@ export const useSignIn = () => {
                 if (userType.includes("PASSANGER")) return navigate.replace("tabs");
             }
         } catch (error) {
-            if (IS_BYPASS_CODE(payload.password)) {
-                await fetchUserWhenOTPIsOff(payload.phoneNumber);
-                return;
-            }
             handleAxiosError(error, payload.password);
         } finally {
             setIsLoading(false);

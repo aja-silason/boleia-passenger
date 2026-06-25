@@ -51,7 +51,7 @@ export const OtpconfirmScreen = () => {
     return (
         <View style={style.mainContainer}>
             <View style={style.container}>
-                <HeaderBack title="Segurança" description="Digite a sua senha para:" isOtp number={route?.params?.phone}/>
+                <HeaderBack title="Segurança" description="Digite a senha definida para: " isOtp number={route?.params?.phone}/>
                 
                 <OTPBox code={otp} phoneNumber={route?.params.phone}/>
 
