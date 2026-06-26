@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect } from "react";
-import { Alert, BackHandler, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, BackHandler, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MenuButton } from "./components/button/MenuButton";
 
 export default function SettingsDriverScreen() {
@@ -49,7 +49,14 @@ export default function SettingsDriverScreen() {
         <ScrollView style={styles.mainContent} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
             <View style={styles.profileSection}>
                 <View style={styles.avatarContainer}>
-                    <Ionicons name="person" size={40} color={Colors.primary} />
+                    {userInformation?.photoUrl ? (
+                        <Image 
+                            source={{ uri: userInformation?.photoUrl }} 
+                            style={styles.avatar} 
+                        />
+                    ) : (
+                        <Ionicons name="person" size={40} color={Colors.primary} />
+                    )}
                 </View>
                 <View style={styles.profileInfo}>
                     <Text style={styles.userName}>{userInformation?.firstName +' '+ userInformation?.lastName || '-'}</Text>
@@ -199,4 +206,12 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         fontSize: 16,
     },
+    avatar: {
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        backgroundColor: Colors.inactive,
+        borderWidth: 1,
+        borderColor: Colors.placeHolder
+    }
 });

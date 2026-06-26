@@ -73,7 +73,7 @@ export default function HomeScreen() {
                 }
                 keyboardShouldPersistTaps="handled"
             >
-                <Header title="Encontre sua próxima" username={`Olá, ${userInformation?.firstName+' '+userInformation?.lastName}`} />
+                <Header title="Encontre sua próxima" username={`Olá, ${userInformation?.firstName+' '+userInformation?.lastName}`} photoUrl={userInformation?.photoUrl}/>
                 
                 <View style={styles.welcomeSection}>
                     <Text style={styles.subtitle}>

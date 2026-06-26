@@ -1,11 +1,12 @@
 import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 type props = {
     username?: string;
     title: string;
     role?: string;
+    photoUrl?: string
 }
 
 export const Header = (props: props) => {
@@ -17,8 +18,15 @@ export const Header = (props: props) => {
                 {props.role && <Text style={styles.username}>{props.role}</Text>}
             </View>
             <View>
+            {props.photoUrl ? (
+                <Image 
+                    source={{uri: props?.photoUrl}} 
+                    style={styles.avatar} 
+                />
+            ) : (
                 <Ionicons name="person-circle-outline" size={40} color={Colors.placeHolder}/>
-            </View>
+            )}
+        </View>
         </View>
     )
 }
@@ -43,5 +51,13 @@ const styles = StyleSheet.create({
     },
     username: {
         fontSize: 13
+    },
+    avatar: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: Colors.inactive,
+        borderWidth: 1,
+        borderColor: Colors.placeHolder
     }
 })

@@ -5,7 +5,8 @@ export interface UserOutput {
   phoneNumber: string,
   status: string,
   userWillBeSignedUntil: string,
-  type: string
+  type: string,
+  photoUrl?: string
 }
 
 export type DriverOuput = {
@@ -20,7 +21,8 @@ export type DriverOuput = {
     phoneNumber: string,
     isDriver: boolean,
     createdAt: string,
-    updatedAt: string
+    updatedAt: string,
+    photoUrl: string
   },
   createdAt: string,
   updatedAt: string
@@ -33,5 +35,6 @@ export interface LoginOutput {
   phoneNumber: string,
   status: string,
   userWillBeSignedUntil: string,
-  type: string
+  type: string,
+  photoUrl?: string
 }

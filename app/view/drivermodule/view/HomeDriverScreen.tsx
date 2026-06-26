@@ -43,6 +43,7 @@ export default function HomeDriverScreen() {
             <Header 
                 title="Painel do Motorista" 
                 username={`Olá, ${userInformation?.firstName}`}
+                photoUrl={userInformation?.photoUrl}
             />
             {needsDocuments && <PendingDocumentationCard/>}
             <View style={styles.earningsCard}>
