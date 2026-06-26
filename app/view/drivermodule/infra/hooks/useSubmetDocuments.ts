@@ -21,9 +21,9 @@ export const useSubmetDocuments = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     
     const [documents, setDocuments] = useState<DocumentItem[]>([
-        { id: "1", name: "Exterior", front: { uri: null }, back: { uri: null } },
-        { id: "2", name: "Interior", front: { uri: null }, back: { uri: null } },
-        { id: "3", name: "Título", front: { uri: null }, back: { uri: null } },
+        { id: "1", name: "Carta de Condução", front: { uri: null }, back: { uri: null } },
+        { id: "2", name: "Bilhete de Identidade (BI)", front: { uri: null }, back: { uri: null } },
+        { id: "3", name: "Livrete do Veículo", front: { uri: null }, back: { uri: null } },
     ]);
 
     const {userInformation} = useAuthContext();
