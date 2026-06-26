@@ -24,7 +24,7 @@ export const useRegisterVehicle = (phoneNumber: string) => {
         try {
             setIsLoading(true)
 
-            const driverId = userInformation?.id;
+            const driverId = userInformation?.driverId;
 
             const payload: RegisterVehicleInput = {
                 ...data,

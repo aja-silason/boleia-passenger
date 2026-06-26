@@ -6,7 +6,8 @@ export interface UserOutput {
   status: string,
   userWillBeSignedUntil: string,
   type: string,
-  photoUrl?: string
+  photoUrl?: string,
+  driverId: string
 }
 
 export type DriverOuput = {
@@ -22,7 +23,8 @@ export type DriverOuput = {
     isDriver: boolean,
     createdAt: string,
     updatedAt: string,
-    photoUrl: string
+    photoUrl: string,
+    driverId: string
   },
   createdAt: string,
   updatedAt: string
@@ -36,5 +38,6 @@ export interface LoginOutput {
   status: string,
   userWillBeSignedUntil: string,
   type: string,
+  driverId: string,
   photoUrl?: string
 }

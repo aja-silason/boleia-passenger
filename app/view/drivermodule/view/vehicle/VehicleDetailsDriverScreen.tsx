@@ -34,6 +34,7 @@ export default function VehicleDetailsDriverScreen() {
     const isActive = data.status?.includes("AVAILABLE");
 
     const vehicle = {
+        id: data.id,
         brand: data?.brand,
         model: data?.model,
         plate: data?.plate,
@@ -83,6 +84,7 @@ export default function VehicleDetailsDriverScreen() {
 
                 {/* Ações */}
                 <View style={styles.actionsContainer}>
+                    <Button isLoading={false} onPress={() => navigation.navigate("vehicleDocumentSubmissionDriver", {vehicleId: data.id})} text="Adicionar Imagem do veículo" icon={<Ionicons name="cloud-upload-outline" size={20} color={Colors.blackText} />}/>
                     <Button isLoading={false} onPress={() => navigation.navigate("editVehicle", {data: data})} text="Editar Veículo" icon={<Ionicons name="create-outline" size={20} color={Colors.blackText} />} isPrimary/>
                     
                     <TouchableOpacity 

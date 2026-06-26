@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import { Alert } from "react-native";
-import { Driver } from "../service/entity/driver.service";
+import { Driver } from "../../service/entity/driver.service";
 
 interface DocumentSide {
     uri: string | null;
@@ -16,7 +16,7 @@ export interface DocumentItem {
     back: DocumentSide;
 }
 
-export const useSubmetDocuments = () => {
+export const useVehicleSubmetDocuments = () => {
     const navigate = useNavigation();
     const [isSubmitting, setIsSubmitting] = useState(false);
     

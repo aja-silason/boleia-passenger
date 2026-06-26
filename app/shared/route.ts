@@ -63,4 +63,5 @@ export type RootStackParamList = {
     securityDriver: undefined;
     centralDriver: undefined;
     documentSubmissionDriver: undefined;
+    vehicleDocumentSubmissionDriver: {vehicleId: string};
 }

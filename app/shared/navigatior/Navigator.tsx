@@ -19,6 +19,7 @@ import EditVehicleDriverScreen from "@/app/view/drivermodule/view/vehicle/EditVe
 import MyVehiclesDriverScreen from "@/app/view/drivermodule/view/vehicle/MyVehiclesDriverScreen";
 import RegisterMyVehicleDriverScreen from "@/app/view/drivermodule/view/vehicle/RegisterMyVehicleDriverScreen";
 import VehicleDetailsDriverScreen from "@/app/view/drivermodule/view/vehicle/VehicleDetailsDriverScreen";
+import VehicleDocumentSubmissionScreen from "@/app/view/drivermodule/view/vehicle/VehicleDocumentSubmissionScreen";
 import Map from "@/app/view/Map";
 import { OtpconfirmScreen } from "@/app/view/OtpconfirmScreen";
 import { OtpCreatePasswordScreen } from "@/app/view/OtpCreatePasswordScreen";
@@ -102,6 +103,7 @@ export default function Navigator(){
                 <Stack.Screen name="securityDriver" component={SecurityDriverScreen} />
                 <Stack.Screen name="centralDriver" component={CentrallCallDriverScreen} />
                 <Stack.Screen name="documentSubmissionDriver" component={SubmissionDocumentDriverScreen} />
+                <Stack.Screen name="vehicleDocumentSubmissionDriver" component={VehicleDocumentSubmissionScreen} />
             </Stack.Group>
 
 

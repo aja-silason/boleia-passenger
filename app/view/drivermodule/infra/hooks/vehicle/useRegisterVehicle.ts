@@ -23,7 +23,7 @@ export const useRegisterVehicle = () => {
         try {
             setIsLoading(true)
 
-            const driverId = userInformation?.id as string;
+            const driverId = userInformation?.driverId as string;
 
             const payload: RegisterVehicleInput = {
                 ...data,

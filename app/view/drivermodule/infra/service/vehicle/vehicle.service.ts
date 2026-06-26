@@ -16,6 +16,16 @@ export namespace Vehicle {
 
         findAllVehicle: (id: string) => {
             return api.get<VehicleOutput[]>('vehicle/driver/all/'+id, {skipAuth: true});
-        }
+        },
+
+        uploadDocument: (formData: FormData, id: string) => {
+            return api.patch<{success: boolean}>(`vehicle/${id}/upload-file`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    timeout: 60000
+                }
+            )
+        },
     }
 }
