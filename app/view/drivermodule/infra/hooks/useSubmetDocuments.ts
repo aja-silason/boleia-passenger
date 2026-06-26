@@ -109,7 +109,7 @@ export const useSubmetDocuments = () => {
                 } as any);
 
                 formData.append("file", {
-                    uri: file.front.uri,
+                    uri: file.back.uri,
                     name: backImage,
                     type: "image/jpeg",
                 } as any);
