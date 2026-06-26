@@ -1,9 +1,8 @@
-import { useAuthContext } from "@/app/shared/context/auth.context";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import { Alert } from "react-native";
-import { Driver } from "../../service/entity/driver.service";
+import { Vehicle } from "../../service/vehicle/vehicle.service";
 
 interface DocumentSide {
     uri: string | null;
@@ -25,8 +24,6 @@ export const useVehicleSubmetDocuments = () => {
         { id: "2", name: "Interior", front: { uri: null }, back: { uri: null } },
         { id: "3", name: "Título", front: { uri: null }, back: { uri: null } },
     ]);
-
-    const {userInformation} = useAuthContext();
 
     const handlePickImage = async (docId: string, side: "front" | "back") => {
         const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
@@ -83,7 +80,7 @@ export const useVehicleSubmetDocuments = () => {
         );
     };
 
-    const handleSubmitAll = async () => {
+    const handleSubmitAll = async (id: string) => {
         const allPhotosCaptured = documents.every(doc => doc.front.uri && doc.back.uri);
         
         if (!allPhotosCaptured) {
@@ -116,9 +113,9 @@ export const useVehicleSubmetDocuments = () => {
     
             });
 
-            const userId = userInformation?.id as string;
+            console.log(formData, id)
 
-            const response = await Driver.driver.uploadDocument(formData, userId);
+            const response = await Vehicle.vehicle.uploadDocument(formData, id);
 
             if (!response) {
                 throw new Error("Erro na resposta do servidor");
@@ -130,6 +127,7 @@ export const useVehicleSubmetDocuments = () => {
                 [{ text: "Entendido", onPress: () => navigate.goBack() }]
             );
         } catch (error) {
+            console.log(error)
             Alert.alert("Erro", "Falha ao enviar as imagens. Verifique a sua ligação à internet.");
         } finally {
             setIsSubmitting(false);

@@ -100,7 +100,6 @@ export default function VehicleDetailsDriverScreen() {
     );
 }
 
-// Sub-componente para as linhas de detalhes
 const DetailRow = ({ label, value, icon, valueColor = "#333" }: any) => (
     <View style={styles.detailRow}>
         <View style={styles.labelGroup}>

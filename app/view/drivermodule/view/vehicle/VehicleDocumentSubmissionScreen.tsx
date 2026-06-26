@@ -1,6 +1,6 @@
 import { Colors } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React from "react";
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { DocumentItem } from "../../infra/hooks/useSubmetDocuments";
@@ -11,6 +11,9 @@ export default function VehicleDocumentSubmissionScreen() {
     const {handlePickImage, handleSubmitAll, isSubmitting, documents} = useVehicleSubmetDocuments();
     const navigate = useNavigation();
 
+    const route = useRoute();
+
+    const { vehicleId } = route.params as { vehicleId: string  };
 
     return (
         <View style={styles.container}>
@@ -87,7 +90,7 @@ export default function VehicleDocumentSubmissionScreen() {
                     text="Enviar Fotos para Análise"
                     isPrimary
                     isLoading={isSubmitting}
-                    onPress={handleSubmitAll}
+                    onPress={() => handleSubmitAll(vehicleId)}
                 />
             </View>
         </View>
