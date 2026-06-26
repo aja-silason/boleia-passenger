@@ -21,7 +21,7 @@ export default function VehicleDocumentSubmissionScreen() {
                 <TouchableOpacity onPress={() => navigate.goBack()} style={styles.backButton}>
                     <Ionicons name="arrow-back" size={24} color="#212529" />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>Verificação de Conta</Text>
+                <Text style={styles.headerTitle}>Verificação do Veículo</Text>
                 <View style={{ width: 24 }} />
             </View>
 

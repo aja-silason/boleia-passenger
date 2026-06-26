@@ -81,7 +81,6 @@ export default function Navigator(){
             
             <Stack.Screen name="typeOfUser" component={TypeOfUserScreen} />
 
-
             <Stack.Group>
                 <Stack.Screen name="tabsDriver" component={DriverLayout} />
                 <Stack.Screen name="signupDriver" component={SignUpDriverScreen} />
@@ -105,12 +104,6 @@ export default function Navigator(){
                 <Stack.Screen name="documentSubmissionDriver" component={SubmissionDocumentDriverScreen} />
                 <Stack.Screen name="vehicleDocumentSubmissionDriver" component={VehicleDocumentSubmissionScreen} />
             </Stack.Group>
-
-
-
-
-
-
 
         </Stack.Navigator>
     )
