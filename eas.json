@@ -7,7 +7,7 @@
     "production": {
       "channel": "production",
       "android": {
-        "buildType": "store"
+        "buildType": "app-bundle"
       }
     },
     "preview": {
